@@ -4,6 +4,8 @@
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-green)](https://opensource.org/licenses/AGPL-3.0)
 [![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)](https://fabricmc.net)
 
+---
+
 Type /staffhelp followed by one of these options:
 
 - /staffhelp bait -> Explains how to use bait
@@ -24,3 +26,9 @@ Type /staffhelp followed by one of these options:
 - /staffhelp howfish	-> Fishing minigame guide
 - /staffhelp tutorial	-> Basic gameplay tutorial
 - /staffhelp calibrator	-> Rod calibration info
+
+---
+
+**Disclaimer:** Not affilliated with Mojang, Microsoft or the FishOnMC Server. This is a player made mod.
+
+Madisonn
