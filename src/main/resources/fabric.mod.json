@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "staffhelper",
+  "version": "0.1.3",
+  "name": "Staff-Helper",
+  "description": "A custom built staff tool for helping players",
+  "authors": [
+    "Madisonn"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.Madisonn.StaffHelperMod.CommandRegistry"
+    ]
+  },
+  "depends": {
+    "fabricloader": "0.16.14",
+    "fabric": "*",
+    "minecraft": ">=1.21.4 <=1.21.5",
+    "java": ">=21"
+  }
+}
