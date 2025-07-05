@@ -3,3 +3,52 @@
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.4%20to%201.21.5-blue)](https://minecraft.net)
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-green)](https://opensource.org/licenses/AGPL-3.0)
 [![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)](https://fabricmc.net)
+
+---
+
+Type /staffhelp followed by one of these options:
+
+- /staffhelp bait -> Explains how to use bait
+    - To use bait press 'Q' while holding your fishing rod, click the tackle box and drop your baits in there!
+- /staffhelp baitpack	-> Shows how to get bait packages
+    - To get bait packages you can do /vote, purchase them in /ah or from Fish Compendium and '/collections'.
+- /staffhelp petdrop	-> Displays pet drop rates
+    - Pet Drop Chances are Common 1/750 - Rare 1/4000 - Epic 1/10000 - Legendary 1/30000 - Mythical 1/80000!
+- /staffhelp armor	-> Explains shard usage for armor
+    - Shards are used for armor with default armor recipes, no helmets.
+- /staffhelp variants	-> Shows fish variant rates
+    - Albino 1/5000, Melanistic 1/10000 and Trophy 1/15000.
+- /staffhelp artisan	-> How to craft/upgrade rod parts
+    - To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank).
+- /staffhelp forge	-> Armor tier-up costs
+    - To tier up your armor you can go to the forge at spawn or use '/forge' (Sailor Rank), T2 16 Shards, T3 48 Shards, T4 96 Shards, T5 256 Shards.
+- /staffhelp scrapper	-> How to scrap armor for shards
+    - To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' to scrap your pieces and get some shards in return! '/scrapper'.
+- /staffhelp auction	-> Guide for using /ah
+    - You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price'
+- /staffhelp cosmetics	-> Info about cosmetic items
+    - Cosmetics can be bought with credits from '/buy' these are purely cosmetic and will not influence your gameplay.
+- /staffhelp crew	-> How to create/manage crews
+    - You can create a crew '/crew create name' a crew island is mostly used for building and storage! crews are also used to compete for fun!
+- /staffhelp foe	-> Link to FishonMC-Extras mod
+    - You can install the FishonMC-Extras Mod here modrinth.com/mod/fishonmc-extras.
+- /staffhelp luckscaleprospect	-> Stats for Luck/Scale/Prospect
+    - Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance.
+- /staffhelp reelbiteline	-> Reel & Bite Speed explanation
+    - Reel Speed increases progress per tick; Bite Speed reduces wait time for bites.
+- /staffhelp xpmoney	-> XP & Money multipliers
+    - Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches
+- /staffhelp howfish	-> Fishing minigame guide
+    - Sneak to raise line tension (blue bar right), stop to lower it (left). Fill the green bar to catch the fish!
+- /staffhelp tutorial	-> Basic gameplay tutorial
+    - You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.
+- /staffhelp calibrator	-> Rod calibration info
+    - Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank)
+- /staffhelp locationroll -> Location roll info
+    - Each location has a bonus roll per level 1-20, slots can be rolled for Species Size Bonus, General Bonus: luck, prospect and scale, also Sell and XP bonus.
+
+---
+
+**Disclaimer:** Not affilliated with Mojang, Microsoft or the FishOnMC Server. This is a player made mod.
+
+Madisonn
