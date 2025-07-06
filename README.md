@@ -35,7 +35,7 @@ Type /staffhelp followed by one of these options:
 - /staffhelp luckscaleprospect	-> Stats for Luck/Scale/Prospect
     - Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance.
 - /staffhelp reelbiteline	-> Reel & Bite Speed explanation
-    - Reel Speed increases progress per tick; Bite Speed reduces wait time for bites.
+    - Reel Speed increases progress per tick, Bite Speed reduces wait time for bites.
 - /staffhelp xpmoney	-> XP & Money multipliers
     - Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches
 - /staffhelp howfish	-> Fishing minigame guide
