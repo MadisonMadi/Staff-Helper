@@ -89,7 +89,7 @@ public class CommandRegistry implements ClientModInitializer {
 
                 .then(ClientCommandManager.literal("reelbiteline")
                         .executes(context -> {
-                            sendAsPlayer("Reel Speed increases progress per tick; Bite Speed reduces wait time for bites.");
+                            sendAsPlayer("Reel Speed increases progress per tick, Bite Speed reduces wait time for bites.");
                             return 1;
                         }))
 
