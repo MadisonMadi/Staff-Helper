@@ -1,0 +1,26 @@
+{
+  "text.autoconfig.staffhelpermod.title": "Staff Helper Messages",
+
+  "text.autoconfig.staffhelpermod.option.baitMessage": "/staffhelp bait",
+  "text.autoconfig.staffhelpermod.option.baitpackMessage": "/staffhelp baitpack",
+  "text.autoconfig.staffhelpermod.option.petdropMessage": "/staffhelp petdrop",
+  "text.autoconfig.staffhelpermod.option.armorMessage": "/staffhelp armor",
+  "text.autoconfig.staffhelpermod.option.variantsMessage": "/staffhelp variants",
+  "text.autoconfig.staffhelpermod.option.artisanMessage": "/staffhelp artisan",
+  "text.autoconfig.staffhelpermod.option.forgeMessage": "/staffhelp forge",
+  "text.autoconfig.staffhelpermod.option.scrapperMessage": "/staffhelp scrapper",
+  "text.autoconfig.staffhelpermod.option.auctionMessage": "/staffhelp auction",
+  "text.autoconfig.staffhelpermod.option.cosmeticsMessage": "/staffhelp cosmetics",
+  "text.autoconfig.staffhelpermod.option.crewMessage": "/staffhelp crew",
+  "text.autoconfig.staffhelpermod.option.foeMessage": "/staffhelp foe",
+  "text.autoconfig.staffhelpermod.option.luckscaleprospectMessage": "/staffhelp luckscaleprospect",
+  "text.autoconfig.staffhelpermod.option.reelbitelineMessage": "/staffhelp reelbiteline",
+  "text.autoconfig.staffhelpermod.option.xpmoneyMessage": "/staffhelp xpmoney",
+  "text.autoconfig.staffhelpermod.option.howfishMessage": "/staffhelp howfish",
+  "text.autoconfig.staffhelpermod.option.tutorialMessage": "/staffhelp tutorial",
+  "text.autoconfig.staffhelpermod.option.calibratorMessage": "/staffhelp calibrator",
+  "text.autoconfig.staffhelpermod.option.locationrollMessage": "/staffhelp locationroll",
+  "text.autoconfig.staffhelpermod.option.questsMessage": "/staffhelp quests",
+  "text.autoconfig.staffhelpermod.option.earnmoneyMessage": "/staffhelp earnmoney",
+  "text.autoconfig.staffhelpermod.option.wikiMessage": "/staffhelp wiki"
+}
