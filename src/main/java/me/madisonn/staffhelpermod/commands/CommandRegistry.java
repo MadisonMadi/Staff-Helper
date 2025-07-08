@@ -20,7 +20,7 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("armor")
                         .executes(context -> sendAsPlayer(config.messages.armorMessage)))
 
-                .then(ClientCommandManager.literal("artisan")
+                .then(ClientCommandManager.literal("variants")
                         .executes(context -> sendAsPlayer(config.messages.variantsMessage)))
 
                 .then(ClientCommandManager.literal("artisan")
