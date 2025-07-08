@@ -16,72 +16,78 @@ public class CommandRegistry implements ClientModInitializer {
         AutoConfig.register(StaffHelperConfig.class, GsonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(StaffHelperConfig.class).getConfig();
 
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("staffhelp")
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal(CONFIG.commands.mainCommand)
                 .then(ClientCommandManager.literal("bait")
-                        .executes(context -> sendAsPlayer(CONFIG.baitMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.baitMessage)))
 
                 .then(ClientCommandManager.literal("baitpack")
-                        .executes(context -> sendAsPlayer(CONFIG.baitpackMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.baitpackMessage)))
 
                 .then(ClientCommandManager.literal("petdrop")
-                        .executes(context -> sendAsPlayer(CONFIG.petdropMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.petdropMessage)))
 
                 .then(ClientCommandManager.literal("armor")
-                        .executes(context -> sendAsPlayer(CONFIG.armorMessage)))
-
-                .then(ClientCommandManager.literal("variants")
-                        .executes(context -> sendAsPlayer(CONFIG.variantsMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.armorMessage)))
 
                 .then(ClientCommandManager.literal("artisan")
-                        .executes(context -> sendAsPlayer(CONFIG.artisanMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.variantsMessage)))
+
+                .then(ClientCommandManager.literal("artisan")
+                        .executes(context -> sendAsPlayer(CONFIG.messages.artisanMessage)))
 
                 .then(ClientCommandManager.literal("forge")
-                        .executes(context -> sendAsPlayer(CONFIG.forgeMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.forgeMessage)))
 
                 .then(ClientCommandManager.literal("scrapper")
-                        .executes(context -> sendAsPlayer(CONFIG.scrapperMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.scrapperMessage)))
 
                 .then(ClientCommandManager.literal("auction")
-                        .executes(context -> sendAsPlayer(CONFIG.auctionMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.auctionMessage)))
 
                 .then(ClientCommandManager.literal("cosmetics")
-                        .executes(context -> sendAsPlayer(CONFIG.cosmeticsMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.cosmeticsMessage)))
 
                 .then(ClientCommandManager.literal("crew")
-                        .executes(context -> sendAsPlayer(CONFIG.crewMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.crewMessage)))
 
                 .then(ClientCommandManager.literal("foe")
-                        .executes(context -> sendAsPlayer(CONFIG.foeMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.foeMessage)))
 
                 .then(ClientCommandManager.literal("luckscaleprospect")
-                        .executes(context -> sendAsPlayer(CONFIG.luckscaleprospectMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.luckscaleprospectMessage)))
 
                 .then(ClientCommandManager.literal("reelbiteline")
-                        .executes(context -> sendAsPlayer(CONFIG.reelbitelineMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.reelbitelineMessage)))
 
                 .then(ClientCommandManager.literal("xpmoney")
-                        .executes(context -> sendAsPlayer(CONFIG.xpmoneyMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.xpmoneyMessage)))
 
                 .then(ClientCommandManager.literal("howfish")
-                        .executes(context -> sendAsPlayer(CONFIG.howfishMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.howfishMessage)))
 
                 .then(ClientCommandManager.literal("tutorial")
-                        .executes(context -> sendAsPlayer(CONFIG.tutorialMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.tutorialMessage)))
 
                 .then(ClientCommandManager.literal("calibrator")
-                        .executes(context -> sendAsPlayer(CONFIG.calibratorMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.calibratorMessage)))
 
                 .then(ClientCommandManager.literal("locationroll")
-                        .executes(context -> sendAsPlayer(CONFIG.locationrollMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.locationrollMessage)))
 
                 .then(ClientCommandManager.literal("quests")
-                        .executes(context -> sendAsPlayer(CONFIG.questsMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.questsMessage)))
 
                 .then(ClientCommandManager.literal("earnmoney")
-                        .executes(context -> sendAsPlayer(CONFIG.earnmoneyMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.earnmoneyMessage)))
 
                 .then(ClientCommandManager.literal("wiki")
-                        .executes(context -> sendAsPlayer(CONFIG.wikiMessage)))
+                        .executes(context -> sendAsPlayer(CONFIG.messages.wikiMessage)))
+
+                .then(ClientCommandManager.literal("supercharged")
+                        .executes(context -> sendAsPlayer(CONFIG.messages.superchargedMessage)))
+
+                .then(ClientCommandManager.literal("lightningstorm")
+                        .executes(context -> sendAsPlayer(CONFIG.messages.lightningstormMessage)))
         ));
     }
 
