@@ -1,4 +1,4 @@
-package me.Madisonn.StaffHelperMod.Config;
+package me.madisonn.staffhelpermod.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;

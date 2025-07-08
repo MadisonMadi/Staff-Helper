@@ -17,10 +17,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.Madisonn.StaffHelperMod.CommandRegistry"
+      "me.madisonn.staffhelpermod.StaffHelperClient"
     ],
     "modmenu": [
-      "me.Madisonn.StaffHelperMod.Config.ModMenuIntegration"
+      "me.madisonn.staffhelpermod.config.ModMenuIntegration"
     ]
   },
   "depends": {

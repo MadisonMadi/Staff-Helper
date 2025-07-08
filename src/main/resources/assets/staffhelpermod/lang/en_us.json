@@ -6,7 +6,7 @@
   "text.autoconfig.staffhelpermod.category.messages": "Messages",
   "text.autoconfig.staffhelpermod.category.commands": "Commands",
 
-  "text.autoconfig.staffhelpermod.option.messages": "Message Options",
+  "text.autoconfig.staffhelpermod.option.messages": "§f§lMessage Options",
   "text.autoconfig.staffhelpermod.option.messages.baitMessage": "Bait Message",
   "text.autoconfig.staffhelpermod.option.messages.baitpackMessage": "Bait Package Message",
   "text.autoconfig.staffhelpermod.option.messages.petdropMessage": "Pet Drop Message",
@@ -32,6 +32,6 @@
   "text.autoconfig.staffhelpermod.option.messages.superchargedMessage": "Supercharged Message",
   "text.autoconfig.staffhelpermod.option.messages.lightningstormMessage": "Lightning Bottle Message",
 
-  "text.autoconfig.staffhelpermod.option.commands": "Command Options",
+  "text.autoconfig.staffhelpermod.option.commands": "§f§lCommand Options",
   "text.autoconfig.staffhelpermod.option.commands.mainCommand": "Main Command"
 }
