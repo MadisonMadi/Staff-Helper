@@ -19,7 +19,7 @@
   "text.autoconfig.staffhelpermod.option.messages.foeMessage": "FishonExtra Message",
   "text.autoconfig.staffhelpermod.option.messages.forgeMessage": "Forge Message",
   "text.autoconfig.staffhelpermod.option.messages.howfishMessage": "How to Fish Message",
-  "text.autoconfig.staffhelpermod.option.messages.lightningstormMessage": "Lightning Bottle Message",
+  "text.autoconfig.staffhelpermod.option.messages.lightningstormMessage": "Lightning Storm Message",
   "text.autoconfig.staffhelpermod.option.messages.locationrollMessage": "Location Roll Message",
   "text.autoconfig.staffhelpermod.option.messages.luckscaleprospectMessage": "Luck, Scale and Prospect Message",
   "text.autoconfig.staffhelpermod.option.messages.petdropMessage": "Pet Drop Message",
@@ -30,7 +30,7 @@
   "text.autoconfig.staffhelpermod.option.messages.tutorialMessage": "Tutotial Message",
   "text.autoconfig.staffhelpermod.option.messages.variantsMessage": "Variants Message",
   "text.autoconfig.staffhelpermod.option.messages.wikiMessage": "Wiki Message",
-  "text.autoconfig.staffhelpermod.option.messages.xpmoneyMessage": "Experience, Money Message",
+  "text.autoconfig.staffhelpermod.option.messages.xpmoneyMessage": "Experience and Money Message",
 
   "text.autoconfig.staffhelpermod.option.commands": "§f§lCommand Options",
   "text.autoconfig.staffhelpermod.option.commands.mainCommand": "Main Command"
