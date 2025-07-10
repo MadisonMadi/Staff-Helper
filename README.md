@@ -76,8 +76,8 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - There are Easy, Medium (lvl 20) and Hard (lvl 50) quests, each tier gives more rewards and at hard quests you get shards and a chance for a pet!
 
 
-- /staffhelp reelbiteline -> Reel & Bite Speed Explanation
-  - Reel Speed increases progress per tick, Bite Speed reduces wait time for bites.
+- /staffhelp reelbiteline -> Reel Speed & Bite Speed and Line Strength Explanation
+  - Reel Speed increases progress per tick, Bite Speed reduces wait time for bites, Line Strength makes catching fish easier.
 
 
 - /staffhelp scrapper -> How to Scrap Armor for Shards

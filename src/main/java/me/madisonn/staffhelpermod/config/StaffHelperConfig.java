@@ -34,7 +34,7 @@ public class StaffHelperConfig implements ConfigData {
         public String luckscaleprospectMessage = "Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance: base chance is 1/50.";
         public String petdropMessage = "Pet Drop Chances are Common 1/750 - Rare 1/4000 - Epic 1/10000 - Legendary 1/30000 - Mythical 1/80000!";
         public String questsMessage = "There are Easy, Medium (lvl 20) and Hard (lvl 50) quests, each tier gives more rewards and at hard quests you get shards and a chance for a pet!";
-        public String reelbitelineMessage = "Reel Speed increases progress per tick, Bite Speed reduces wait time for bites.";
+        public String reelbitelineMessage = "Reel Speed increases progress per tick, Bite Speed reduces wait time for bites, Line Strength makes catching fish easier.";
         public String scrapperMessage = "To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' to scrap your pieces and get some shards in return! '/scrapper'.";
         public String superchargeMessage = "For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.";
         public String tutorialMessage = "You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.";
