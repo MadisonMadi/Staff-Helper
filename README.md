@@ -88,6 +88,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.
 
 
+- /staffhelp tackleshop ➜ Tackle Shop Message
+  - The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the wait to extremely rare Variant Bait.
+
+
 - /staffhelp tutorial ➜ Tutorial Message
   - You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.
 

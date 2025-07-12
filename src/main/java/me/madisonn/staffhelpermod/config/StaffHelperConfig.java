@@ -37,6 +37,7 @@ public class StaffHelperConfig implements ConfigData {
         public String reelbitelineMessage = "Reel Speed increases progress per tick, Bite Speed reduces wait time for bites, Line Strength makes catching fish easier.";
         public String scrapperMessage = "To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' to scrap your pieces and get some shards in return! '/scrapper'.";
         public String superchargeMessage = "For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.";
+        public String tackleshopMessage = "The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the wait to extremely rare Variant Bait.";
         public String tutorialMessage = "You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.";
         public String variantsMessage = "Albino 1/5000, Melanistic 1/10000 and Trophy 1/15000.";
         public String wikiMessage = "https://wiki.fishonmc.net/";

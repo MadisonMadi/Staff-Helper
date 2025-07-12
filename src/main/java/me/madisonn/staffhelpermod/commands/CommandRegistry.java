@@ -68,6 +68,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("supercharge")
                         .executes(context -> sendAsPlayer(config.messages.superchargeMessage)))
 
+                .then(ClientCommandManager.literal("tackleshop")
+                        .executes(context -> sendAsPlayer(config.messages.tackleshopMessage)))
+
                 .then(ClientCommandManager.literal("tutorial")
                         .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))
 
