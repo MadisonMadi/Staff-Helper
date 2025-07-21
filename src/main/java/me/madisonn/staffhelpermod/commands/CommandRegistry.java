@@ -26,6 +26,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("calibrator")
                         .executes(context -> sendAsPlayer(config.messages.calibratorMessage)))
 
+                .then(ClientCommandManager.literal("calibratorloc")
+                        .executes(context -> sendAsPlayer(config.messages.calibratorlocMessage)))
+
                 .then(ClientCommandManager.literal("contest")
                         .executes(context -> sendAsPlayer(config.messages.contestMessage))) // Danuh Suggestion
 
@@ -40,6 +43,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("event")
                         .executes(context -> sendAsPlayer(config.messages.eventMessage))) // Danuh Suggestion
+
+                .then(ClientCommandManager.literal("findnpc")
+                        .executes(context -> sendAsPlayer(config.messages.findnpcMessage)))
 
                 .then(ClientCommandManager.literal("foe")
                         .executes(context -> sendAsPlayer(config.messages.foeMessage)))

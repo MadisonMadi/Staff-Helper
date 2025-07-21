@@ -32,6 +32,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank)
 
 
+- /staffhelp calibratorloc ➜ Calibrator Location Message
+  - The Calibrator can be found by going to /spawn, go inside and turn around and then to the right you will find the Calibrator.
+
+
 - /staffhelp contest ➜ Contest Message
   - Winning a contest top 3 will give you money, location xp, shards and if 5 people participate top 3 has a chance to win a pet and bait package!
 
@@ -49,7 +53,11 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp event ➜ Event Message
-  - Make sure you check /event | Hover over the book to see how to obtain event points.
+  - Make sure you check '/event' and hover over the book to see how to obtain event points.
+
+
+- /staffhelp findnpc ➜ Find NPC Message
+  - Do '/spawn' walk forwards towards the 6 npc's and then walk to the left you'll find every npc with a huge sign stuck to their building!
 
 
 - /staffhelp foe ➜ FishonExtra Message
@@ -77,7 +85,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp overflow ➜ Overflow Message
-  - Type /overflow to check if you have any lost loot from previous contests. Make sure you have some free slots in your inventory.
+  - Type '/overflow' to check if you have any lost loot from previous contests. Make sure you have some free slots in your inventory.
 
 
 - /staffhelp petdrop ➜ Pet Drop Message
@@ -97,7 +105,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp scrapper ➜ Scrapper Message
-  - To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' to scrap your pieces and get some shards in return! '/scrapper'.
+  - To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' (Sailor Rank) to scrap your pieces and get some shards in return!
 
 
 - /staffhelp showitem ➜ Show Item Message
@@ -113,7 +121,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp tackleshoploc ➜ Tackle Shop Location Message
-  - The Tackle Shop can be found by going to /spawn, turn around and then to the right you will find the Tackle Shop.
+  - The Tackle Shop can be found by going to /spawn, go inside and turn around and then to the right you will find the Tackle Shop.
 
 
 - /staffhelp tutorial ➜ Tutorial Message
@@ -130,6 +138,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 - /staffhelp xpmoney ➜ Experience and Money Message
   - Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches
+
 ---
 
 ## Installation
