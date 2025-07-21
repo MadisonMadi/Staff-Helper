@@ -11,6 +11,7 @@ public class StaffHelperClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // MUST BE FIRST
         AutoConfig.register(StaffHelperConfig.class, GsonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(StaffHelperConfig.class).getConfig();
 

@@ -1,11 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "staffhelpermod",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "name": "Staff-Helper",
   "description": "A custom built staff tool for helping players",
   "authors": [
     "Madisonn"
+  ],
+  "contributors": [
+    "Danuh"
   ],
   "contact": {
     "discord": "madisonmadi",

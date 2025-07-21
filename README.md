@@ -32,6 +32,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank)
 
 
+- /staffhelp contest ➜ Contest Message
+  - Winning a contest top 3 will give you money, location xp, shards and if 5 people participate top 3 has a chance to win a pet and bait package!
+
+
 - /staffhelp cosmetics ➜ Cosmetics Message
   - Cosmetics can be bought with credits from '/buy' these are purely cosmetic and will not influence your gameplay.
 
@@ -42,6 +46,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 - /staffhelp earnmoney ➜ Earn Money Message
   - You can earn money from '/collections', '/ah', '/event', '/vote and '/quests'
+
+
+- /staffhelp event ➜ Event Message
+  - Make sure you check /event | Hover over the book to see how to obtain event points.
 
 
 - /staffhelp foe ➜ FishonExtra Message
@@ -68,8 +76,16 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance.
 
 
+- /staffhelp overflow ➜ Overflow Message
+  - Type /overflow to check if you have any lost loot from previous contests. Make sure you have some free slots in your inventory.
+
+
 - /staffhelp petdrop ➜ Pet Drop Message
   - Pet Drop Chances are Common 1/750 - Rare 1/4000 - Epic 1/10000 - Legendary 1/30000 - Mythical 1/80000!
+
+
+- /staffhelp petmerge ➜ Pet Merge Message
+  - You can merge 2 pets that are the same type and rarity. Both must be level 100 - right click one of them in your inventory, then left click the other one.
 
 
 - /staffhelp quests ➜ Quests Message
@@ -84,12 +100,20 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' to scrap your pieces and get some shards in return! '/scrapper'.
 
 
+- /staffhelp showitem ➜ Show Item Message
+  - You can showcase an item simply by holding it in your hand, then type in chat [ item] (no space).
+
+
 - /staffhelp supercharge ➜ Supercharge Message
   - For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.
 
 
 - /staffhelp tackleshop ➜ Tackle Shop Message
   - The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the wait to extremely rare Variant Bait.
+
+
+- /staffhelp tackleshoploc ➜ Tackle Shop Location Message
+  - The Tackle Shop can be found by going to /spawn, turn around and then to the right you will find the Tackle Shop.
 
 
 - /staffhelp tutorial ➜ Tutorial Message
