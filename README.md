@@ -72,6 +72,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - Sneak to raise line tension (blue bar right), stop to lower it (left). Fill the green bar to catch the fish!
 
 
+- /staffhelp identifier ➜ Identifier Message
+  - You can identify you armor pieces with '/identifier' (Sailor Rank) it goes from 1% to 100%, and it's recommended to only forge pieces with 90%+
+
+
 - /staffhelp lightningstorm ➜ Lightning Storm Message
   - A lightning storm has a 1 in 5 chance to appear and has a 1 in 250 chance for a lightning bottle while fishing.
 
@@ -96,6 +100,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - You can merge 2 pets that are the same type and rarity. Both must be level 100 - right click one of them in your inventory, then left click the other one.
 
 
+- /staffhelp power ➜ Power Message
+  - Power comes from completing collections, compendiums, and other tasks, this is cosmetic for now and will have a use later.
+
+
 - /staffhelp quests ➜ Quests Message
   - There are Easy, Medium (lvl 20) and Hard (lvl 50) quests, each tier gives more rewards and at hard quests you get shards and a chance for a pet!
 
@@ -110,6 +118,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 - /staffhelp showitem ➜ Show Item Message
   - You can showcase an item simply by holding it in your hand, then type in chat [ item] (no space).
+
+
+- /staffhelp store ➜ Store Message
+  - You can check out the store page by doing '/buy', to purchase ranks, boosters and credits!
 
 
 - /staffhelp supercharge ➜ Supercharge Message

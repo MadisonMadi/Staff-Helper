@@ -56,6 +56,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("howfish")
                         .executes(context -> sendAsPlayer(config.messages.howfishMessage)))
 
+                .then(ClientCommandManager.literal("identifier")
+                        .executes(context -> sendAsPlayer(config.messages.identifierMessage))) // Danuh Suggestion
+
                 .then(ClientCommandManager.literal("lightningstorm")
                         .executes(context -> sendAsPlayer(config.messages.lightningstormMessage)))
 
@@ -74,6 +77,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("petmerge")
                         .executes(context -> sendAsPlayer(config.messages.petmergeMessage))) // Danuh Suggestion
 
+                .then(ClientCommandManager.literal("power")
+                        .executes(context -> sendAsPlayer(config.messages.powerMessage))) // Danuh Suggestion
+
                 .then(ClientCommandManager.literal("quests")
                         .executes(context -> sendAsPlayer(config.messages.questsMessage)))
 
@@ -85,6 +91,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("showitem")
                         .executes(context -> sendAsPlayer(config.messages.showitemMessage))) // Danuh Suggestion
+
+                .then(ClientCommandManager.literal("store")
+                        .executes(context -> sendAsPlayer(config.messages.storeMessage))) // Danuh Suggestion
 
                 .then(ClientCommandManager.literal("supercharge")
                         .executes(context -> sendAsPlayer(config.messages.superchargeMessage)))
