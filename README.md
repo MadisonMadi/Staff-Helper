@@ -9,7 +9,7 @@
 These commands are to help players quickly; Messages and Main Command can be changed the in-game config
 
 - /staffhelp armor ➜ Armor Message
-  - Shards are used for armor with default armor recipes, no helmets.
+  - Shards are used for armor with default armor recipes, no helmets. '/craft'
 
 
 - /staffhelp artisan ➜ Artisan Message
@@ -76,6 +76,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - You can identify you armor pieces with '/identifier' (Sailor Rank) it goes from 1% to 100%, and it's recommended to only forge pieces with 90%+
 
 
+- /staffhelp instances ➜ Instance Message
+  - If you can't find someone, make sure you're in the same '/instance'.
+
+
 - /staffhelp lightningstorm ➜ Lightning Storm Message
   - A lightning storm has a 1 in 5 chance to appear and has a 1 in 250 chance for a lightning bottle while fishing.
 
@@ -106,6 +110,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 - /staffhelp quests ➜ Quests Message
   - There are Easy, Medium (lvl 20) and Hard (lvl 50) quests, each tier gives more rewards and at hard quests you get shards and a chance for a pet!
+
+
+- /staffhelp recipes ➜ Recipes Message
+  - Make sure to check out recipes to see the crafting patterns, open your green book and click the Recipes book.
 
 
 - /staffhelp reelbiteline ➜ Reel, Bite and Line Message

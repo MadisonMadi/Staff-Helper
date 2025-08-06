@@ -59,6 +59,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("identifier")
                         .executes(context -> sendAsPlayer(config.messages.identifierMessage))) // Danuh Suggestion
 
+                .then(ClientCommandManager.literal("instances")
+                        .executes(context -> sendAsPlayer(config.messages.instancesMessage)))
+
                 .then(ClientCommandManager.literal("lightningstorm")
                         .executes(context -> sendAsPlayer(config.messages.lightningstormMessage)))
 
@@ -82,6 +85,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("quests")
                         .executes(context -> sendAsPlayer(config.messages.questsMessage)))
+
+                .then(ClientCommandManager.literal("recipes")
+                        .executes(context -> sendAsPlayer(config.messages.recipesMessage)))
 
                 .then(ClientCommandManager.literal("reelbiteline")
                         .executes(context -> sendAsPlayer(config.messages.reelbitelineMessage)))

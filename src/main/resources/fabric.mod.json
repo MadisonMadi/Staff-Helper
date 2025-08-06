@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "staffhelpermod",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "name": "Staff-Helper",
   "description": "A custom built staff tool for helping players",
   "authors": [

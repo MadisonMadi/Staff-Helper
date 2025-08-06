@@ -19,7 +19,7 @@ public class StaffHelperConfig implements ConfigData {
     // Category options
     public static class Messages {
         @ConfigEntry.Gui.Tooltip(count = 0)
-        public String armorMessage = "Shards are used for armor with default armor recipes, no helmets.";
+        public String armorMessage = "Shards are used for armor with default armor recipes, no helmets. '/craft'";
         public String artisanMessage = "To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank).";
         public String auctionMessage = "You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price' expired items go to '/overflow'.";
         public String baitMessage = "To use bait press 'Q' while holding your fishing rod or right click it in your inventory, click the tackle box and drop your baits in there!";
@@ -36,6 +36,7 @@ public class StaffHelperConfig implements ConfigData {
         public String forgeMessage = "To tier up your armor you can go to the forge at spawn or use '/forge' (Sailor Rank), T2 16 Shards, T3 48 Shards, T4 96 Shards, T5 256 Shards.";
         public String howfishMessage = "Sneak to raise line tension (blue bar right), stop to lower it (left). Fill the green bar to catch the fish!";
         public String identifierMessage = "You can identify you armor pieces with '/identifier' (Sailor Rank) it goes from 1% to 100%, and it's recommended to only forge pieces with 90%+";
+        public String instancesMessage = "If you can't find someone, make sure you're in the same '/instance'";
         public String lightningstormMessage = "A lightning storm has a 1 in 5 chance to appear and has a 1 in 250 chance for a lightning bottle while fishing.";
         public String locationrollMessage = "Each location has a bonus roll per level 1-20, slots can be rolled for Species Size Bonus, General Bonus: luck, prospect and scale, also Sell and XP bonus.";
         public String luckscaleprospectMessage = "Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance: base chance is 1/50.";
@@ -44,6 +45,7 @@ public class StaffHelperConfig implements ConfigData {
         public String petmergeMessage = "You can merge 2 pets that are the same type and rarity. Both must be level 100 - right click one of them in your inventory, then left click the other one.";
         public String powerMessage = "Power comes from completing collections, compendiums, and other tasks, this is cosmetic for now and will have a use later.";
         public String questsMessage = "There are Easy, Medium (lvl 20) and Hard (lvl 50) quests, each tier gives more rewards and at hard quests you get shards and a chance for a pet!";
+        public String recipesMessage = "Make sure to check out recipes to see the crafting patterns, open your green book and click the Recipes book.";
         public String reelbitelineMessage = "Reel Speed increases progress per tick, Bite Speed reduces wait time for bites, Line Strength makes catching fish easier.";
         public String scrapperMessage = "To scrap your armor pieces you can go to the scrapper at spawn or use '/scrapper' (Sailor Rank) to scrap your pieces and get some shards in return!";
         public String showitemMessage = "You can showcase an item simply by holding it in your hand, then type in chat '[ item]' (no space).";
