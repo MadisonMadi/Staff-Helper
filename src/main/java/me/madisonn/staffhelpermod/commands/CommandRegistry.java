@@ -98,6 +98,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("showitem")
                         .executes(context -> sendAsPlayer(config.messages.showitemMessage))) // Danuh Suggestion
 
+                .then(ClientCommandManager.literal("sitting")
+                        .executes(context -> sendAsPlayer(config.messages.sittingMessage)))
+
                 .then(ClientCommandManager.literal("store")
                         .executes(context -> sendAsPlayer(config.messages.storeMessage))) // Danuh Suggestion
 
@@ -112,6 +115,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("tutorial")
                         .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))
+
+                .then(ClientCommandManager.literal("vehicles")
+                        .executes(context -> sendAsPlayer(config.messages.vehiclesMessage)))
 
                 .then(ClientCommandManager.literal("variants")
                         .executes(context -> sendAsPlayer(config.messages.variantsMessage)))

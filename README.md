@@ -25,7 +25,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp baitpack ➜ Bait Package Message
-  - To get bait packages you can do /vote, purchase them in /ah or from Fish Compendium and '/collections'.
+  - To get bait packages you can do '/vote', '/ah', '/collections', Fish Compendium and from Contests if top 3 at 5 participants.
 
 
 - /staffhelp calibrator ➜ Calibrator Message
@@ -128,6 +128,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - You can showcase an item simply by holding it in your hand, then type in chat [ item] (no space).
 
 
+- /staffhelp sitting Sitting Message
+  - To find places where you can sit down you need to enable F3+B to find interactable hitboxes, click these spots to sit down and cast your rod!
+
+
 - /staffhelp store ➜ Store Message
   - You can check out the store page by doing '/buy', to purchase ranks, boosters and credits!
 
@@ -146,6 +150,10 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 - /staffhelp tutorial ➜ Tutorial Message
   - You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.
+
+
+- /staffhelp vehicles ➜ Vehicles Messages
+  - You can buy vehicles in the building behind spawn to the left, purchase these with credits or money, to spawn your vehicle do '/vehicles' or walk to a dock to spawn your water vehicles.
 
 
 - /staffhelp variants ➜ Variants Message
