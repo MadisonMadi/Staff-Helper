@@ -128,7 +128,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
   - You can showcase an item simply by holding it in your hand, then type in chat '[ item]' (no space).
 
 
-- /staffhelp sitting Sitting Message
+- /staffhelp sitting ➜ Sitting Message
   - To find places where you can sit down you need to enable F3+B to find interactable hitboxes, click these spots to sit down and cast your rod!
 
 
