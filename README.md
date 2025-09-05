@@ -9,7 +9,7 @@
 These commands are to help players quickly; Messages and Main Command can be changed the in-game config
 
 - /staffhelp armor ➜ Armor Message
-  - Shards are used for armor with default armor recipes, no helmets. '/craft'
+  - Shards are used for armor with default armor recipes, no helmets. '/craft'.
 
 
 - /staffhelp artisan ➜ Artisan Message
@@ -17,11 +17,11 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp auction ➜ Auction Message
-  - You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price'
+  - You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price' expired items go to '/overflow'.
 
 
 - /staffhelp bait ➜ Bait Message
-  - To use bait press 'Q' while holding your fishing rod, click the tackle box and drop your baits in there!
+  - To use bait press 'Q' while holding your fishing rod or right click it in your inventory, click the tackle box and drop your baits in there!
 
 
 - /staffhelp baitpack ➜ Bait Package Message
@@ -29,11 +29,11 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp calibrator ➜ Calibrator Message
-  - Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank)
+  - Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank).
 
 
 - /staffhelp calibratorloc ➜ Calibrator Location Message
-  - The Calibrator can be found by going to /spawn, go inside and turn around and then to the right you will find the Calibrator.
+  - The Calibrator can be found by going to '/spawn' and turn around, go inside and follow the sign directions.
 
 
 - /staffhelp contest ➜ Contest Message
@@ -49,7 +49,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp earnmoney ➜ Earn Money Message
-  - You can earn money from '/collections', '/ah', '/event', '/vote and '/quests'
+  - You can earn money from '/collections', '/ah', '/event', '/vote' and '/quests'.
 
 
 - /staffhelp event ➜ Event Message
@@ -73,7 +73,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp identifier ➜ Identifier Message
-  - You can identify you armor pieces with '/identifier' (Sailor Rank) it goes from 1% to 100%, and it's recommended to only forge pieces with 90%+
+  - You can identify you armor pieces with '/identifier' (Sailor Rank) it goes from 1% to 100%, and it's recommended to only forge pieces with 90%+.
 
 
 - /staffhelp instances ➜ Instance Message
@@ -89,7 +89,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp luckscaleprospect ➜ Luck, Scale and Prospect Message
-  - Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance.
+  - Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance: base chance is 1/50.
 
 
 - /staffhelp overflow ➜ Overflow Message
@@ -97,7 +97,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp petdrop ➜ Pet Drop Message
-  - Pet Drop Chances are Common 1/750 - Rare 1/4000 - Epic 1/10000 - Legendary 1/30000 - Mythical 1/80000!
+  - Pet Drop Chances are Common 1/750, Rare 1/4000, Epic 1/10000, Legendary 1/30000 and Mythical 1/80000!
 
 
 - /staffhelp petmerge ➜ Pet Merge Message
@@ -125,7 +125,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp showitem ➜ Show Item Message
-  - You can showcase an item simply by holding it in your hand, then type in chat [ item] (no space).
+  - You can showcase an item simply by holding it in your hand, then type in chat '[ item]' (no space).
 
 
 - /staffhelp sitting Sitting Message
@@ -145,7 +145,7 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp tackleshoploc ➜ Tackle Shop Location Message
-  - The Tackle Shop can be found by going to /spawn, go inside and turn around and then to the right you will find the Tackle Shop.
+  - The Tackle Shop can be found by going to '/spawn' and turn around, go inside and follow the sign directions.
 
 
 - /staffhelp tutorial ➜ Tutorial Message
@@ -153,19 +153,19 @@ These commands are to help players quickly; Messages and Main Command can be cha
 
 
 - /staffhelp vehicles ➜ Vehicles Messages
-  - You can buy vehicles in the building behind spawn to the left, purchase these with credits or money, to spawn your vehicle do '/vehicles' or walk to a dock to spawn your water vehicles.
+  - You can buy vehicles in the building behind spawn to the left, purchase with credits or money, spawn your vehicle with '/vehicles' or walk to a dock to spawn your water vehicles.
 
 
 - /staffhelp variants ➜ Variants Message
-  - Albino 1/5000, Melanistic 1/10000 and Trophy 1/15000.
+  - Variant chances are Albino 1/5000, Melanistic 1/10000 and Trophy 1/15000.
 
 
 - /staffhelp wiki ➜ Wiki Message
-  - https://wiki.fishonmc.net/
+  - You can learn more at wiki.fishonmc.net
 
 
 - /staffhelp xpmoney ➜ Experience and Money Message
-  - Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches
+  - Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches.
 
 ---
 

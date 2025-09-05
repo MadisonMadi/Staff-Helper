@@ -19,7 +19,7 @@ public class StaffHelperConfig implements ConfigData {
     // Category options
     public static class Messages {
         @ConfigEntry.Gui.Tooltip(count = 0)
-        public String armorMessage = "Shards are used for armor with default armor recipes, no helmets. '/craft'";
+        public String armorMessage = "Shards are used for armor with default armor recipes, no helmets. '/craft'.";
         public String artisanMessage = "To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank).";
         public String auctionMessage = "You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price' expired items go to '/overflow'.";
         public String baitMessage = "To use bait press 'Q' while holding your fishing rod or right click it in your inventory, click the tackle box and drop your baits in there!";
