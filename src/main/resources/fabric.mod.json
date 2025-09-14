@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "staffhelpermod",
-  "version": "0.2.5",
+  "version": "${version}",
   "name": "Staff-Helper",
   "description": "A custom built staff tool for helping players",
   "authors": [
@@ -15,7 +15,7 @@
     "issues": "https://github.com/MadisonMadi/Staff-Helper/issues",
     "sources": "https://github.com/MadisonMadi/Staff-Helper"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "icon": "assets/staffhelpermod/icon.png",
   "environment": "client",
   "entrypoints": {

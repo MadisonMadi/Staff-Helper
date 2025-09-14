@@ -1,9 +1,11 @@
 package me.madisonn.staffhelpermod.commands;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import me.madisonn.staffhelpermod.config.StaffHelperConfig;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
 public class CommandRegistry {
     public static void registerCommands(StaffHelperConfig config) {
@@ -22,6 +24,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("baitpack")
                         .executes(context -> sendAsPlayer(config.messages.baitpackMessage)))
+
+                .then(ClientCommandManager.literal("bloomingoasis")
+                        .executes(context -> sendAsPlayer(config.messages.bloomingoasisMessage)))
 
                 .then(ClientCommandManager.literal("calibrator")
                         .executes(context -> sendAsPlayer(config.messages.calibratorMessage)))
@@ -44,6 +49,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("event")
                         .executes(context -> sendAsPlayer(config.messages.eventMessage))) // Danuh Suggestion
 
+                .then(ClientCommandManager.literal("fabled")
+                        .executes(context -> sendAsPlayer(config.messages.fabledMessage)))
+
                 .then(ClientCommandManager.literal("findnpc")
                         .executes(context -> sendAsPlayer(config.messages.findnpcMessage)))
 
@@ -52,6 +60,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("forge")
                         .executes(context -> sendAsPlayer(config.messages.forgeMessage)))
+
+                .then(ClientCommandManager.literal("goldrush")
+                        .executes(context -> sendAsPlayer(config.messages.goldrushMessage)))
 
                 .then(ClientCommandManager.literal("howfish")
                         .executes(context -> sendAsPlayer(config.messages.howfishMessage)))
@@ -62,14 +73,14 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("instances")
                         .executes(context -> sendAsPlayer(config.messages.instancesMessage)))
 
-                .then(ClientCommandManager.literal("lightningstorm")
-                        .executes(context -> sendAsPlayer(config.messages.lightningstormMessage)))
-
                 .then(ClientCommandManager.literal("locationroll")
                         .executes(context -> sendAsPlayer(config.messages.locationrollMessage)))
 
                 .then(ClientCommandManager.literal("luckscaleprospect")
                         .executes(context -> sendAsPlayer(config.messages.luckscaleprospectMessage)))
+
+                .then(ClientCommandManager.literal("moonevents")
+                        .executes(context -> sendAsPlayer(config.messages.mooneventsMessage)))
 
                 .then(ClientCommandManager.literal("overflow")
                         .executes(context -> sendAsPlayer(config.messages.overflowMessage))) // Danuh Suggestion
@@ -85,6 +96,12 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("quests")
                         .executes(context -> sendAsPlayer(config.messages.questsMessage)))
+
+                .then(ClientCommandManager.literal("rainbow")
+                        .executes(context -> sendAsPlayer(config.messages.rainbowMessage)))
+
+                .then(ClientCommandManager.literal("rainshower")
+                        .executes(context -> sendAsPlayer(config.messages.rainshowerMessage)))
 
                 .then(ClientCommandManager.literal("recipes")
                         .executes(context -> sendAsPlayer(config.messages.recipesMessage)))
@@ -104,6 +121,9 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("store")
                         .executes(context -> sendAsPlayer(config.messages.storeMessage))) // Danuh Suggestion
 
+                .then(ClientCommandManager.literal("supercellstorm")
+                        .executes(context -> sendAsPlayer(config.messages.supercellstormMessage)))
+
                 .then(ClientCommandManager.literal("supercharge")
                         .executes(context -> sendAsPlayer(config.messages.superchargeMessage)))
 
@@ -112,6 +132,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("tackleshoploc")
                         .executes(context -> sendAsPlayer(config.messages.tackleshoplocMessage))) // Danuh Suggestion
+
+                .then(ClientCommandManager.literal("thunderstorm")
+                        .executes(context -> sendAsPlayer(config.messages.thunderstormMessage)))
 
                 .then(ClientCommandManager.literal("tutorial")
                         .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))
@@ -127,6 +150,14 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("xpmoney")
                         .executes(context -> sendAsPlayer(config.messages.xpmoneyMessage)))
+
+                .then(ClientCommandManager.argument("unknown", StringArgumentType.string())
+                        .executes(context -> {
+                            Text ErrorMessage = Text.literal("Error! Command doesn't exist, check spelling!").withColor(0xFF0000);
+
+                            context.getSource().sendFeedback(ErrorMessage);
+                            return 1;
+                        }))
         ));
     }
 

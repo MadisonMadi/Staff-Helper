@@ -33,15 +33,13 @@ dependencies {
 }
 
 processResources {
+    from("LICENSE"){
+        into "META-INF"
+    }
+    from("README.md")
     inputs.property "version", project.version
-    inputs.property "minecraft_version", project.version
-    inputs.property "loader_version", project.version
-    filteringCharset "UTF-8"
-
     filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "minecraft_version": project.version,
-                "loader_version": project.version
+        expand "version": project.version
     }
 }
 
