@@ -74,6 +74,6 @@ Messages and the main command can be changed in the in-game config.
 
 ---
 
-**Disclaimer:** Not affiliated with Mojang, Microsoft or the FishOnMC Server. This is a Player Made Mod.
+**Disclaimer:** Not affiliated with Mojang, Microsoft, or the FishOnMC Server. This is a Player-Made Mod.
 
 Madisonn
