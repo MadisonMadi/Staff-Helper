@@ -27,6 +27,7 @@ public class CommandRegistry {
             addCommand(mainCommand, "contest", config.messages.contestMessage);
             addCommand(mainCommand, "cosmetics", config.messages.cosmeticsMessage);
             addCommand(mainCommand, "crew", config.messages.crewMessage);
+            addCommand(mainCommand, "cryptidsighting", config.messages.cryptidsightingMessage);
             addCommand(mainCommand, "dailymissions", config.messages.dailymissionsMessage);
             addCommand(mainCommand, "earnmoney", config.messages.earnmoneyMessage);
             addCommand(mainCommand, "event", config.messages.eventMessage);

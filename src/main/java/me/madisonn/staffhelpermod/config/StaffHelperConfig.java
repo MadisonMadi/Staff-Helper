@@ -32,10 +32,11 @@ public class StaffHelperConfig implements ConfigData {
         public String contestMessage = "Winning a contest top 3 will give you money, location xp, shards and if 5 people participate top 3 has a chance to win a pet and bait package!";
         public String cosmeticsMessage = "Cosmetics can be bought with credits from '/buy' these are purely cosmetic and will not influence your gameplay.";
         public String crewMessage = "You can create a crew '/crew create name' a crew island is mostly used for building and storage! crews are also used to compete for fun!";
+        public String cryptidsightingMessage = "Fishing at Cypress Lake between 1AM-3AM, there is a 1/300 change bigfoot will steal your fish, and gives you either a Bigfoot Tooth or Bigfoot Fur, these are used for pet items.";
         public String dailymissionsMessage = "Open the green book and check the bottom-right corner for Daily Missions. Each mission rewards 2-4 shards based on your location. Completing all grants XP, Money, a pet, and Location XP.";
         public String earnmoneyMessage = "You can earn money from '/collections', '/ah', '/event', '/vote' and '/quests'.";
         public String eventMessage = "Make sure you check '/event' and hover over the book to see how to obtain event points.";
-        public String fabledMessage = "The Fabled Event happens twice per day, and has a 1/2000 chance in a location declared in chat. Only one person per fabled event can catch it.";
+        public String fabledMessage = "The Fabled Event happens twice per day, and has a 1/3000 chance in a location declared in chat. Only one person per fabled event can catch it.";
         public String findnpcMessage = "Do '/spawn' walk forwards towards the 6 npc's and then walk to the left you'll find every npc with a huge sign stuck to their building!";
         public String foeMessage = "You can install the FishonMC-Extras Mod here modrinth.com/mod/fishonmc-extras.";
         public String forgeMessage = "To tier up your armor you can go to the forge at spawn or use '/forge' (Sailor Rank), T2 16 Shards, T3 48 Shards, T4 96 Shards, T5 256 Shards, it's recommended to only forge pieces with 95%+.";
@@ -66,7 +67,7 @@ public class StaffHelperConfig implements ConfigData {
         public String thunderstormMessage = "Thunderstorms spawn 1 in 3 times when it starts to rain and grants +100 bite speed as well as a 1/500 chance to fish up a lightning bottle and lasts for around 5-11 minutes.";
         public String tutorialMessage = "You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.";
         public String vehiclesMessage = "You can buy vehicles in the building behind spawn to the left, purchase with credits or money, spawn your vehicle with '/vehicles' or walk to a dock to spawn your water vehicles.";
-        public String variantsMessage = "Variant chances are Albino 1/5000, Melanistic 1/10000 and Trophy 1/15000.";
+        public String variantsMessage = "Variant chances are Albino 1/5000, Melanistic 1/10000, Trophy 1/15000 and Fabled 1/3000";
         public String wikiMessage = "You can learn more at wiki.fishonmc.net";
         public String xpmoneyMessage = "Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches.";
     }
