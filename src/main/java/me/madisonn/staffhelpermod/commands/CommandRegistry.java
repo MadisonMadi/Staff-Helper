@@ -73,6 +73,17 @@ public class CommandRegistry {
                         return 1;
                     }));
 
+            // Get Skin Command + Error
+            mainCommand.then(ClientCommandManager.literal("getskin")
+                    .then(ClientCommandManager.argument("playername", StringArgumentType.word())
+                            .suggests(SkinGrabber::suggestPlayers)
+                            .executes(SkinGrabber::getskin))
+                    .executes(context -> {
+                        context.getSource().sendFeedback(Text.literal("StaffHelper » Usage: /getskin <playername>").withColor(0xFF0000));
+                        return 1;
+                    })
+            );
+
             dispatcher.register(mainCommand);
         });
     }
