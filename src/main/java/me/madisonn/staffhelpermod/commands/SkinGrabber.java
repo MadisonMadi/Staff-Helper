@@ -16,20 +16,17 @@ import java.util.concurrent.CompletableFuture;
 public class SkinGrabber {
     public static int getskin(CommandContext<FabricClientCommandSource> context) {
         String playerName = StringArgumentType.getString(context, "playername");
-        MinecraftClient client = MinecraftClient.getInstance();
+        String url = "https://nl.namemc.com/profile/" + playerName;
 
-        if (client.player != null) {
-            String url = "https://nl.namemc.com/profile/" + playerName;
-
-            client.player.sendMessage(Text.literal("")
-                    .append(Text.literal("StaffHelper » NameMC Profile: ").withColor(0x00FF00))
-                    .append(Text.literal(url)
-                            .formatted(Formatting.AQUA, Formatting.UNDERLINE)
-                            .styled(style -> style
-                                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url))
-                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                            Text.literal("Click to open in browser").withColor(0x00FF00))))), false);
-        }
+        context.getSource().sendFeedback(Text.literal("")
+                .append(Text.literal("StaffHelper » NameMC Profile: ").withColor(0x00FF00))
+                .append(Text.literal(url)
+                        .formatted(Formatting.AQUA, Formatting.UNDERLINE)
+                        .styled(style -> style
+                                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                        Text.literal("Click to open in browser").withColor(0x00FF00))))
+                ));
         return 1;
     }
 

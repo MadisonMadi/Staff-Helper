@@ -79,7 +79,7 @@ public class CommandRegistry {
                             .suggests(SkinGrabber::suggestPlayers)
                             .executes(SkinGrabber::getskin))
                     .executes(context -> {
-                        context.getSource().sendFeedback(Text.literal("StaffHelper » Usage: /getskin <playername>").withColor(0xFF0000));
+                        context.getSource().sendFeedback(Text.literal("StaffHelper » Usage: /staffhelp getskin <playername>").withColor(0xFF0000));
                         return 1;
                     })
             );
