@@ -62,7 +62,9 @@ Messages and the main command can be changed in the in-game config.
 | **`/staffhelp wiki`**              | You can learn more at wiki.fishonmc.net                                                                                                                                                                                                    |
 | **`/staffhelp xpmoney`**           | Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches.                                                                                                                                                |
 
----
+| Command Utils                         | Description                                                                   |
+|---------------------------------------|-------------------------------------------------------------------------------|
+| **`/staffhelp getskin <playername>`** | It'll send the NameMC Profile + playername, and will send you a link to view. |
 
 ## Installation
 1. **Install Fabric Loader** for your Minecraft version (1.21.4-1.21.5)
