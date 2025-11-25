@@ -28,10 +28,8 @@ public class SkinViewScreen extends Screen {
         int totalWidth = (buttonWidth * 2) + buttonSpacing;
         int leftButtonX = centerX - totalWidth / 2;
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("NameMC"), button -> {
-                    String url = "https://nl.namemc.com/profile/" + playerName;
-                    Util.getOperatingSystem().open(url);
-                })
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("NameMC"), button ->
+                        Util.getOperatingSystem().open("https://nl.namemc.com/profile/" + playerName))
                 .dimensions(leftButtonX, this.height - 60, buttonWidth, 20)
                 .build());
 
@@ -45,9 +43,7 @@ public class SkinViewScreen extends Screen {
                 .dimensions(leftButtonX + buttonWidth + buttonSpacing, this.height - 60, buttonWidth, 20)
                 .build());
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("Close"), button -> {
-                    closeScreen();
-                })
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("Close"), button -> closeScreen())
                 .dimensions(centerX - 50, this.height - 30, 100, 20)
                 .build());
     }

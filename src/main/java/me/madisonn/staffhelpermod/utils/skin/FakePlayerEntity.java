@@ -4,14 +4,13 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.data.TrackedData;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
     private static TrackedData<Byte> SKIN_LAYERS_FIELD = null;
-    private boolean showSecondLayer = true;
-    private Identifier customSkin = null;
+    private boolean showSecondLayer;
+    private Identifier customSkin;
 
     public FakePlayerEntity(ClientWorld world, GameProfile profile, boolean showSecondLayer) {
         super(world, profile);
@@ -83,8 +82,34 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     }
 
     @Override
-    public Text getName() {
-        return Text.empty();
+    public net.minecraft.text.Text getName() {
+        return net.minecraft.text.Text.empty();
+    }
+
+    @Override
+    public net.minecraft.text.Text getDisplayName() {
+        return net.minecraft.text.Text.empty();
+    }
+
+    @Override
+    public boolean isCustomNameVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public net.minecraft.text.Text getCustomName() {
+        return null;
+    }
+
+    // Nuclear option - also override any team-related rendering
+    @Override
+    public net.minecraft.scoreboard.Team getScoreboardTeam() {
+        return null;
     }
 
     @Override
