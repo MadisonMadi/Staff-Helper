@@ -30,14 +30,14 @@ public class PlayerModelRenderer {
         if (client.world == null) return;
 
         try {
-            // Create new fake player if needed
+            // Fake Player
             if (currentFakePlayer == null || !currentPlayerName.equals(playerName)) {
                 currentFakePlayer = createPlayerWithSkin(client, playerName, showSecondLayer);
                 currentPlayerName = playerName;
                 currentShowSecondLayer = showSecondLayer;
             }
 
-            // Update second layer setting if changed
+            // Second Layer Toggle
             if (currentShowSecondLayer != showSecondLayer) {
                 currentFakePlayer.setShowSecondLayer(showSecondLayer);
                 currentShowSecondLayer = showSecondLayer;
@@ -48,7 +48,7 @@ public class PlayerModelRenderer {
 
             matrices.push();
 
-            // Position the model
+            // Position model
             matrices.translate(x, y, 50);
             matrices.scale(size, -size, size);
 
@@ -58,7 +58,7 @@ public class PlayerModelRenderer {
             // Position adjustment
             matrices.translate(0, -0.5, 0);
 
-            // Render the entity
+            // Render entity
             client.getEntityRenderDispatcher().render(
                     currentFakePlayer,
                     0, 0, 0,
@@ -90,7 +90,6 @@ public class PlayerModelRenderer {
             profile = new GameProfile(uuid, playerName);
             System.out.println("Loading skin for offline player: " + playerName);
 
-            // Only try to load skin once per player session
             if (!skinLoadingAttempts.containsKey(playerName.toLowerCase())) {
                 skinLoadingAttempts.put(playerName.toLowerCase(), true);
                 loadSkinFromMinecraftTextureServer(client, playerName, uuid);
@@ -99,7 +98,6 @@ public class PlayerModelRenderer {
 
         FakePlayerEntity fakePlayer = new FakePlayerEntity(client.world, profile, showSecondLayer);
 
-        // Apply custom skin if available
         if (loadedSkins.containsKey(playerName.toLowerCase())) {
             fakePlayer.setCustomSkin(loadedSkins.get(playerName.toLowerCase()));
         }
@@ -213,7 +211,6 @@ public class PlayerModelRenderer {
 
                         System.out.println("Successfully loaded skin for: " + playerName);
 
-                        // Only clear cache once to refresh with the new skin
                         if (currentPlayerName.equals(playerName)) {
                             currentFakePlayer = null;
                         }

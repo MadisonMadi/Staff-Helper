@@ -22,14 +22,12 @@ public class SkinViewScreen extends Screen {
     protected void init() {
         super.init();
 
-        // Calculate button positions
         int centerX = this.width / 2;
         int buttonWidth = 100;
         int buttonSpacing = 5;
         int totalWidth = (buttonWidth * 2) + buttonSpacing;
         int leftButtonX = centerX - totalWidth / 2;
 
-        // NameMC button (left)
         this.addDrawableChild(ButtonWidget.builder(Text.literal("NameMC"), button -> {
                     String url = "https://nl.namemc.com/profile/" + playerName;
                     Util.getOperatingSystem().open(url);
@@ -37,7 +35,6 @@ public class SkinViewScreen extends Screen {
                 .dimensions(leftButtonX, this.height - 60, buttonWidth, 20)
                 .build());
 
-        // Toggle Second Layer button (right next to NameMC)
         this.addDrawableChild(ButtonWidget.builder(
                         Text.literal("Second Layer: " + (showSecondLayer ? "ON" : "OFF")),
                         button -> {
@@ -48,7 +45,6 @@ public class SkinViewScreen extends Screen {
                 .dimensions(leftButtonX + buttonWidth + buttonSpacing, this.height - 60, buttonWidth, 20)
                 .build());
 
-        // Close button (centered below)
         this.addDrawableChild(ButtonWidget.builder(Text.literal("Close"), button -> {
                     closeScreen();
                 })
@@ -58,26 +54,21 @@ public class SkinViewScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // Render the semi-transparent background FIRST
         renderTransparentBackground(context);
 
-        // Then render the 3D model with the current second layer setting
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
         PlayerModelRenderer.renderPlayerModel(context, playerName, centerX, centerY, 60, rotation, showSecondLayer);
 
-        // Then render UI text elements
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, 0xFFFFFF);
         context.drawCenteredTextWithShadow(this.textRenderer, "Player: " + playerName, this.width / 2, centerY + 70, 0xFFFFFF);
         context.drawCenteredTextWithShadow(this.textRenderer, "Drag to rotate", this.width / 2, centerY + 85, 0xAAAAAA);
 
-        // Show offline player status if applicable
         if (!PlayerModelRenderer.isPlayerOnline(playerName)) {
             context.drawCenteredTextWithShadow(this.textRenderer, "Offline Player", this.width / 2, centerY + 100, 0xFF0000);
         }
 
-        // Render buttons last (on top of everything)
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -85,17 +76,15 @@ public class SkinViewScreen extends Screen {
         context.fill(0, 0, this.width, this.height, 0x80000000);
     }
 
-    // Handle ESC key press
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == 256) { // ESC key
+        if (keyCode == 256) {
             closeScreen();
             return true;
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    // Centralized close method for both ESC and Close button
     private void closeScreen() {
         PlayerModelRenderer.clearAllCache();
         this.close();
@@ -103,7 +92,6 @@ public class SkinViewScreen extends Screen {
 
     @Override
     public void close() {
-        // Ensure cache is cleared when screen closes (redundant but safe)
         PlayerModelRenderer.clearAllCache();
         super.close();
     }
@@ -146,6 +134,5 @@ public class SkinViewScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        // Do nothing - we handle background in renderTransparentBackground()
     }
 }

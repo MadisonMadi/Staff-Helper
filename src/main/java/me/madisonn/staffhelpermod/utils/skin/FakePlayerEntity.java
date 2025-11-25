@@ -35,7 +35,6 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     public void setCustomSkin(Identifier skin) {
         this.customSkin = skin;
-        // Removed debug print to reduce console spam
     }
 
     private void updateSkinLayers() {
@@ -54,14 +53,10 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
         }
     }
 
-    // Override to use custom skin if available
     @Override
     public SkinTextures getSkinTextures() {
         if (customSkin != null) {
-            // Removed debug print to reduce console spam - this method is called every frame!
             try {
-                // Create custom SkinTextures with our texture
-                // Using reflection to handle the constructor safely
                 java.lang.reflect.Constructor<SkinTextures> constructor = SkinTextures.class.getDeclaredConstructor(
                         Identifier.class, String.class, Identifier.class, Identifier.class,
                         SkinTextures.Model.class, boolean.class
@@ -76,7 +71,6 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
                         false // secure
                 );
             } catch (Exception e) {
-                // If reflection fails, fall back to default
                 return super.getSkinTextures();
             }
         }
@@ -85,12 +79,12 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     @Override
     public boolean shouldRenderName() {
-        return false; // This prevents the username from rendering
+        return false;
     }
 
     @Override
     public Text getName() {
-        return Text.empty(); // Return empty text to be safe
+        return Text.empty();
     }
 
     @Override
