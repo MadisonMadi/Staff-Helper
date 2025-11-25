@@ -1,6 +1,6 @@
 # Staff Helper
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.4%20to%201.21.5-blue)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.5-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)
 
@@ -62,17 +62,17 @@ Messages and the main command can be changed in the in-game config.
 | **`/staffhelp wiki`**              | You can learn more at wiki.fishonmc.net                                                                                                                                                                                                    |
 | **`/staffhelp xpmoney`**           | Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches.                                                                                                                                                |
 
-| Command Utils                         | Description                                                                   |
-|---------------------------------------|-------------------------------------------------------------------------------|
-| **`/staffhelp getskin <playername>`** | It'll send the NameMC Profile + playername, and will send you a link to view. |
+| Command Utils                         | Description                                                                                     |
+|---------------------------------------|-------------------------------------------------------------------------------------------------|
+| **`/staffhelp getskin <playername>`** | Will show you a 3D Model of the player skin, and NameMC Profile button + Toggle for Skin Layer. |
 
 ## Installation
-1. **Install Fabric Loader** for your Minecraft version (1.21.4-1.21.5)
+1. **Install Fabric Loader** for your Minecraft version (1.21.5)
 2. Download dependencies:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.4-1.21.5)
-   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.4-1.21.5)
-   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.4-1.21.5)
-3. Place `Staff-Helper-x.x.x+1.21.4-1.21.5.jar` in your `mods` folder
+   - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.5)
+   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.5)
+   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.5)
+3. Place `Staff-Helper-x.x.x+1.21.5.jar` in your `mods` folder
 
 ---
 
