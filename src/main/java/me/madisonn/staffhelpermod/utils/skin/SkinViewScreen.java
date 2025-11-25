@@ -74,7 +74,7 @@ public class SkinViewScreen extends Screen {
 
         // Show offline player status if applicable
         if (!PlayerModelRenderer.isPlayerOnline(playerName)) {
-            context.drawCenteredTextWithShadow(this.textRenderer, "Offline Player - Default Skin", this.width / 2, centerY + 100, 0xFFAA00);
+            context.drawCenteredTextWithShadow(this.textRenderer, "Offline Player", this.width / 2, centerY + 100, 0xFF0000);
         }
 
         // Render buttons last (on top of everything)
