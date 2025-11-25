@@ -4,7 +4,6 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.data.TrackedData;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
 
