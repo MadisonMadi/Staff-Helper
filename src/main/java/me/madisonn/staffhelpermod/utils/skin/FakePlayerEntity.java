@@ -4,6 +4,7 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
 
@@ -80,6 +81,16 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
             }
         }
         return super.getSkinTextures();
+    }
+
+    @Override
+    public boolean shouldRenderName() {
+        return false; // This prevents the username from rendering
+    }
+
+    @Override
+    public Text getName() {
+        return Text.empty(); // Return empty text to be safe
     }
 
     @Override
