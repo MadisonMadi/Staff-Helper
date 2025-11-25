@@ -57,29 +57,21 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     @Override
     public SkinTextures getSkinTextures() {
         if (customSkin != null) {
-            // Removed debug print to reduce console spam - this method is called every frame!
-            try {
-                // Create custom SkinTextures with our texture
-                // Using reflection to handle the constructor safely
-                java.lang.reflect.Constructor<SkinTextures> constructor = SkinTextures.class.getDeclaredConstructor(
-                        Identifier.class, String.class, Identifier.class, Identifier.class,
-                        SkinTextures.Model.class, boolean.class
-                );
-                constructor.setAccessible(true);
-                return new SkinTextures(
-                        customSkin,
-                        null,        // textureUrl (new in 1.21.5)
-                        customSkin,
-                        null,
-                        SkinTextures.Model.WIDE,
-                        false
-                );
-            } catch (Exception e) {
-                // If reflection fails, fall back to default
-                return super.getSkinTextures();
-            }
+            return new SkinTextures(
+                    customSkin,
+                    null,        // textureUrl
+                    customSkin,  // cape texture
+                    null,        // elytra texture
+                    SkinTextures.Model.WIDE,
+                    false
+            );
         }
         return super.getSkinTextures();
+    }
+
+    @Override
+    public boolean shouldRenderName() {
+        return false;
     }
 
     @Override
