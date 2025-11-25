@@ -30,14 +30,14 @@ public class PlayerModelRenderer {
         if (client.world == null) return;
 
         try {
-            // Create new fake player if needed
+            // Fake Player
             if (currentFakePlayer == null || !currentPlayerName.equals(playerName)) {
                 currentFakePlayer = createPlayerWithSkin(client, playerName, showSecondLayer);
                 currentPlayerName = playerName;
                 currentShowSecondLayer = showSecondLayer;
             }
 
-            // Update second layer setting if changed
+            // Second Layer Toggle
             if (currentShowSecondLayer != showSecondLayer) {
                 currentFakePlayer.setShowSecondLayer(showSecondLayer);
                 currentShowSecondLayer = showSecondLayer;
@@ -48,18 +48,17 @@ public class PlayerModelRenderer {
 
             matrices.push();
 
-            // Position the model
+            // Position model
             matrices.translate(x, y, 50);
             matrices.scale(size, -size, size);
 
-            // Rotation - 1.21.5 version
+            // Rotation - 1.21.5
             matrices.multiply(new org.joml.Quaternionf().rotateY((float) Math.toRadians(rotation)));
 
             // Position adjustment
             matrices.translate(0, -0.5, 0);
 
-            // Render the entity - SIMPLIFIED 1.21.5 approach
-            // Use the same method as 1.21.4 but with reflection to avoid compilation errors
+            // Render Entity
             renderEntity1215(client, currentFakePlayer, matrices, vertexConsumers);
 
             vertexConsumers.draw();
@@ -70,13 +69,8 @@ public class PlayerModelRenderer {
         }
     }
 
-    /**
-     * 1.21.5 entity rendering using the same method signature as 1.21.4
-     * This should work in 1.21.5 even though the internal implementation changed
-     */
     private static void renderEntity1215(MinecraftClient client, FakePlayerEntity entity, MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers) {
         try {
-            // Try the 1.21.4 signature - it might still work in 1.21.5
             client.getEntityRenderDispatcher().render(
                     entity,
                     0.0, 0.0, 0.0,
@@ -104,7 +98,6 @@ public class PlayerModelRenderer {
             profile = new GameProfile(uuid, playerName);
             System.out.println("Loading skin for offline player: " + playerName);
 
-            // Only try to load skin once per player session
             if (!skinLoadingAttempts.containsKey(playerName.toLowerCase())) {
                 skinLoadingAttempts.put(playerName.toLowerCase(), true);
                 loadSkinFromMinecraftTextureServer(client, playerName, uuid);
@@ -113,7 +106,6 @@ public class PlayerModelRenderer {
 
         FakePlayerEntity fakePlayer = new FakePlayerEntity(client.world, profile, showSecondLayer);
 
-        // Apply custom skin if available
         if (loadedSkins.containsKey(playerName.toLowerCase())) {
             fakePlayer.setCustomSkin(loadedSkins.get(playerName.toLowerCase()));
         }
@@ -221,7 +213,6 @@ public class PlayerModelRenderer {
 
                         var nativeImage = net.minecraft.client.texture.NativeImage.read(imageStream);
 
-                        // 1.21.5 NativeImageBackedTexture constructor
                         var texture = new net.minecraft.client.texture.NativeImageBackedTexture(
                                 () -> "staffhelper_skin_" + playerName.toLowerCase(),
                                 nativeImage
@@ -232,7 +223,6 @@ public class PlayerModelRenderer {
 
                         System.out.println("Successfully loaded skin for: " + playerName);
 
-                        // Only clear cache once to refresh with the new skin
                         if (currentPlayerName.equals(playerName)) {
                             currentFakePlayer = null;
                         }

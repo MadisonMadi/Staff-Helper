@@ -35,7 +35,6 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     public void setCustomSkin(Identifier skin) {
         this.customSkin = skin;
-        // Removed debug print to reduce console spam
     }
 
     private void updateSkinLayers() {
@@ -54,17 +53,16 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
         }
     }
 
-    // Override to use custom skin if available
     @Override
     public SkinTextures getSkinTextures() {
         if (customSkin != null) {
             return new SkinTextures(
-                    customSkin,
-                    null,        // textureUrl
-                    customSkin,  // cape texture
-                    null,        // elytra texture
-                    SkinTextures.Model.WIDE,
-                    false
+                    customSkin, //Texture
+                    null, // textureUrl
+                    customSkin, // cape texture
+                    null, // elytra texture
+                    SkinTextures.Model.WIDE, // model
+                    false // secure
             );
         }
         return super.getSkinTextures();
@@ -72,12 +70,12 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     @Override
     public boolean shouldRenderName() {
-        return false; // This prevents the username from rendering
+        return false;
     }
 
     @Override
     public Text getName() {
-        return Text.empty(); // Return empty text to be safe
+        return Text.empty();
     }
 
     @Override
