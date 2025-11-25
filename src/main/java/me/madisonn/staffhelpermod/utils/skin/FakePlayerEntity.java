@@ -74,8 +74,34 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     }
 
     @Override
-    public Text getName() {
-        return Text.empty();
+    public net.minecraft.text.Text getName() {
+        return net.minecraft.text.Text.empty();
+    }
+
+    @Override
+    public net.minecraft.text.Text getDisplayName() {
+        return net.minecraft.text.Text.empty();
+    }
+
+    @Override
+    public boolean isCustomNameVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public net.minecraft.text.Text getCustomName() {
+        return null;
+    }
+
+    // Nuclear option - also override any team-related rendering
+    @Override
+    public net.minecraft.scoreboard.Team getScoreboardTeam() {
+        return null;
     }
 
     @Override
