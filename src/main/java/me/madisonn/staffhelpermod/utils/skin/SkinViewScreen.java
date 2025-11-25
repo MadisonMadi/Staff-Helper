@@ -21,51 +21,67 @@ public class SkinViewScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+        addControlButtons();
+    }
 
+    private void addControlButtons() {
         int centerX = this.width / 2;
+        int buttonY = this.height - 60;
+        int closeButtonY = this.height - 30;
+
         int buttonWidth = 100;
         int buttonSpacing = 5;
         int totalWidth = (buttonWidth * 2) + buttonSpacing;
         int leftButtonX = centerX - totalWidth / 2;
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("NameMC"),
-                        button -> Util.getOperatingSystem().open("https://nl.namemc.com/profile/" + playerName))
-                .dimensions(leftButtonX, this.height - 60, buttonWidth, 20)
-                .build());
+        addDrawableChild(createNameMCButton(leftButtonX, buttonY));
+        addDrawableChild(createSecondLayerButton(leftButtonX + buttonWidth + buttonSpacing, buttonY));
+        addDrawableChild(createCloseButton(centerX - 50, closeButtonY));
+    }
 
-        this.addDrawableChild(ButtonWidget.builder(
+    private ButtonWidget createNameMCButton(int x, int y) {
+        return ButtonWidget.builder(Text.literal("NameMC"),
+                        button -> openNameMC())
+                .dimensions(x, y, 100, 20)
+                .build();
+    }
+
+    private ButtonWidget createSecondLayerButton(int x, int y) {
+        return ButtonWidget.builder(
                         Text.literal("Second Layer: " + (showSecondLayer ? "ON" : "OFF")),
-                        button -> {
-                            showSecondLayer = !showSecondLayer;
-                            button.setMessage(Text.literal("Second Layer: " + (showSecondLayer ? "ON" : "OFF")));
-                            PlayerModelRenderer.clearCache();
-                        })
-                .dimensions(leftButtonX + buttonWidth + buttonSpacing, this.height - 60, buttonWidth, 20)
-                .build());
+                        this::toggleSecondLayer)
+                .dimensions(x, y, 100, 20)
+                .build();
+    }
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("Close"),
+    private ButtonWidget createCloseButton(int x, int y) {
+        return ButtonWidget.builder(Text.literal("Close"),
                         button -> closeScreen())
-                .dimensions(centerX - 50, this.height - 30, 100, 20)
-                .build());
+                .dimensions(x, y, 100, 20)
+                .build();
+    }
+
+    private void openNameMC() {
+        String nameMCUrl = "https://nl.namemc.com/profile/" + playerName;
+        Util.getOperatingSystem().open(nameMCUrl);
+    }
+
+    private void toggleSecondLayer(ButtonWidget button) {
+        showSecondLayer = !showSecondLayer;
+        button.setMessage(Text.literal("Second Layer: " + (showSecondLayer ? "ON" : "OFF")));
+        PlayerModelRenderer.clearCache();
+    }
+
+    private void closeScreen() {
+        PlayerModelRenderer.clearAllCache();
+        close();
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         renderTransparentBackground(context);
-
-        int centerX = this.width / 2;
-        int centerY = this.height / 2;
-
-        PlayerModelRenderer.renderPlayerModel(context, playerName, centerX, centerY, 60, rotation, showSecondLayer);
-
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, 0xFFFFFF);
-        context.drawCenteredTextWithShadow(this.textRenderer, "Player: " + playerName, this.width / 2, centerY + 70, 0xFFFFFF);
-        context.drawCenteredTextWithShadow(this.textRenderer, "Drag to rotate", this.width / 2, centerY + 85, 0xAAAAAA);
-
-        if (!PlayerModelRenderer.isPlayerOnline(playerName)) {
-            context.drawCenteredTextWithShadow(this.textRenderer, "Offline Player", this.width / 2, centerY + 100, 0xFF0000);
-        }
-
+        renderPlayerModel(context);
+        renderTextInfo(context);
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -73,18 +89,32 @@ public class SkinViewScreen extends Screen {
         context.fill(0, 0, this.width, this.height, 0x80000000);
     }
 
+    private void renderPlayerModel(DrawContext context) {
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
+        PlayerModelRenderer.renderPlayerModel(context, playerName, centerX, centerY, 60, rotation, showSecondLayer);
+    }
+
+    private void renderTextInfo(DrawContext context) {
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
+
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, centerX, 10, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, "Player: " + playerName, centerX, centerY + 70, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, "Drag to rotate", centerX, centerY + 85, 0xAAAAAA);
+
+        if (!PlayerModelRenderer.isPlayerOnline(playerName)) {
+            context.drawCenteredTextWithShadow(this.textRenderer, "Offline Player", centerX, centerY + 100, 0xFF0000);
+        }
+    }
+
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == 256) {
+        if (keyCode == 256) { // ESC
             closeScreen();
             return true;
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
-    }
-
-    private void closeScreen() {
-        PlayerModelRenderer.clearAllCache();
-        this.close();
     }
 
     @Override
@@ -118,15 +148,17 @@ public class SkinViewScreen extends Screen {
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         if (this.isDragging && button == 0) {
-            int currentMouseX = (int) mouseX;
-            int delta = currentMouseX - this.lastMouseX;
-            rotation += delta * 0.5f;
-            if (rotation >= 360f) rotation -= 360f;
-            if (rotation < 0f) rotation += 360f;
-            this.lastMouseX = currentMouseX;
+            updateRotation(mouseX);
             return true;
         }
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    }
+
+    private void updateRotation(double mouseX) {
+        int currentMouseX = (int) mouseX;
+        int delta = currentMouseX - this.lastMouseX;
+        rotation = (rotation + delta * 0.5f) % 360f;
+        this.lastMouseX = currentMouseX;
     }
 
     @Override

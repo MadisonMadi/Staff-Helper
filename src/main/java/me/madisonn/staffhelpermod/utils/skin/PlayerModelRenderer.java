@@ -3,10 +3,13 @@ package me.madisonn.staffhelpermod.utils.skin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.UUID;
@@ -17,12 +20,24 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class PlayerModelRenderer {
-    private static FakePlayerEntity currentFakePlayer = null;
-    private static String currentPlayerName = "";
-    private static boolean currentShowSecondLayer = true;
-    private static final Map<String, Identifier> loadedSkins = new HashMap<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerModelRenderer.class);
+
+    private record PlayerModelCache(FakePlayerEntity fakePlayer, String playerName, boolean showSecondLayer) {}
+    private record SkinCacheEntry(Identifier textureId, long timestamp) {
+        SkinCacheEntry(Identifier textureId) {
+            this(textureId, System.currentTimeMillis());
+        }
+
+        boolean isExpired() {
+            return System.currentTimeMillis() - timestamp > 300_000; // 5 minutes
+        }
+    }
+
+    private static PlayerModelCache currentCache = null;
+    private static final Map<String, SkinCacheEntry> skinCache = new HashMap<>();
     private static final Map<String, Boolean> skinLoadingAttempts = new HashMap<>();
 
     public static void renderPlayerModel(DrawContext context, String playerName, int x, int y, int size, float rotation, boolean showSecondLayer) {
@@ -30,121 +45,118 @@ public class PlayerModelRenderer {
         if (client.world == null) return;
 
         try {
-            // Fake Player
-            if (currentFakePlayer == null || !currentPlayerName.equals(playerName)) {
-                currentFakePlayer = createPlayerWithSkin(client, playerName, showSecondLayer);
-                currentPlayerName = playerName;
-                currentShowSecondLayer = showSecondLayer;
-            }
-
-            // Second Layer Toggle
-            if (currentShowSecondLayer != showSecondLayer) {
-                currentFakePlayer.setShowSecondLayer(showSecondLayer);
-                currentShowSecondLayer = showSecondLayer;
-            }
-
-            MatrixStack matrices = context.getMatrices();
-            VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
-
-            matrices.push();
-
-            // Position model
-            matrices.translate(x, y, 50);
-            matrices.scale(size, -size, size);
-
-            // Rotation - 1.21.5
-            matrices.multiply(new org.joml.Quaternionf().rotateY((float) Math.toRadians(rotation)));
-
-            // Position adjustment
-            matrices.translate(0, -0.5, 0);
-
-            // Render Entity
-            renderEntity(client, currentFakePlayer, matrices, vertexConsumers);
-
-            vertexConsumers.draw();
-            matrices.pop();
-
+            updateCurrentPlayer(client, playerName, showSecondLayer);
+            renderEntity(context, client, x, y, size, rotation);
         } catch (Exception e) {
+            LOGGER.error("Failed to render player model for: {}", playerName, e);
             context.drawText(client.textRenderer, "3D Model", x, y, 0xFFFFFF, false);
         }
     }
 
-    private static void renderEntity(MinecraftClient client, FakePlayerEntity entity, MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers) {
+    private static void updateCurrentPlayer(MinecraftClient client, String playerName, boolean showSecondLayer) {
+        if (currentCache == null || !currentCache.playerName().equals(playerName)) {
+            FakePlayerEntity fakePlayer = createPlayerWithSkin(client, playerName, showSecondLayer);
+            currentCache = new PlayerModelCache(fakePlayer, playerName, showSecondLayer);
+        } else if (currentCache.showSecondLayer() != showSecondLayer) {
+            currentCache.fakePlayer().setShowSecondLayer(showSecondLayer);
+            currentCache = new PlayerModelCache(currentCache.fakePlayer(), playerName, showSecondLayer);
+        }
+    }
+
+    private static void renderEntity(DrawContext context, MinecraftClient client, int x, int y, int size, float rotation) {
+        MatrixStack matrices = context.getMatrices();
+        VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
+
+        matrices.push();
+        matrices.translate(x, y, 50);
+        matrices.scale(size, -size, size);
+        matrices.multiply(new org.joml.Quaternionf().rotateY((float) Math.toRadians(rotation)));
+        matrices.translate(0, -0.5, 0);
+
+        renderEntityModel(client, currentCache.fakePlayer(), matrices, vertexConsumers);
+        vertexConsumers.draw();
+        matrices.pop();
+    }
+
+    private static void renderEntityModel(MinecraftClient client, FakePlayerEntity entity, MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers) {
         try {
             client.getEntityRenderDispatcher().render(
-                    entity,
-                    0.0, 0.0, 0.0,
-                    180f,
-                    matrices,
-                    vertexConsumers,
-                    15728880
+                    entity, 0.0, 0.0, 0.0, 180f, matrices, vertexConsumers, LightmapTextureManager.pack(15, 15)
             );
         } catch (Exception e) {
-            System.out.println("Entity rendering failed: " + e.getMessage());
+            LOGGER.error("Entity rendering failed", e);
         }
     }
 
     private static FakePlayerEntity createPlayerWithSkin(MinecraftClient client, String playerName, boolean showSecondLayer) {
-        PlayerListEntry playerEntry = null;
-        if (client.getNetworkHandler() != null) {
-            playerEntry = client.getNetworkHandler().getPlayerListEntry(playerName);
-        }
+        UUID uuid = getPlayerUUID(client, playerName);
+        GameProfile profile = new GameProfile(uuid, playerName);
 
-        GameProfile profile;
-        if (playerEntry != null) {
-            // Online player - use their skin
-            profile = playerEntry.getProfile();
-            System.out.println("Using online player skin for: " + playerName);
-        } else {
-            // Offline player - get UUID and load skin
-            UUID uuid = getRealUUID(playerName).join();
-            profile = new GameProfile(uuid, playerName);
-            System.out.println("Loading skin for offline player: " + playerName);
-
-            // Only try to load skin once per player session
-            if (!skinLoadingAttempts.containsKey(playerName.toLowerCase())) {
-                skinLoadingAttempts.put(playerName.toLowerCase(), true);
-                loadSkinFromMinecraftTextureServer(client, playerName, uuid);
-            }
-        }
+        loadSkinIfNeeded(client, playerName, uuid);
 
         FakePlayerEntity fakePlayer = new FakePlayerEntity(client.world, profile, showSecondLayer);
-
-        if (loadedSkins.containsKey(playerName.toLowerCase())) {
-            fakePlayer.setCustomSkin(loadedSkins.get(playerName.toLowerCase()));
-        }
+        applyCachedSkin(fakePlayer, playerName);
 
         return fakePlayer;
+    }
+
+    private static UUID getPlayerUUID(MinecraftClient client, String playerName) {
+        PlayerListEntry playerEntry = getPlayerListEntry(client, playerName);
+        return playerEntry != null ? playerEntry.getProfile().getId() : fetchUUIDFromAPI(playerName);
+    }
+
+    private static PlayerListEntry getPlayerListEntry(MinecraftClient client, String playerName) {
+        return client.getNetworkHandler() != null ? client.getNetworkHandler().getPlayerListEntry(playerName) : null;
+    }
+
+    private static UUID fetchUUIDFromAPI(String playerName) {
+        try {
+            return getRealUUID(playerName).get();
+        } catch (Exception e) {
+            LOGGER.warn("Failed to fetch UUID for {}, using offline UUID", playerName, e);
+            return UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes());
+        }
+    }
+
+    private static void loadSkinIfNeeded(MinecraftClient client, String playerName, UUID uuid) {
+        if (shouldLoadSkin(playerName)) {
+            skinLoadingAttempts.put(playerName.toLowerCase(), true);
+            loadSkinFromMinecraftTextureServer(client, playerName, uuid);
+        }
+    }
+
+    private static boolean shouldLoadSkin(String playerName) {
+        return !skinLoadingAttempts.containsKey(playerName.toLowerCase()) &&
+                getPlayerListEntry(MinecraftClient.getInstance(), playerName) == null;
+    }
+
+    private static void applyCachedSkin(FakePlayerEntity fakePlayer, String playerName) {
+        SkinCacheEntry cachedSkin = skinCache.get(playerName.toLowerCase());
+        if (cachedSkin != null && !cachedSkin.isExpired()) {
+            fakePlayer.setCustomSkin(cachedSkin.textureId());
+        }
     }
 
     private static CompletableFuture<UUID> getRealUUID(String playerName) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String apiUrl = "https://api.mojang.com/users/profiles/minecraft/" + playerName;
-                HttpURLConnection connection = (HttpURLConnection) new URI(apiUrl).toURL().openConnection();
-                connection.setRequestMethod("GET");
-                connection.setConnectTimeout(5000);
-                connection.setReadTimeout(5000);
+                HttpURLConnection connection = createConnection(apiUrl);
 
                 if (connection.getResponseCode() == 200) {
-                    try (InputStream inputStream = connection.getInputStream()) {
-                        String response = new String(inputStream.readAllBytes());
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        if (json.has("id")) {
-                            String uuidStr = json.get("id").getAsString();
-                            uuidStr = uuidStr.replaceAll(
-                                    "(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})",
-                                    "$1-$2-$3-$4-$5"
-                            );
-                            UUID uuid = UUID.fromString(uuidStr);
-                            System.out.println("Found real UUID for " + playerName + ": " + uuid);
-                            return uuid;
-                        }
+                    String response = readResponse(connection);
+                    JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+
+                    if (json.has("id")) {
+                        String uuidStr = formatUUID(json.get("id").getAsString());
+                        UUID uuid = UUID.fromString(uuidStr);
+                        LOGGER.debug("Found UUID for {}: {}", playerName, uuid);
+                        return uuid;
                     }
                 }
-                System.out.println("No Mojang profile found for: " + playerName);
+                LOGGER.debug("No Mojang profile found for: {}", playerName);
             } catch (Exception e) {
-                System.out.println("Mojang API error for " + playerName + ": " + e.getMessage());
+                LOGGER.error("Mojang API error for {}", playerName, e);
             }
 
             return UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes());
@@ -154,111 +166,120 @@ public class PlayerModelRenderer {
     private static void loadSkinFromMinecraftTextureServer(MinecraftClient client, String playerName, UUID uuid) {
         CompletableFuture.runAsync(() -> {
             try {
-                // Get skin data from Mojang session server
                 String sessionUrl = "https://sessionserver.mojang.com/session/minecraft/profile/" + uuid.toString().replace("-", "");
-                HttpURLConnection sessionConnection = (HttpURLConnection) new URI(sessionUrl).toURL().openConnection();
-                sessionConnection.setRequestMethod("GET");
-                sessionConnection.setConnectTimeout(5000);
-                sessionConnection.setReadTimeout(5000);
+                HttpURLConnection sessionConnection = createConnection(sessionUrl);
 
                 if (sessionConnection.getResponseCode() == 200) {
-                    try (InputStream inputStream = sessionConnection.getInputStream()) {
-                        String response = new String(inputStream.readAllBytes());
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-
-                        if (json.has("properties")) {
-                            var properties = json.getAsJsonArray("properties");
-                            for (var prop : properties) {
-                                JsonObject property = prop.getAsJsonObject();
-                                if (property.has("name") && property.get("name").getAsString().equals("textures")) {
-                                    String textureData = property.get("value").getAsString();
-                                    String decoded = new String(java.util.Base64.getDecoder().decode(textureData));
-                                    JsonObject texturesJson = JsonParser.parseString(decoded).getAsJsonObject();
-
-                                    if (texturesJson.has("textures")) {
-                                        JsonObject textures = texturesJson.getAsJsonObject("textures");
-                                        if (textures.has("SKIN")) {
-                                            JsonObject skin = textures.getAsJsonObject("SKIN");
-                                            String skinUrl = skin.get("url").getAsString();
-
-                                            System.out.println("Downloading skin from Minecraft CDN: " + skinUrl);
-                                            downloadAndRegisterSkin(client, playerName, skinUrl);
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    String response = readResponse(sessionConnection);
+                    extractAndDownloadSkin(client, playerName, response);
                 }
-                System.out.println("No skin data found for: " + playerName);
             } catch (Exception e) {
-                System.out.println("Error loading from Minecraft texture server: " + e.getMessage());
+                LOGGER.error("Error loading skin from texture server for {}", playerName, e);
             }
         });
     }
 
-    private static void downloadAndRegisterSkin(MinecraftClient client, String playerName, String skinUrl) {
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URI(skinUrl).toURL().openConnection();
-            connection.setRequestMethod("GET");
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(10000);
+    private static void extractAndDownloadSkin(MinecraftClient client, String playerName, String response) {
+        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
 
-            if (connection.getResponseCode() == 200) {
-                byte[] imageData;
-                try (InputStream inputStream = connection.getInputStream()) {
-                    imageData = inputStream.readAllBytes();
-                }
+        if (json.has("properties")) {
+            json.getAsJsonArray("properties").forEach(prop -> {
+                JsonObject property = prop.getAsJsonObject();
+                if (property.has("name") && "textures".equals(property.get("name").getAsString())) {
+                    String textureData = property.get("value").getAsString();
+                    String decoded = new String(java.util.Base64.getDecoder().decode(textureData));
+                    JsonObject texturesJson = JsonParser.parseString(decoded).getAsJsonObject();
 
-                client.execute(() -> {
-                    try (InputStream imageStream = new java.io.ByteArrayInputStream(imageData)) {
-                        Identifier skinId = Identifier.of("staffhelper", "skin_" + playerName.toLowerCase());
-
-                        var nativeImage = net.minecraft.client.texture.NativeImage.read(imageStream);
-
-                        var texture = new net.minecraft.client.texture.NativeImageBackedTexture(
-                                () -> "staffhelper_skin_" + playerName.toLowerCase(),
-                                nativeImage
-                        );
-
-                        client.getTextureManager().registerTexture(skinId, texture);
-                        loadedSkins.put(playerName.toLowerCase(), skinId);
-
-                        System.out.println("Successfully loaded skin for: " + playerName);
-
-                        if (currentPlayerName.equals(playerName)) {
-                            currentFakePlayer = null;
+                    if (texturesJson.has("textures")) {
+                        JsonObject textures = texturesJson.getAsJsonObject("textures");
+                        if (textures.has("SKIN")) {
+                            String skinUrl = textures.getAsJsonObject("SKIN").get("url").getAsString();
+                            LOGGER.debug("Downloading skin for {} from: {}", playerName, skinUrl);
+                            downloadAndRegisterSkin(client, playerName, skinUrl);
                         }
-
-                    } catch (Exception e) {
-                        System.out.println("Failed to load skin texture: " + e.getMessage());
                     }
-                });
-            }
-        } catch (Exception e) {
-            System.out.println("Error downloading skin: " + e.getMessage());
+                }
+            });
         }
     }
 
-    // Clear only the current player cache (for switching players)
-    public static void clearCache() {
-        currentFakePlayer = null;
-        currentPlayerName = "";
+    private static void downloadAndRegisterSkin(MinecraftClient client, String playerName, String skinUrl) {
+        CompletableFuture.supplyAsync(() -> downloadSkinImage(skinUrl))
+                .thenAccept(imageData -> imageData.ifPresent(data -> registerSkin(client, playerName, data)))
+                .exceptionally(throwable -> {
+                    LOGGER.error("Failed to download skin for {}", playerName, throwable);
+                    return null;
+                });
     }
 
-    // Clear ALL cache including skins (for closing the GUI)
+    private static Optional<byte[]> downloadSkinImage(String skinUrl) {
+        try {
+            HttpURLConnection connection = createConnection(skinUrl);
+            if (connection.getResponseCode() == 200) {
+                try (InputStream inputStream = connection.getInputStream()) {
+                    return Optional.of(inputStream.readAllBytes());
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error downloading skin image", e);
+        }
+        return Optional.empty();
+    }
+
+    private static void registerSkin(MinecraftClient client, String playerName, byte[] imageData) {
+        client.execute(() -> {
+            try (InputStream imageStream = new java.io.ByteArrayInputStream(imageData)) {
+                Identifier skinId = Identifier.of("staffhelper", "skin_" + playerName.toLowerCase());
+                var nativeImage = net.minecraft.client.texture.NativeImage.read(imageStream);
+                var texture = new net.minecraft.client.texture.NativeImageBackedTexture(
+                        () -> "staffhelper_skin_" + playerName.toLowerCase(),
+                        nativeImage
+                );
+
+                client.getTextureManager().registerTexture(skinId, texture);
+                skinCache.put(playerName.toLowerCase(), new SkinCacheEntry(skinId));
+                LOGGER.info("Successfully loaded skin for: {}", playerName);
+
+                if (currentCache != null && currentCache.playerName().equals(playerName)) {
+                    currentCache = null;
+                }
+            } catch (Exception e) {
+                LOGGER.error("Failed to register skin texture for {}", playerName, e);
+            }
+        });
+    }
+
+    private static HttpURLConnection createConnection(String url) throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URI(url).toURL().openConnection();
+        connection.setRequestMethod("GET");
+        connection.setConnectTimeout(5000);
+        connection.setReadTimeout(5000);
+        return connection;
+    }
+
+    private static String readResponse(HttpURLConnection connection) throws Exception {
+        try (InputStream inputStream = connection.getInputStream()) {
+            return new String(inputStream.readAllBytes());
+        }
+    }
+
+    private static String formatUUID(String uuidStr) {
+        return uuidStr.replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5");
+    }
+
+    public static void clearCache() {
+        currentCache = null;
+    }
+
     public static void clearAllCache() {
-        currentFakePlayer = null;
-        currentPlayerName = "";
-        loadedSkins.clear();
+        currentCache = null;
+        skinCache.entrySet().removeIf(entry -> entry.getValue().isExpired());
         skinLoadingAttempts.clear();
-        System.out.println("Cleared all skin viewer cache from memory");
+        LOGGER.info("Cleared all skin viewer cache");
     }
 
     public static boolean isPlayerOnline(String playerName) {
         MinecraftClient client = MinecraftClient.getInstance();
-        return client.getNetworkHandler() != null &&
-                client.getNetworkHandler().getPlayerListEntry(playerName) != null;
+        return getPlayerListEntry(client, playerName) != null;
     }
 }
