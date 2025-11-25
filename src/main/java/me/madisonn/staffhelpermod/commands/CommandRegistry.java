@@ -1,97 +1,187 @@
 package me.madisonn.staffhelpermod.commands;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import me.madisonn.staffhelpermod.config.StaffHelperConfig;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
 public class CommandRegistry {
     public static void registerCommands(StaffHelperConfig config) {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            LiteralArgumentBuilder<FabricClientCommandSource> mainCommand = ClientCommandManager.literal(config.commands.mainCommand);
+            dispatcher.register(ClientCommandManager.literal(config.commands.mainCommand)
+                    .then(ClientCommandManager.literal("armor")
+                            .executes(context -> sendAsPlayer(config.messages.armorMessage)))
 
-            addCommand(mainCommand, "armor", config.messages.armorMessage);
-            addCommand(mainCommand, "artisan", config.messages.artisanMessage);
-            addCommand(mainCommand, "armorinfusions", config.messages.armorinfusionsMessage);
-            addCommand(mainCommand, "auction", config.messages.auctionMessage);
-            addCommand(mainCommand, "bait", config.messages.baitMessage);
-            addCommand(mainCommand, "baitpack", config.messages.baitpackMessage);
-            addCommand(mainCommand, "bloomingoasis", config.messages.bloomingoasisMessage);
-            addCommand(mainCommand, "calibrator", config.messages.calibratorMessage);
-            addCommand(mainCommand, "calibratorloc", config.messages.calibratorlocMessage);
-            addCommand(mainCommand, "chummer", config.messages.chummerMessage);
-            addCommand(mainCommand, "contest", config.messages.contestMessage);
-            addCommand(mainCommand, "cosmetics", config.messages.cosmeticsMessage);
-            addCommand(mainCommand, "crew", config.messages.crewMessage);
-            addCommand(mainCommand, "cryptidsighting", config.messages.cryptidsightingMessage);
-            addCommand(mainCommand, "dailymissions", config.messages.dailymissionsMessage);
-            addCommand(mainCommand, "earnmoney", config.messages.earnmoneyMessage);
-            addCommand(mainCommand, "event", config.messages.eventMessage);
-            addCommand(mainCommand, "fabled", config.messages.fabledMessage);
-            addCommand(mainCommand, "findnpc", config.messages.findnpcMessage);
-            addCommand(mainCommand, "foe", config.messages.foeMessage);
-            addCommand(mainCommand, "forge", config.messages.forgeMessage);
-            addCommand(mainCommand, "goldrush", config.messages.goldrushMessage);
-            addCommand(mainCommand, "howfish", config.messages.howfishMessage);
-            addCommand(mainCommand, "identifier", config.messages.identifierMessage);
-            addCommand(mainCommand, "instances", config.messages.instancesMessage);
-            addCommand(mainCommand, "locationroll", config.messages.locationrollMessage);
-            addCommand(mainCommand, "luckscaleprospect", config.messages.luckscaleprospectMessage);
-            addCommand(mainCommand, "moonevents", config.messages.mooneventsMessage);
-            addCommand(mainCommand, "overflow", config.messages.overflowMessage);
-            addCommand(mainCommand, "petdrop", config.messages.petdropMessage);
-            addCommand(mainCommand, "petmerge", config.messages.petmergeMessage);
-            addCommand(mainCommand, "power", config.messages.powerMessage);
-            addCommand(mainCommand, "quests", config.messages.questsMessage);
-            addCommand(mainCommand, "rainbow", config.messages.rainbowMessage);
-            addCommand(mainCommand, "rainshower", config.messages.rainshowerMessage);
-            addCommand(mainCommand, "recipes", config.messages.recipesMessage);
-            addCommand(mainCommand, "reelbiteline", config.messages.reelbitelineMessage);
-            addCommand(mainCommand, "scrapper", config.messages.scrapperMessage);
-            addCommand(mainCommand, "showitem", config.messages.showitemMessage);
-            addCommand(mainCommand, "sitting", config.messages.sittingMessage);
-            addCommand(mainCommand, "store", config.messages.storeMessage);
-            addCommand(mainCommand, "supercellstorm", config.messages.supercellstormMessage);
-            addCommand(mainCommand, "supercharge", config.messages.superchargeMessage);
-            addCommand(mainCommand, "tackleshop", config.messages.tackleshopMessage);
-            addCommand(mainCommand, "tackleshoploc", config.messages.tackleshoplocMessage);
-            addCommand(mainCommand, "thunderstorm", config.messages.thunderstormMessage);
-            addCommand(mainCommand, "tutorial", config.messages.tutorialMessage);
-            addCommand(mainCommand, "vehicles", config.messages.vehiclesMessage);
-            addCommand(mainCommand, "variants", config.messages.variantsMessage);
-            addCommand(mainCommand, "wiki", config.messages.wikiMessage);
-            addCommand(mainCommand, "xpmoney", config.messages.xpmoneyMessage);
+                    .then(ClientCommandManager.literal("artisan")
+                            .executes(context -> sendAsPlayer(config.messages.artisanMessage)))
 
-            // Error Message
-            mainCommand.then(ClientCommandManager.argument("unknown", StringArgumentType.word())
-                    .executes(context -> {
-                        context.getSource().sendFeedback(Text.literal("Error! Command doesn't exist, check spelling!").withColor(0xFF0000));
-                        return 1;
-                    }));
+                    .then(ClientCommandManager.literal("armorinfusions")
+                            .executes(context -> sendAsPlayer(config.messages.armorinfusionsMessage)))
 
-            // Get Skin Command + Error
-            mainCommand.then(ClientCommandManager.literal("getskin")
-                    .then(ClientCommandManager.argument("playername", StringArgumentType.word())
-                            .suggests(SkinGrabber::suggestPlayers)
-                            .executes(SkinGrabber::getskin))
-                    .executes(context -> {
-                        context.getSource().sendFeedback(Text.literal("StaffHelper » Usage: /staffhelp getskin <playername>").withColor(0xFF0000));
-                        return 1;
-                    })
+                    .then(ClientCommandManager.literal("auction")
+                            .executes(context -> sendAsPlayer(config.messages.auctionMessage)))
+
+                    .then(ClientCommandManager.literal("bait")
+                            .executes(context -> sendAsPlayer(config.messages.baitMessage)))
+
+                    .then(ClientCommandManager.literal("baitpack")
+                            .executes(context -> sendAsPlayer(config.messages.baitpackMessage)))
+
+                    .then(ClientCommandManager.literal("bloomingoasis")
+                            .executes(context -> sendAsPlayer(config.messages.bloomingoasisMessage)))
+
+                    .then(ClientCommandManager.literal("calibrator")
+                            .executes(context -> sendAsPlayer(config.messages.calibratorMessage)))
+
+                    .then(ClientCommandManager.literal("calibratorloc")
+                            .executes(context -> sendAsPlayer(config.messages.calibratorlocMessage)))
+
+                    .then(ClientCommandManager.literal("chummer")
+                            .executes(context -> sendAsPlayer(config.messages.chummerMessage)))
+
+                    .then(ClientCommandManager.literal("contest")
+                            .executes(context -> sendAsPlayer(config.messages.contestMessage)))
+
+                    .then(ClientCommandManager.literal("cosmetics")
+                            .executes(context -> sendAsPlayer(config.messages.cosmeticsMessage)))
+
+                    .then(ClientCommandManager.literal("crew")
+                            .executes(context -> sendAsPlayer(config.messages.crewMessage)))
+
+                    .then(ClientCommandManager.literal("cryptidsighting")
+                            .executes(context -> sendAsPlayer(config.messages.cryptidsightingMessage)))
+
+                    .then(ClientCommandManager.literal("dailymissions")
+                            .executes(context -> sendAsPlayer(config.messages.dailymissionsMessage)))
+
+                    .then(ClientCommandManager.literal("earnmoney")
+                            .executes(context -> sendAsPlayer(config.messages.earnmoneyMessage)))
+
+                    .then(ClientCommandManager.literal("event")
+                            .executes(context -> sendAsPlayer(config.messages.eventMessage)))
+
+                    .then(ClientCommandManager.literal("fabled")
+                            .executes(context -> sendAsPlayer(config.messages.fabledMessage)))
+
+                    .then(ClientCommandManager.literal("findnpc")
+                            .executes(context -> sendAsPlayer(config.messages.findnpcMessage)))
+
+                    .then(ClientCommandManager.literal("foe")
+                            .executes(context -> sendAsPlayer(config.messages.foeMessage)))
+
+                    .then(ClientCommandManager.literal("forge")
+                            .executes(context -> sendAsPlayer(config.messages.forgeMessage)))
+
+                    .then(ClientCommandManager.literal("goldrush")
+                            .executes(context -> sendAsPlayer(config.messages.goldrushMessage)))
+
+                    .then(ClientCommandManager.literal("howfish")
+                            .executes(context -> sendAsPlayer(config.messages.howfishMessage)))
+
+                    .then(ClientCommandManager.literal("identifier")
+                            .executes(context -> sendAsPlayer(config.messages.identifierMessage)))
+
+                    .then(ClientCommandManager.literal("instances")
+                            .executes(context -> sendAsPlayer(config.messages.instancesMessage)))
+
+                    .then(ClientCommandManager.literal("locationroll")
+                            .executes(context -> sendAsPlayer(config.messages.locationrollMessage)))
+
+                    .then(ClientCommandManager.literal("luckscaleprospect")
+                            .executes(context -> sendAsPlayer(config.messages.luckscaleprospectMessage)))
+
+                    .then(ClientCommandManager.literal("moonevents")
+                            .executes(context -> sendAsPlayer(config.messages.mooneventsMessage)))
+
+                    .then(ClientCommandManager.literal("overflow")
+                            .executes(context -> sendAsPlayer(config.messages.overflowMessage)))
+
+                    .then(ClientCommandManager.literal("petdrop")
+                            .executes(context -> sendAsPlayer(config.messages.petdropMessage)))
+
+                    .then(ClientCommandManager.literal("petmerge")
+                            .executes(context -> sendAsPlayer(config.messages.petmergeMessage)))
+
+                    .then(ClientCommandManager.literal("power")
+                            .executes(context -> sendAsPlayer(config.messages.powerMessage)))
+
+                    .then(ClientCommandManager.literal("quests")
+                            .executes(context -> sendAsPlayer(config.messages.questsMessage)))
+
+                    .then(ClientCommandManager.literal("rainbow")
+                            .executes(context -> sendAsPlayer(config.messages.rainbowMessage)))
+
+                    .then(ClientCommandManager.literal("rainshower")
+                            .executes(context -> sendAsPlayer(config.messages.rainshowerMessage)))
+
+                    .then(ClientCommandManager.literal("recipes")
+                            .executes(context -> sendAsPlayer(config.messages.recipesMessage)))
+
+                    .then(ClientCommandManager.literal("reelbiteline")
+                            .executes(context -> sendAsPlayer(config.messages.reelbitelineMessage)))
+
+                    .then(ClientCommandManager.literal("scrapper")
+                            .executes(context -> sendAsPlayer(config.messages.scrapperMessage)))
+
+                    .then(ClientCommandManager.literal("showitem")
+                            .executes(context -> sendAsPlayer(config.messages.showitemMessage)))
+
+                    .then(ClientCommandManager.literal("sitting")
+                            .executes(context -> sendAsPlayer(config.messages.sittingMessage)))
+
+                    .then(ClientCommandManager.literal("store")
+                            .executes(context -> sendAsPlayer(config.messages.storeMessage)))
+
+                    .then(ClientCommandManager.literal("supercellstorm")
+                            .executes(context -> sendAsPlayer(config.messages.supercellstormMessage)))
+
+                    .then(ClientCommandManager.literal("supercharge")
+                            .executes(context -> sendAsPlayer(config.messages.superchargeMessage)))
+
+                    .then(ClientCommandManager.literal("tackleshop")
+                            .executes(context -> sendAsPlayer(config.messages.tackleshopMessage)))
+
+                    .then(ClientCommandManager.literal("tackleshoploc")
+                            .executes(context -> sendAsPlayer(config.messages.tackleshoplocMessage)))
+
+                    .then(ClientCommandManager.literal("thunderstorm")
+                            .executes(context -> sendAsPlayer(config.messages.thunderstormMessage)))
+
+                    .then(ClientCommandManager.literal("tutorial")
+                            .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))
+
+                    .then(ClientCommandManager.literal("vehicles")
+                            .executes(context -> sendAsPlayer(config.messages.vehiclesMessage)))
+
+                    .then(ClientCommandManager.literal("variants")
+                            .executes(context -> sendAsPlayer(config.messages.variantsMessage)))
+
+                    .then(ClientCommandManager.literal("wiki")
+                            .executes(context -> sendAsPlayer(config.messages.wikiMessage)))
+
+                    .then(ClientCommandManager.literal("xpmoney")
+                            .executes(context -> sendAsPlayer(config.messages.xpmoneyMessage)))
+
+                    // Error Message
+                    .then(ClientCommandManager.argument("unknown", StringArgumentType.word())
+                            .executes(context -> {
+                                context.getSource().sendFeedback(Text.literal("StaffHelper » Error! Command doesn't exist, check spelling!").withColor(0xFF0000));
+                                return 1;
+                            }))
+
+                    // Get Skin Command + Error
+                    .then(ClientCommandManager.literal("getskin")
+                            .then(ClientCommandManager.argument("playername", StringArgumentType.word())
+                                    .suggests(SkinGrabber::suggestPlayers)
+                                    .executes(SkinGrabber::getskin))
+                            .executes(context -> {
+                                context.getSource().sendFeedback(Text.literal("StaffHelper » Usage: /" + config.commands.mainCommand + " getskin <playername>").withColor(0xFF0000));
+                                return 1;
+                            }))
             );
-
-            dispatcher.register(mainCommand);
         });
-    }
-
-    // Command Creator
-    private static void addCommand(LiteralArgumentBuilder<FabricClientCommandSource> mainCommand, String commandName, String message) {
-        mainCommand.then(ClientCommandManager.literal(commandName)
-                .executes(context -> sendAsPlayer(message)));
     }
 
     // Sends message as player
