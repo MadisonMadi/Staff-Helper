@@ -6,23 +6,38 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
+import net.minecraft.text.Text;
+import net.minecraft.scoreboard.Team;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
-    private static TrackedData<Byte> SKIN_LAYERS_FIELD = null;
+    private static final TrackedData<Byte> SKIN_LAYERS_FIELD = initializeSkinLayersField();
     private boolean showSecondLayer;
     private Identifier customSkin;
 
     public FakePlayerEntity(ClientWorld world, GameProfile profile, boolean showSecondLayer) {
         super(world, profile);
-
         this.showSecondLayer = showSecondLayer;
+        initializeEntity();
+        updateSkinLayers();
+    }
 
+    private void initializeEntity() {
         this.setYaw(180f);
         this.setBodyYaw(180f);
         this.setHeadYaw(180f);
         this.setSneaking(false);
+    }
 
-        updateSkinLayers();
+    @SuppressWarnings("unchecked")
+    private static TrackedData<Byte> initializeSkinLayersField() {
+        try {
+            java.lang.reflect.Field field = net.minecraft.entity.player.PlayerEntity.class.getDeclaredField("field_7518");
+            field.setAccessible(true);
+            return (TrackedData<Byte>) field.get(null);
+        } catch (Exception e) {
+            System.err.println("Failed to initialize skin layers field: " + e.getMessage());
+            return null;
+        }
     }
 
     public void setShowSecondLayer(boolean show) {
@@ -37,18 +52,13 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     }
 
     private void updateSkinLayers() {
-        try {
-            if (SKIN_LAYERS_FIELD == null) {
-                java.lang.reflect.Field field = net.minecraft.entity.player.PlayerEntity.class.getDeclaredField("field_7518");
-                field.setAccessible(true);
-                SKIN_LAYERS_FIELD = (TrackedData<Byte>) field.get(null);
-            }
+        if (SKIN_LAYERS_FIELD == null) return;
 
+        try {
             byte skinLayersValue = showSecondLayer ? (byte) 0xFE : (byte) 0x00;
             this.getDataTracker().set(SKIN_LAYERS_FIELD, skinLayersValue);
-
         } catch (Exception e) {
-            System.out.println("Failed to update skin layers: " + e.getMessage());
+            System.err.println("Failed to update skin layers: " + e.getMessage());
         }
     }
 
@@ -56,79 +66,24 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     public SkinTextures getSkinTextures() {
         if (customSkin != null) {
             try {
-                java.lang.reflect.Constructor<SkinTextures> constructor = SkinTextures.class.getDeclaredConstructor(
-                        Identifier.class, String.class, Identifier.class, Identifier.class,
-                        SkinTextures.Model.class, boolean.class
-                );
-                constructor.setAccessible(true);
-                return constructor.newInstance(
-                        customSkin, // texture
-                        null, // signature (can be null)
-                        customSkin, // cape texture (same as skin)
-                        null, // elytra texture
-                        SkinTextures.Model.WIDE, // model
-                        false // secure
-                );
+                return new SkinTextures(customSkin, null, customSkin, null, SkinTextures.Model.WIDE, false);
             } catch (Exception e) {
-                return super.getSkinTextures();
+                System.err.println("Failed to create custom skin textures: " + e.getMessage());
             }
         }
         return super.getSkinTextures();
     }
 
-    @Override
-    public boolean shouldRenderName() {
-        return false;
-    }
+    @Override public boolean shouldRenderName() { return false; }
+    @Override public Text getName() { return Text.empty(); }
+    @Override public Text getDisplayName() { return Text.empty(); }
+    @Override public boolean isCustomNameVisible() { return false; }
+    @Override public boolean hasCustomName() { return false; }
+    @Override public Text getCustomName() { return null; }
+    @Override public Team getScoreboardTeam() { return null; }
 
-    @Override
-    public net.minecraft.text.Text getName() {
-        return net.minecraft.text.Text.empty();
-    }
-
-    @Override
-    public net.minecraft.text.Text getDisplayName() {
-        return net.minecraft.text.Text.empty();
-    }
-
-    @Override
-    public boolean isCustomNameVisible() {
-        return false;
-    }
-
-    @Override
-    public boolean hasCustomName() {
-        return false;
-    }
-
-    @Override
-    public net.minecraft.text.Text getCustomName() {
-        return null;
-    }
-
-    // Nuclear option - also override any team-related rendering
-    @Override
-    public net.minecraft.scoreboard.Team getScoreboardTeam() {
-        return null;
-    }
-
-    @Override
-    public boolean isSpectator() {
-        return false;
-    }
-
-    @Override
-    public boolean isCreative() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldRender(double distance) {
-        return true;
-    }
-
-    @Override
-    public boolean isInvisible() {
-        return false;
-    }
+    @Override public boolean isSpectator() { return false; }
+    @Override public boolean isCreative() { return true; }
+    @Override public boolean shouldRender(double distance) { return true; }
+    @Override public boolean isInvisible() { return false; }
 }
