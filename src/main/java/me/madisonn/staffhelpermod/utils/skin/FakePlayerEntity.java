@@ -10,8 +10,8 @@ import net.minecraft.client.util.SkinTextures;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
     private static TrackedData<Byte> SKIN_LAYERS_FIELD = null;
-    private boolean showSecondLayer = true;
-    private Identifier customSkin = null;
+    private boolean showSecondLayer;
+    private Identifier customSkin;
 
     public FakePlayerEntity(ClientWorld world, GameProfile profile, boolean showSecondLayer) {
         super(world, profile);

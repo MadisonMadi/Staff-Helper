@@ -8,11 +8,11 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.Identifier;
 
+import java.net.URI;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.Map;
@@ -22,8 +22,8 @@ public class PlayerModelRenderer {
     private static FakePlayerEntity currentFakePlayer = null;
     private static String currentPlayerName = "";
     private static boolean currentShowSecondLayer = true;
-    private static Map<String, Identifier> loadedSkins = new HashMap<>();
-    private static Map<String, Boolean> skinLoadingAttempts = new HashMap<>();
+    private static final Map<String, Identifier> loadedSkins = new HashMap<>();
+    private static final Map<String, Boolean> skinLoadingAttempts = new HashMap<>();
 
     public static void renderPlayerModel(DrawContext context, String playerName, int x, int y, int size, float rotation, boolean showSecondLayer) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -59,7 +59,7 @@ public class PlayerModelRenderer {
             matrices.translate(0, -0.5, 0);
 
             // Render Entity
-            renderEntity1215(client, currentFakePlayer, matrices, vertexConsumers);
+            renderEntity(client, currentFakePlayer, matrices, vertexConsumers);
 
             vertexConsumers.draw();
             matrices.pop();
@@ -69,7 +69,7 @@ public class PlayerModelRenderer {
         }
     }
 
-    private static void renderEntity1215(MinecraftClient client, FakePlayerEntity entity, MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers) {
+    private static void renderEntity(MinecraftClient client, FakePlayerEntity entity, MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers) {
         try {
             client.getEntityRenderDispatcher().render(
                     entity,
@@ -85,7 +85,10 @@ public class PlayerModelRenderer {
     }
 
     private static FakePlayerEntity createPlayerWithSkin(MinecraftClient client, String playerName, boolean showSecondLayer) {
-        PlayerListEntry playerEntry = client.getNetworkHandler().getPlayerListEntry(playerName);
+        PlayerListEntry playerEntry = null;
+        if (client.getNetworkHandler() != null) {
+            playerEntry = client.getNetworkHandler().getPlayerListEntry(playerName);
+        }
 
         GameProfile profile;
         if (playerEntry != null) {
@@ -98,6 +101,7 @@ public class PlayerModelRenderer {
             profile = new GameProfile(uuid, playerName);
             System.out.println("Loading skin for offline player: " + playerName);
 
+            // Only try to load skin once per player session
             if (!skinLoadingAttempts.containsKey(playerName.toLowerCase())) {
                 skinLoadingAttempts.put(playerName.toLowerCase(), true);
                 loadSkinFromMinecraftTextureServer(client, playerName, uuid);
@@ -117,7 +121,7 @@ public class PlayerModelRenderer {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String apiUrl = "https://api.mojang.com/users/profiles/minecraft/" + playerName;
-                HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+                HttpURLConnection connection = (HttpURLConnection) new URI(apiUrl).toURL().openConnection();
                 connection.setRequestMethod("GET");
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
@@ -152,7 +156,7 @@ public class PlayerModelRenderer {
             try {
                 // Get skin data from Mojang session server
                 String sessionUrl = "https://sessionserver.mojang.com/session/minecraft/profile/" + uuid.toString().replace("-", "");
-                HttpURLConnection sessionConnection = (HttpURLConnection) new URL(sessionUrl).openConnection();
+                HttpURLConnection sessionConnection = (HttpURLConnection) new URI(sessionUrl).toURL().openConnection();
                 sessionConnection.setRequestMethod("GET");
                 sessionConnection.setConnectTimeout(5000);
                 sessionConnection.setReadTimeout(5000);
@@ -196,7 +200,7 @@ public class PlayerModelRenderer {
 
     private static void downloadAndRegisterSkin(MinecraftClient client, String playerName, String skinUrl) {
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(skinUrl).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URI(skinUrl).toURL().openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(10000);
             connection.setReadTimeout(10000);
