@@ -25,19 +25,11 @@ import java.util.Optional;
 
 public class PlayerModelRenderer {
     private static final Logger LOGGER = StaffHelperClient.LOGGER;
-    private record PlayerModelCache(FakePlayerEntity fakePlayer, String playerName, boolean showSecondLayer) {}
-    private record SkinCacheEntry(Identifier textureId, long timestamp) {
-        SkinCacheEntry(Identifier textureId) {
-            this(textureId, System.currentTimeMillis());
-        }
 
-        boolean isExpired() {
-            return System.currentTimeMillis() - timestamp > 300_000; // 5 minutes
-        }
-    }
+    private record PlayerModelCache(FakePlayerEntity fakePlayer, String playerName, boolean showSecondLayer) {}
 
     private static PlayerModelCache currentCache = null;
-    private static final Map<String, SkinCacheEntry> skinCache = new HashMap<>();
+    private static final Map<String, Identifier> skinCache = new HashMap<>();
     private static final Map<String, Boolean> skinLoadingAttempts = new HashMap<>();
 
     public static void renderPlayerModel(DrawContext context, String playerName, int x, int y, int size, float rotation, boolean showSecondLayer) {
@@ -131,9 +123,9 @@ public class PlayerModelRenderer {
     }
 
     private static void applyCachedSkin(FakePlayerEntity fakePlayer, String playerName) {
-        SkinCacheEntry cachedSkin = skinCache.get(playerName.toLowerCase());
-        if (cachedSkin != null && !cachedSkin.isExpired()) {
-            fakePlayer.setCustomSkin(cachedSkin.textureId());
+        Identifier cachedSkin = skinCache.get(playerName.toLowerCase());
+        if (cachedSkin != null) {
+            fakePlayer.setCustomSkin(cachedSkin);
         }
     }
 
@@ -237,7 +229,7 @@ public class PlayerModelRenderer {
                 );
 
                 client.getTextureManager().registerTexture(skinId, texture);
-                skinCache.put(playerName.toLowerCase(), new SkinCacheEntry(skinId));
+                skinCache.put(playerName.toLowerCase(), skinId);
                 LOGGER.info("Successfully loaded skin for: {}", playerName);
 
                 if (currentCache != null && currentCache.playerName().equals(playerName)) {
@@ -273,7 +265,7 @@ public class PlayerModelRenderer {
 
     public static void clearAllCache() {
         currentCache = null;
-        skinCache.entrySet().removeIf(entry -> entry.getValue().isExpired());
+        skinCache.clear();
         skinLoadingAttempts.clear();
         LOGGER.info("Cleared all skin viewer cache");
     }
