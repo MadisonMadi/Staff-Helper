@@ -1,5 +1,6 @@
 package me.madisonn.staffhelpermod.utils.skin;
 
+import me.madisonn.staffhelpermod.StaffHelperClient;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import com.mojang.authlib.GameProfile;
@@ -8,8 +9,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
 import net.minecraft.text.Text;
 import net.minecraft.scoreboard.Team;
+import org.slf4j.Logger;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
+    private static final Logger LOGGER = StaffHelperClient.LOGGER;
     private static final TrackedData<Byte> SKIN_LAYERS_FIELD = initializeSkinLayersField();
     private boolean showSecondLayer;
     private Identifier customSkin;
@@ -35,7 +38,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
             field.setAccessible(true);
             return (TrackedData<Byte>) field.get(null);
         } catch (Exception e) {
-            System.err.println("Failed to initialize skin layers field: " + e.getMessage());
+            LOGGER.error("Failed to initialize skin layers field", e);
             return null;
         }
     }
@@ -58,7 +61,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
             byte skinLayersValue = showSecondLayer ? (byte) 0xFE : (byte) 0x00;
             this.getDataTracker().set(SKIN_LAYERS_FIELD, skinLayersValue);
         } catch (Exception e) {
-            System.err.println("Failed to update skin layers: " + e.getMessage());
+            LOGGER.error("Failed to update skin layers", e);
         }
     }
 
