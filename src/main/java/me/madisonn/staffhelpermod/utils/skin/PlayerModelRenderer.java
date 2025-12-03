@@ -1,5 +1,6 @@
 package me.madisonn.staffhelpermod.utils.skin;
 
+import me.madisonn.staffhelpermod.StaffHelperClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -9,7 +10,6 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.UUID;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class PlayerModelRenderer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerModelRenderer.class);
+    private static final Logger LOGGER = StaffHelperClient.LOGGER;
 
     private record PlayerModelCache(FakePlayerEntity fakePlayer, String playerName, boolean showSecondLayer) {}
 
