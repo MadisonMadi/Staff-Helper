@@ -14,6 +14,7 @@ public class StaffHelperClient implements ClientModInitializer {
     public static final String MOD_ID = "staffhelper";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static StaffHelperConfig CONFIG;
+    private static String currentCommand; // Track current command
 
     @Override
     public void onInitializeClient() {
@@ -22,18 +23,28 @@ public class StaffHelperClient implements ClientModInitializer {
         ConfigHolder<StaffHelperConfig> configHolder = AutoConfig.getConfigHolder(StaffHelperConfig.class);
         CONFIG = configHolder.getConfig();
 
-        // Register commands initially
+        currentCommand = CONFIG.commands.mainCommand;
+
         CommandRegistry.registerCommands(CONFIG);
 
-        // Auto reload function + relog
         configHolder.registerSaveListener((holder, newConfig) -> {
-            CONFIG = newConfig;
-            if (net.minecraft.client.MinecraftClient.getInstance().player != null) {
-                net.minecraft.client.MinecraftClient.getInstance().player.sendMessage(
-                        Text.literal("StaffHelper » Command updated, disconnect and re-join!").withColor(0xFFFF00),
-                        false
-                );
+            boolean commandChanged = !currentCommand.equals(newConfig.commands.mainCommand);
+
+            if (commandChanged) {
+                currentCommand = newConfig.commands.mainCommand;
+
+                if (net.minecraft.client.MinecraftClient.getInstance().player != null) {
+                    net.minecraft.client.MinecraftClient.getInstance().player.sendMessage(
+                            Text.literal("StaffHelper » Main command has changed to '" +
+                                    newConfig.commands.mainCommand + "'. Disconnect and re-join!").withColor(0xFFFF00),
+                            false
+                    );
+                }
             }
+
+            CONFIG = newConfig;
+            CommandRegistry.registerCommands(CONFIG);
+
             return null;
         });
     }
