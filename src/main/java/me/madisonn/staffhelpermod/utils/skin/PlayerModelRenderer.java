@@ -98,13 +98,11 @@ public class PlayerModelRenderer {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String response = fetch("https://api.mojang.com/users/profiles/minecraft/" + playerName);
-                if (response != null) {
-                    JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                    if (json.has("id")) {
-                        String uuidStr = formatUUID(json.get("id").getAsString());
-                        StaffHelperClient.LOGGER.debug("Found UUID for {}: {}", playerName, uuidStr);
-                        return UUID.fromString(uuidStr);
-                    }
+                JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+                if (json.has("id")) {
+                    String uuidStr = formatUUID(json.get("id").getAsString());
+                    StaffHelperClient.LOGGER.debug("Found UUID for {}: {}", playerName, uuidStr);
+                    return UUID.fromString(uuidStr);
                 }
             } catch (Exception e) {
                 StaffHelperClient.LOGGER.error("Mojang API error: {}", playerName, e);
@@ -117,7 +115,7 @@ public class PlayerModelRenderer {
         CompletableFuture.runAsync(() -> {
             try {
                 String response = fetch("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid.toString().replace("-", ""));
-                if (response != null) extractAndDownloadSkin(playerName, response);
+                extractAndDownloadSkin(playerName, response);
             } catch (Exception e) {
                 StaffHelperClient.LOGGER.error("Error loading skin: {}", playerName, e);
             }
@@ -125,27 +123,23 @@ public class PlayerModelRenderer {
     }
 
     private static void extractAndDownloadSkin(String playerName, String response) {
-        try {
-            JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-            if (json.has("properties")) {
-                json.getAsJsonArray("properties").forEach(prop -> {
-                    JsonObject property = prop.getAsJsonObject();
-                    if (property.has("name") && "textures".equals(property.get("name").getAsString())) {
-                        String decoded = new String(Base64.getDecoder().decode(property.get("value").getAsString()));
-                        JsonObject texturesJson = JsonParser.parseString(decoded).getAsJsonObject();
+        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+        if (json.has("properties")) {
+            json.getAsJsonArray("properties").forEach(prop -> {
+                JsonObject property = prop.getAsJsonObject();
+                if (property.has("name") && "textures".equals(property.get("name").getAsString())) {
+                    String decoded = new String(Base64.getDecoder().decode(property.get("value").getAsString()));
+                    JsonObject texturesJson = JsonParser.parseString(decoded).getAsJsonObject();
 
-                        if (texturesJson.has("textures")) {
-                            JsonObject textures = texturesJson.getAsJsonObject("textures");
-                            if (textures.has("SKIN")) {
-                                String skinUrl = textures.getAsJsonObject("SKIN").get("url").getAsString();
-                                downloadAndRegisterSkin(playerName, skinUrl);
-                            }
+                    if (texturesJson.has("textures")) {
+                        JsonObject textures = texturesJson.getAsJsonObject("textures");
+                        if (textures.has("SKIN")) {
+                            String skinUrl = textures.getAsJsonObject("SKIN").get("url").getAsString();
+                            downloadAndRegisterSkin(playerName, skinUrl);
                         }
                     }
-                });
-            }
-        } catch (Exception e) {
-            StaffHelperClient.LOGGER.error("Error extracting skin: {}", playerName, e);
+                }
+            });
         }
     }
 
