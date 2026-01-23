@@ -4,16 +4,16 @@ import me.madisonn.staffhelpermod.StaffHelperClient;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.util.SkinTextures;
 import net.minecraft.text.Text;
 import net.minecraft.scoreboard.Team;
-import org.slf4j.Logger;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
-    private static final Logger LOGGER = StaffHelperClient.LOGGER;
-    private static final TrackedData<Byte> SKIN_LAYERS_FIELD = initializeSkinLayersField();
+    private static final byte ALL_LAYERS = (byte) 0x7E;  // 01111110 - No Cape
+    private static final byte NO_LAYERS = (byte) 0x00;   // 00000000 - No Cape
+
     private boolean showSecondLayer;
     private Identifier customSkin;
 
@@ -31,18 +31,6 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
         this.setSneaking(false);
     }
 
-    @SuppressWarnings("unchecked")
-    private static TrackedData<Byte> initializeSkinLayersField() {
-        try {
-            java.lang.reflect.Field field = net.minecraft.entity.player.PlayerEntity.class.getDeclaredField("field_7518");
-            field.setAccessible(true);
-            return (TrackedData<Byte>) field.get(null);
-        } catch (Exception e) {
-            LOGGER.error("Failed to initialize skin layers field", e);
-            return null;
-        }
-    }
-
     public void setShowSecondLayer(boolean show) {
         if (this.showSecondLayer != show) {
             this.showSecondLayer = show;
@@ -55,13 +43,11 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     }
 
     private void updateSkinLayers() {
-        if (SKIN_LAYERS_FIELD == null) return;
-
         try {
-            byte skinLayersValue = showSecondLayer ? (byte) 0xFE : (byte) 0x00;
-            this.getDataTracker().set(SKIN_LAYERS_FIELD, skinLayersValue);
+            byte skinLayersValue = showSecondLayer ? ALL_LAYERS : NO_LAYERS;
+            this.getDataTracker().set(PlayerEntity.PLAYER_MODEL_PARTS, skinLayersValue);
         } catch (Exception e) {
-            LOGGER.error("Failed to update skin layers", e);
+            StaffHelperClient.LOGGER.error("Failed to update skin layers", e);
         }
     }
 
@@ -71,7 +57,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
             try {
                 return new SkinTextures(customSkin, null, customSkin, null, SkinTextures.Model.WIDE, false);
             } catch (Exception e) {
-                LOGGER.error("Failed to create custom skin textures", e);
+                StaffHelperClient.LOGGER.error("Failed to create custom skin textures", e);
             }
         }
         return super.getSkinTextures();
@@ -84,7 +70,6 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
     @Override public boolean hasCustomName() { return false; }
     @Override public Text getCustomName() { return null; }
     @Override public Team getScoreboardTeam() { return null; }
-
     @Override public boolean isSpectator() { return false; }
     @Override public boolean isCreative() { return true; }
     @Override public boolean shouldRender(double distance) { return true; }
