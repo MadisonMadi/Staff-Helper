@@ -149,11 +149,11 @@ public class CommandRegistry {
                     .then(ClientCommandManager.literal("tackleshoploc")
                             .executes(context -> sendAsPlayer(config.messages.tackleshoplocMessage)))
 
-                    .then(ClientCommandManager.literal("tournaments")
-                            .executes(context -> sendAsPlayer(config.messages.tournamentsMessage)))
-
                     .then(ClientCommandManager.literal("thunderstorm")
                             .executes(context -> sendAsPlayer(config.messages.thunderstormMessage)))
+
+                    .then(ClientCommandManager.literal("tournaments")
+                            .executes(context -> sendAsPlayer(config.messages.tournamentsMessage)))
 
                     .then(ClientCommandManager.literal("tutorial")
                             .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))

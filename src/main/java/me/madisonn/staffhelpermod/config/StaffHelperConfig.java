@@ -65,8 +65,8 @@ public class StaffHelperConfig implements ConfigData {
         public String superchargeMessage = "For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.";
         public String tackleshopMessage = "The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the wait to extremely rare Variant Bait.";
         public String tackleshoplocMessage = "The Tackle Shop can be found by going to '/spawn' and turn around, go inside and follow the sign directions.";
-        public String tournamentsMessage = "Tournaments happen every weekend for 1 location, catch 5 fish and if bigger the lowest one will get replaces! '/tournaments' to open and see your stats/bracket and rewards!";
         public String thunderstormMessage = "Thunderstorms spawn 1 in 3 times when it starts to rain and grants +100 bite speed as well as a 1/500 chance to fish up a lightning bottle and lasts for around 5-11 minutes.";
+        public String tournamentsMessage = "Tournaments happen every weekend for 1 location, catch 5 fish and if bigger the lowest one will get replaces! '/tournaments' to open and see your stats/bracket and rewards!";
         public String tutorialMessage = "You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.";
         public String vehiclesMessage = "You can buy vehicles in the building behind spawn to the left, purchase with credits or money, spawn your vehicle with '/vehicles' or walk to a dock to spawn your water vehicles.";
         public String variantsMessage = "Variant chances are Albino 1/5000, Melanistic 1/10000, Trophy 1/15000 and Fabled 1/3000";
