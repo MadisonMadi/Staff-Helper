@@ -12,11 +12,11 @@ import me.madisonn.staffhelpermod.utils.skin.SkinViewScreen;
 import java.util.concurrent.CompletableFuture;
 
 public class SkinGrabber {
-    public static int getskin(CommandContext<FabricClientCommandSource> context) {
+    public static int getSkin(CommandContext<FabricClientCommandSource> context) {
         String playerName = StringArgumentType.getString(context, "playername");
         MinecraftClient client = MinecraftClient.getInstance();
 
-        context.getSource().sendFeedback(Text.literal("StaffHelper » Opening skin viewer for: " + playerName).withColor(0x00FF00));
+        context.getSource().sendFeedback(Text.literal("Staff Helper » Opening skin viewer for: " + playerName).withColor(0x00FF00));
 
         client.send(() -> {
             client.setScreen(new SkinViewScreen(playerName));

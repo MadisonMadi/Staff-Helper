@@ -4,7 +4,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)
 
-Messages and the main command can be changed in the in-game config.
+The /staffhelp command can be switched with /sh for short.
+
+Messages can be changed in the in-game config.
 
 ---
 
@@ -39,7 +41,7 @@ Messages and the main command can be changed in the in-game config.
 | **`/staffhelp luckscaleprospect`** | Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance: base chance is 1/50.                                                                                                                        |
 | **`/staffhelp moonevents`**        | Moon Events occur every full moon and last 7 minutes, Full Moon +120 Bite Speed, Blue Moon +120 Bite Speed and 5x XP, Super Moon +120 Bite Speed and +150 Reel Speed, Blood Moon +120 Bite Speed and 1/300 chance for an infusion capsule. |
 | **`/staffhelp overflow`**          | Type '/overflow' to check if you have any lost loot from previous contests. Make sure you have some free slots in your inventory.                                                                                                          |
-| **`/staffhelp petdrop`**           | Pet Drop Chances are Common 1/750, Rare 1/4000, Epic 1/10000, Legendary 1/30000 and Mythical 1/80000!                                                                                                                                      |
+| **`/staffhelp petdrop`**           | Pet Drop odds are, Common 1/750, Rare 1/4000, Epic 1/10000, Legendary 1/30000 and Mythical 1/80000!                                                                                                                                        |
 | **`/staffhelp petmerge`**          | You can merge 2 pets that are the same type and rarity. Both must be level 100 - right click one of them in your inventory, then left click the other one.                                                                                 |
 | **`/staffhelp power`**             | Power comes from collections, compendiums and unique fish, Power will give you a bunch of rewards and free quest slots to unlock!.                                                                                                         |
 | **`/staffhelp presets`**           | Presets are used for storing armor and rod parts, use '/presets' to open.                                                                                                                                                                  |
@@ -58,9 +60,9 @@ Messages and the main command can be changed in the in-game config.
 | **`/staffhelp tackleshoploc`**     | The Tackle Shop can be found by going to '/spawn' and turn around, go inside and follow the sign directions.                                                                                                                               |
 | **`/staffhelp thunderstorm`**      | Thunderstorms spawn 1 in 3 times when it starts to rain and grants +100 bite speed as well as a 1/500 chance to fish up a lightning bottle and lasts 5-11 minutes.                                                                         |
 | **`/staffhelp tournaments`**       | Tournaments happen every weekend for 1 location, catch 5 fish and if bigger the lowest one will get replaces! '/tournaments' to open and see your stats/bracket and rewards!                                                               |
-| **`/staffhelp tutorial`**          | You can use the command '/tasks' to see a quick tutorial which will give you the rundown on the basics of the gameplay loop.                                                                                                               |
+| **`/staffhelp tutorial`**          | You can type '/tasks' to get a quick tutorial for the basics of the game. When finished you will receive a common pet from the location that you're in.                                                                                    |
 | **`/staffhelp vehicles`**          | You can buy vehicles in the building behind spawn to the left, purchase with credits or money, spawn your vehicle with '/vehicles' or walk to a dock to spawn your water vehicles.                                                         |
-| **`/staffhelp variants`**          | Variant chances are Albino 1/5000, Melanistic 1/10000, Trophy 1/15000 and Fabled 1/3000.                                                                                                                                                   |
+| **`/staffhelp variants`**          | Variant odds are, Albino 1/5000, Melanistic 1/10000, Trophy 1/15000 and Fabled 1/3000.                                                                                                                                                     |
 | **`/staffhelp wiki`**              | You can learn more at wiki.fishonmc.net                                                                                                                                                                                                    |
 | **`/staffhelp xpmoney`**           | Bonus XP boosts player, location, and crew XP. Bonus Money increases earnings from catches.                                                                                                                                                |
 
