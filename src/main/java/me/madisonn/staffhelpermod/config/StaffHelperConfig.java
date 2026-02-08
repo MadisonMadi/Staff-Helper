@@ -12,21 +12,20 @@ public class StaffHelperConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public StaffHelperConfig.Messages messages = new StaffHelperConfig.Messages();
 
-    // Category Message Options
     public static class Messages {
         @ConfigEntry.Gui.Tooltip(count = 0)
-        public String armorMessage = "Shards are used for armor with default armor recipes, no helmets. '/craft'.";
+        public String armorinfusionsMessage = "You can craft infusion capsules with the recipe in the recipes book. There are three types of infusions Albino, Melanistic and Trophy. The bonus improves by +5% on every tier up to +25% on a single piece.";
         public String artisanMessage = "To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank).";
-        public String auctionMessage = "You can buy and sell items in the '/ah', there's a small tax when listing an item '/ah sell price' expired items go to '/overflow'.";
-        public String armorinfusionsMessage = "To use your Infusion Capsule put 4 Variant Shards around it, there's 3 types Albino, Melanistic and Trophy Infusion, the bonus scales from 5 * tier (up to +75% across all pieces).";
-        public String baitMessage = "To use bait press 'Q' while holding your fishing rod or right click it in your inventory, click the tackle box and drop your baits in there!";
-        public String baitpackMessage = "To get bait packages you can do '/vote', '/ah', '/collections', Fish Compendium and from Contests if top 3 at 5 participants.";
+        public String auctionMessage = "You can buy items on the action house by using '/ah', you can also put items up for sale by using '/ah sell price'. There is a 2% tax when listing items and expired items go to '/overflow'.";
+        public String baitMessage = "You can use bait by holding your rod and pressing 'Q' or right click it in your inventory. Now you can open the tacklebox and move your bait into it, the bait usage starts from the top left.";
+        public String baitpackMessage = "You can get bait packages from '/vote', '/ah', '/collections', '/compendium', '/contest', '/tournament', '/event' and power.";
         public String bloomingoasisMessage = "The Blooming Oasis Gives +100% pet luck for 15-16 minutes.";
         public String calibratorMessage = "Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank).";
         public String calibratorlocMessage = "The Calibrator can be found by going to '/spawn' and turn around, go inside and follow the sign directions.";
         public String chummerMessage = "The Chummer boosts bite speed for all players within 10 blocks. It lasts 15 minutes after being placed. Common +75, Rare +130, Epic +180, Legendary +250 and Mythical +380.";
         public String contestMessage = "Winning a contest will give you money, location xp, shards, top 3 for a chance for a pet and bait package!";
         public String cosmeticsMessage = "Cosmetics can be bought with credits from '/buy' these are purely cosmetic and will not influence your gameplay.";
+        public String craftMessage = "You can use climate shards to craft armor by typing '/craft'! You can't craft helmets, this slot is reserved for cosmetics.";
         public String crewMessage = "You can create a crew '/crew create name' a crew island is mostly used for building and storage! crews are also used to compete for fun!";
         public String cryptidsightingMessage = "Fishing at Cypress Lake between 1AM-3AM, there is a 1/300 change bigfoot will steal your fish, and gives you either a Bigfoot Tooth or Bigfoot Fur, these are used for pet items.";
         public String dailymissionsMessage = "Open the green book and check the bottom-right corner for Daily Missions. Each mission rewards 2-4 shards based on your location. Completing all grants XP, Money, a pet, and Location XP.";

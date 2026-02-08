@@ -19,14 +19,11 @@ public class CommandRegistry {
 
     private static LiteralArgumentBuilder<FabricClientCommandSource> commands(String commandName, StaffHelperConfig config) {
         return ClientCommandManager.literal(commandName)
-                .then(ClientCommandManager.literal("armor")
-                        .executes(context -> sendAsPlayer(config.messages.armorMessage)))
+                .then(ClientCommandManager.literal("armorinfusions")
+                        .executes(context -> sendAsPlayer(config.messages.armorinfusionsMessage)))
 
                 .then(ClientCommandManager.literal("artisan")
                         .executes(context -> sendAsPlayer(config.messages.artisanMessage)))
-
-                .then(ClientCommandManager.literal("armorinfusions")
-                        .executes(context -> sendAsPlayer(config.messages.armorinfusionsMessage)))
 
                 .then(ClientCommandManager.literal("auction")
                         .executes(context -> sendAsPlayer(config.messages.auctionMessage)))
@@ -54,6 +51,9 @@ public class CommandRegistry {
 
                 .then(ClientCommandManager.literal("cosmetics")
                         .executes(context -> sendAsPlayer(config.messages.cosmeticsMessage)))
+
+                .then(ClientCommandManager.literal("craft")
+                        .executes(context -> sendAsPlayer(config.messages.craftMessage)))
 
                 .then(ClientCommandManager.literal("crew")
                         .executes(context -> sendAsPlayer(config.messages.crewMessage)))

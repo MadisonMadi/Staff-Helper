@@ -6,9 +6,8 @@
   "text.autoconfig.staffhelpermod.category.messages": "Messages",
 
   "text.autoconfig.staffhelpermod.option.messages": "§f§lMessage Options",
-  "text.autoconfig.staffhelpermod.option.messages.armorMessage": "Armor Message",
-  "text.autoconfig.staffhelpermod.option.messages.artisanMessage": "Artisan Message",
   "text.autoconfig.staffhelpermod.option.messages.armorinfusionsMessage": "Armor Infusions Message",
+  "text.autoconfig.staffhelpermod.option.messages.artisanMessage": "Artisan Message",
   "text.autoconfig.staffhelpermod.option.messages.auctionMessage": "Auction Message",
   "text.autoconfig.staffhelpermod.option.messages.baitMessage": "Bait Message",
   "text.autoconfig.staffhelpermod.option.messages.baitpackMessage": "Bait Package Message",
@@ -18,6 +17,7 @@
   "text.autoconfig.staffhelpermod.option.messages.chummerMessage": "Chummer Message",
   "text.autoconfig.staffhelpermod.option.messages.contestMessage": "Contest Message",
   "text.autoconfig.staffhelpermod.option.messages.cosmeticsMessage": "Cosmetics Message",
+  "text.autoconfig.staffhelpermod.option.messages.craftMessage": "Craft Message",
   "text.autoconfig.staffhelpermod.option.messages.crewMessage": "Crew Message",
   "text.autoconfig.staffhelpermod.option.messages.cryptidsightingMessage": "Cryptid Sighting Message",
   "text.autoconfig.staffhelpermod.option.messages.earnmoneyMessage": "Earn Money Message",
