@@ -8,172 +8,172 @@ import net.minecraft.client.Minecraft;
 
 public class CommandRegistry {
     public static void registerCommands() {
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, ignored) -> {
             dispatcher.register(commands("staffhelp"));
             dispatcher.register(commands("sh"));
         });
     }
 
     private static LiteralArgumentBuilder<FabricClientCommandSource> commands(String commandName) {
-        return ClientCommandManager.literal(commandName)
-                .then(ClientCommandManager.literal("armorinfusions")
-                        .executes(context -> sendAsPlayer(Configs.messages.armorinfusionsMessage)))
+        return ClientCommands.literal(commandName)
+                .then(ClientCommands.literal("armorinfusions")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.armorinfusionsMessage)))
 
-                .then(ClientCommandManager.literal("artisan")
-                        .executes(context -> sendAsPlayer(Configs.messages.artisanMessage)))
+                .then(ClientCommands.literal("artisan")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.artisanMessage)))
 
-                .then(ClientCommandManager.literal("auction")
-                        .executes(context -> sendAsPlayer(Configs.messages.auctionMessage)))
+                .then(ClientCommands.literal("auction")
+                          .executes(ignored -> sendAsPlayer(Configs.messages.auctionMessage)))
 
-                .then(ClientCommandManager.literal("bait")
-                        .executes(context -> sendAsPlayer(Configs.messages.baitMessage)))
+                .then(ClientCommands.literal("bait")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.baitMessage)))
 
-                .then(ClientCommandManager.literal("baitpack")
-                        .executes(context -> sendAsPlayer(Configs.messages.baitpackMessage)))
+                .then(ClientCommands.literal("baitpack")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.baitpackMessage)))
 
-                .then(ClientCommandManager.literal("bloomingoasis")
-                        .executes(context -> sendAsPlayer(Configs.messages.bloomingoasisMessage)))
+                .then(ClientCommands.literal("bloomingoasis")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.bloomingoasisMessage)))
 
-                .then(ClientCommandManager.literal("calibrator")
-                        .executes(context -> sendAsPlayer(Configs.messages.calibratorMessage)))
+                .then(ClientCommands.literal("calibrator")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.calibratorMessage)))
 
-                .then(ClientCommandManager.literal("calibratorloc")
-                        .executes(context -> sendAsPlayer(Configs.messages.calibratorlocMessage)))
+                .then(ClientCommands.literal("calibratorloc")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.calibratorlocMessage)))
 
-                .then(ClientCommandManager.literal("chummer")
-                        .executes(context -> sendAsPlayer(Configs.messages.chummerMessage)))
+                .then(ClientCommands.literal("chummer")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.chummerMessage)))
 
-                .then(ClientCommandManager.literal("contest")
-                        .executes(context -> sendAsPlayer(Configs.messages.contestMessage)))
+                .then(ClientCommands.literal("contest")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.contestMessage)))
 
-                .then(ClientCommandManager.literal("cosmetics")
-                        .executes(context -> sendAsPlayer(Configs.messages.cosmeticsMessage)))
+                .then(ClientCommands.literal("cosmetics")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.cosmeticsMessage)))
 
-                .then(ClientCommandManager.literal("craft")
-                        .executes(context -> sendAsPlayer(Configs.messages.craftMessage)))
+                .then(ClientCommands.literal("craft")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.craftMessage)))
 
-                .then(ClientCommandManager.literal("crew")
-                        .executes(context -> sendAsPlayer(Configs.messages.crewMessage)))
+                .then(ClientCommands.literal("crew")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.crewMessage)))
 
-                .then(ClientCommandManager.literal("cryptidsighting")
-                        .executes(context -> sendAsPlayer(Configs.messages.cryptidsightingMessage)))
+                .then(ClientCommands.literal("cryptidsighting")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.cryptidsightingMessage)))
 
-                .then(ClientCommandManager.literal("dailymissions")
-                        .executes(context -> sendAsPlayer(Configs.messages.dailymissionsMessage)))
+                .then(ClientCommands.literal("dailymissions")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.dailymissionsMessage)))
 
-                .then(ClientCommandManager.literal("earnmoney")
-                        .executes(context -> sendAsPlayer(Configs.messages.earnmoneyMessage)))
+                .then(ClientCommands.literal("earnmoney")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.earnmoneyMessage)))
 
-                .then(ClientCommandManager.literal("event")
-                        .executes(context -> sendAsPlayer(Configs.messages.eventMessage)))
+                .then(ClientCommands.literal("event")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.eventMessage)))
 
-                .then(ClientCommandManager.literal("fabled")
-                        .executes(context -> sendAsPlayer(Configs.messages.fabledMessage)))
+                .then(ClientCommands.literal("fabled")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.fabledMessage)))
 
-                .then(ClientCommandManager.literal("findnpc")
-                        .executes(context -> sendAsPlayer(Configs.messages.findnpcMessage)))
+                .then(ClientCommands.literal("findnpc")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.findnpcMessage)))
 
-                .then(ClientCommandManager.literal("foer")
-                        .executes(context -> sendAsPlayer(Configs.messages.foerMessage)))
+                .then(ClientCommands.literal("foer")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.foerMessage)))
 
-                .then(ClientCommandManager.literal("forge")
-                        .executes(context -> sendAsPlayer(Configs.messages.forgeMessage)))
+                .then(ClientCommands.literal("forge")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.forgeMessage)))
 
-                .then(ClientCommandManager.literal("goldrush")
-                        .executes(context -> sendAsPlayer(Configs.messages.goldrushMessage)))
+                .then(ClientCommands.literal("goldrush")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.goldrushMessage)))
 
-                .then(ClientCommandManager.literal("howfish")
-                        .executes(context -> sendAsPlayer(Configs.messages.howfishMessage)))
+                .then(ClientCommands.literal("howfish")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.howfishMessage)))
 
-                .then(ClientCommandManager.literal("identifier")
-                        .executes(context -> sendAsPlayer(Configs.messages.identifierMessage)))
+                .then(ClientCommands.literal("identifier")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.identifierMessage)))
 
-                .then(ClientCommandManager.literal("instances")
-                        .executes(context -> sendAsPlayer(Configs.messages.instancesMessage)))
+                .then(ClientCommands.literal("instances")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.instancesMessage)))
 
-                .then(ClientCommandManager.literal("locationroll")
-                        .executes(context -> sendAsPlayer(Configs.messages.locationrollMessage)))
+                .then(ClientCommands.literal("locationroll")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.locationrollMessage)))
 
-                .then(ClientCommandManager.literal("luckscaleprospect")
-                        .executes(context -> sendAsPlayer(Configs.messages.luckscaleprospectMessage)))
+                .then(ClientCommands.literal("luckscaleprospect")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.luckscaleprospectMessage)))
 
-                .then(ClientCommandManager.literal("moonevents")
-                        .executes(context -> sendAsPlayer(Configs.messages.mooneventsMessage)))
+                .then(ClientCommands.literal("moonevents")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.mooneventsMessage)))
 
-                .then(ClientCommandManager.literal("overflow")
-                        .executes(context -> sendAsPlayer(Configs.messages.overflowMessage)))
+                .then(ClientCommands.literal("overflow")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.overflowMessage)))
 
-                .then(ClientCommandManager.literal("petdrop")
-                        .executes(context -> sendAsPlayer(Configs.messages.petdropMessage)))
+                .then(ClientCommands.literal("petdrop")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.petdropMessage)))
 
-                .then(ClientCommandManager.literal("petmerge")
-                        .executes(context -> sendAsPlayer(Configs.messages.petmergeMessage)))
+                .then(ClientCommands.literal("petmerge")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.petmergeMessage)))
 
-                .then(ClientCommandManager.literal("power")
-                        .executes(context -> sendAsPlayer(Configs.messages.powerMessage)))
+                .then(ClientCommands.literal("power")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.powerMessage)))
 
-                .then(ClientCommandManager.literal("presets")
-                        .executes(context -> sendAsPlayer(Configs.messages.presetsMessage)))
+                .then(ClientCommands.literal("presets")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.presetsMessage)))
 
-                .then(ClientCommandManager.literal("quests")
-                        .executes(context -> sendAsPlayer(Configs.messages.questsMessage)))
+                .then(ClientCommands.literal("quests")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.questsMessage)))
 
-                .then(ClientCommandManager.literal("rainbow")
-                        .executes(context -> sendAsPlayer(Configs.messages.rainbowMessage)))
+                .then(ClientCommands.literal("rainbow")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.rainbowMessage)))
 
-                .then(ClientCommandManager.literal("rainshower")
-                        .executes(context -> sendAsPlayer(Configs.messages.rainshowerMessage)))
+                .then(ClientCommands.literal("rainshower")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.rainshowerMessage)))
 
-                .then(ClientCommandManager.literal("recipes")
-                        .executes(context -> sendAsPlayer(Configs.messages.recipesMessage)))
+                .then(ClientCommands.literal("recipes")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.recipesMessage)))
 
-                .then(ClientCommandManager.literal("reelbiteline")
-                        .executes(context -> sendAsPlayer(Configs.messages.reelbitelineMessage)))
+                .then(ClientCommands.literal("reelbiteline")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.reelbitelineMessage)))
 
-                .then(ClientCommandManager.literal("scrapper")
-                        .executes(context -> sendAsPlayer(Configs.messages.scrapperMessage)))
+                .then(ClientCommands.literal("scrapper")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.scrapperMessage)))
 
-                .then(ClientCommandManager.literal("showitem")
-                        .executes(context -> sendAsPlayer(Configs.messages.showitemMessage)))
+                .then(ClientCommands.literal("showitem")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.showitemMessage)))
 
-                .then(ClientCommandManager.literal("sitting")
-                        .executes(context -> sendAsPlayer(Configs.messages.sittingMessage)))
+                .then(ClientCommands.literal("sitting")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.sittingMessage)))
 
-                .then(ClientCommandManager.literal("store")
-                        .executes(context -> sendAsPlayer(Configs.messages.storeMessage)))
+                .then(ClientCommands.literal("store")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.storeMessage)))
 
-                .then(ClientCommandManager.literal("supercellstorm")
-                        .executes(context -> sendAsPlayer(Configs.messages.supercellstormMessage)))
+                .then(ClientCommands.literal("supercellstorm")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.supercellstormMessage)))
 
-                .then(ClientCommandManager.literal("supercharge")
-                        .executes(context -> sendAsPlayer(Configs.messages.superchargeMessage)))
+                .then(ClientCommands.literal("supercharge")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.superchargeMessage)))
 
-                .then(ClientCommandManager.literal("tackleshop")
-                        .executes(context -> sendAsPlayer(Configs.messages.tackleshopMessage)))
+                .then(ClientCommands.literal("tackleshop")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.tackleshopMessage)))
 
-                .then(ClientCommandManager.literal("tackleshoploc")
-                        .executes(context -> sendAsPlayer(Configs.messages.tackleshoplocMessage)))
+                .then(ClientCommands.literal("tackleshoploc")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.tackleshoplocMessage)))
 
-                .then(ClientCommandManager.literal("thunderstorm")
-                        .executes(context -> sendAsPlayer(Configs.messages.thunderstormMessage)))
+                .then(ClientCommands.literal("thunderstorm")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.thunderstormMessage)))
 
-                .then(ClientCommandManager.literal("tournaments")
-                        .executes(context -> sendAsPlayer(Configs.messages.tournamentsMessage)))
+                .then(ClientCommands.literal("tournaments")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.tournamentsMessage)))
 
-                .then(ClientCommandManager.literal("tutorial")
-                        .executes(context -> sendAsPlayer(Configs.messages.tutorialMessage)))
+                .then(ClientCommands.literal("tutorial")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.tutorialMessage)))
 
-                .then(ClientCommandManager.literal("vehicles")
-                        .executes(context -> sendAsPlayer(Configs.messages.vehiclesMessage)))
+                .then(ClientCommands.literal("vehicles")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.vehiclesMessage)))
 
-                .then(ClientCommandManager.literal("variants")
-                        .executes(context -> sendAsPlayer(Configs.messages.variantsMessage)))
+                .then(ClientCommands.literal("variants")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.variantsMessage)))
 
-                .then(ClientCommandManager.literal("wiki")
-                        .executes(context -> sendAsPlayer(Configs.messages.wikiMessage)))
+                .then(ClientCommands.literal("wiki")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.wikiMessage)))
 
-                .then(ClientCommandManager.literal("xpmoney")
-                        .executes(context -> sendAsPlayer(Configs.messages.xpmoneyMessage)))
+                .then(ClientCommands.literal("xpmoney")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.xpmoneyMessage)))
 
                 .then(SkinGrabberCommand.register(commandName));
     }

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
@@ -72,22 +72,22 @@ public class SkinViewScreen extends Screen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        titleLabel = createFixedLabel("Skin Viewer - " + currentPlayerName, centerX, 10, 220);
+        titleLabel = createFixedLabel("Skin Viewer - " + currentPlayerName, centerX, 10, 200);
         addRenderableWidget(titleLabel);
-        counterLabel = createFixedLabel("", centerX, 60, 100);
+        counterLabel = createFixedLabel("", centerX, 60, 80);
         counterLabel.visible = false;
         addRenderableWidget(counterLabel);
-        dragLabel = createFixedLabel("Drag to rotate", centerX, centerY + MODEL_HEIGHT / 2 + 25, 140);
+        dragLabel = createFixedLabel("Drag to rotate", centerX, centerY + MODEL_HEIGHT / 2 + 30, 120);
         addRenderableWidget(dragLabel);
-        offlineLabel = createFixedLabel("Offline Player", centerX, centerY + MODEL_HEIGHT / 2 + 40, 150);
+        offlineLabel = createFixedLabel("Offline Player", centerX, centerY + MODEL_HEIGHT / 2 + 10, 150);
         offlineLabel.visible = false;
         addRenderableWidget(offlineLabel);
         updateLabels();
     }
 
     private Button createFixedLabel(String text, int centerX, int y, int width) {
-        Button label = Button.builder(Component.literal(text), b -> {})
-                .bounds(0, 0, width, 20)
+        Button label = Button.builder(Component.literal(text), ignored -> {})
+                .bounds(0, 0, width, 15)
                 .build();
         label.active = false;
         label.setX(centerX - width / 2);
@@ -125,7 +125,6 @@ public class SkinViewScreen extends Screen {
             lastTabCount = currentCount;
             clearAndReinitializeButtons();
         }
-
         updateCurrentPlayerIndex();
         super.tick();
     }
@@ -181,7 +180,7 @@ public class SkinViewScreen extends Screen {
             if (mojangUUID != null && mojangUUID.equals(uuidFromTab)) {
                 verifiedUUIDs.add(uuidFromTab);
             }
-        }).exceptionally(e -> {
+        }).exceptionally(ignored -> {
             pendingVerifications.remove(playerName);
             forceTrustAll = true;
             forceTrustAllTime = System.currentTimeMillis();
@@ -216,7 +215,7 @@ public class SkinViewScreen extends Screen {
             int finalI = i;
             addRenderableWidget(Button.builder(
                             Component.literal(buttonTexts[i]),
-                            btn -> buttonActions[finalI].run())
+                            ignored -> buttonActions[finalI].run())
                     .bounds(buttonX[i], navY, buttonWidth, 20)
                     .build());
         }
@@ -228,10 +227,10 @@ public class SkinViewScreen extends Screen {
         int closeButtonY = this.height - 30;
         int buttonWidth = 100;
 
-        Button nameMCButton = createButton("NameMC", centerX - 102, buttonY, buttonWidth, btn -> openNameMC());
+        Button nameMCButton = createButton("NameMC", centerX - 102, buttonY, buttonWidth, ignored -> openNameMC());
         Button layerButton = createButton("Second Layer: " + (showSecondLayer ? "ON" : "OFF"),
                 centerX + 2, buttonY, buttonWidth, this::toggleSecondLayer);
-        Button closeButton = createButton("Close", centerX - 50, closeButtonY, buttonWidth, btn -> closeScreen());
+        Button closeButton = createButton("Close", centerX - 50, closeButtonY, buttonWidth, ignored -> closeScreen());
 
         addRenderableWidget(nameMCButton);
         addRenderableWidget(layerButton);
@@ -274,8 +273,9 @@ public class SkinViewScreen extends Screen {
         onClose();
     }
 
+    // ---------- Official rendering hook ----------
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         renderTransparentBackground(graphics);
         int centerX = this.width / 2;
         int centerY = this.height / 2;
@@ -284,7 +284,8 @@ public class SkinViewScreen extends Screen {
         updateLabels();
         PlayerModelRenderer.renderPlayerModel(graphics, currentPlayerName,
                 modelX, modelY, MODEL_WIDTH, MODEL_HEIGHT, rotation, showSecondLayer);
-        super.render(graphics, mouseX, mouseY, delta);
+        // Let Screen draw all buttons and labels
+        super.extractRenderState(graphics, mouseX, mouseY, delta);
     }
 
     @Override
@@ -327,12 +328,9 @@ public class SkinViewScreen extends Screen {
         lastMouseX = mouseX;
     }
 
-    public void renderTransparentBackground(GuiGraphics graphics) {
+    private void renderTransparentBackground(GuiGraphicsExtractor graphics) {
         graphics.fill(0, 0, this.width, this.height, 0x80000000);
     }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float delta) {}
 
     @Override
     public void onClose() {

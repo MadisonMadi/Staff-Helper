@@ -1,6 +1,6 @@
 # Staff Helper
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.11-blue)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1+26.1.2-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)
 
@@ -71,12 +71,11 @@ Messages can be changed in the in-game config.
 | **`/staffhelp getskin <playername>`** | Will show you a 3D Model of the player skin, and NameMC Profile button + Toggle for Skin Layer |
 
 ## Installation
-1. **Install Fabric Loader** for your Minecraft version (1.21.11)
+1. **Install Fabric Loader** for your Minecraft version (26.1-26.1.2)
 2. Download dependencies:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.11)
-   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.11)
-   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.11)
-3. Place `Staff-Helper-x.x.x+1.21.11.jar` in your `mods` folder
+   - [Fabric API](https://modrinth.com/mod/fabric-api) (26.1-26.1.2)
+   - [Fzzy Config](https://modrinth.com/mod/fzzy-config) (26.1-26.1.2)
+3. Place `Staff-Helper-x.x.x+26.1+26.1.2.jar` in your `mods` folder
 
 ---
 
