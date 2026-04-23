@@ -1,7 +1,5 @@
 package me.madisonn.staffhelpermod.utils.skin;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -9,17 +7,12 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @NullMarked
@@ -40,11 +33,6 @@ public class SkinViewScreen extends Screen {
     private @Nullable Button counterLabel;
     private @Nullable Button dragLabel;
     private @Nullable Button offlineLabel;
-
-    private static final Set<UUID> verifiedUUIDs = new HashSet<>();
-    private static final Set<String> pendingVerifications = new HashSet<>();
-    private static boolean forceTrustAll;
-    private static long forceTrustAllTime;
 
     private int lastTabCount;
 
@@ -117,10 +105,7 @@ public class SkinViewScreen extends Screen {
     public void tick() {
         Minecraft client = Minecraft.getInstance();
         int currentCount = client.getConnection() != null ? client.getConnection().getOnlinePlayers().size() : 0;
-        if (currentCount != lastTabCount || (forceTrustAll && System.currentTimeMillis() - forceTrustAllTime > 300_000)) {
-            if (forceTrustAll && System.currentTimeMillis() - forceTrustAllTime > 300_000) {
-                forceTrustAll = false;
-            }
+        if (currentCount != lastTabCount) {
             updateOnlinePlayersList();
             lastTabCount = currentCount;
             clearAndReinitializeButtons();
@@ -135,57 +120,10 @@ public class SkinViewScreen extends Screen {
             this.onlinePlayers = new ArrayList<>();
             return;
         }
-        if (forceTrustAll) {
-            this.onlinePlayers = client.getConnection().getOnlinePlayers().stream()
-                    .map(info -> info.getProfile().name())
-                    .sorted(Comparator.comparing(String::toLowerCase))
-                    .collect(Collectors.toList());
-            return;
-        }
-
-        List<PlayerInfo> allEntries = new ArrayList<>(client.getConnection().getOnlinePlayers());
-        List<String> verifiedNames = new ArrayList<>();
-
-        for (PlayerInfo entry : allEntries) {
-            UUID uuid = entry.getProfile().id();
-            String name = entry.getProfile().name();
-            if (verifiedUUIDs.contains(uuid)) {
-                verifiedNames.add(name);
-            } else if (!pendingVerifications.contains(name)) {
-                pendingVerifications.add(name);
-                startVerification(name, uuid);
-            }
-        }
-        this.onlinePlayers = verifiedNames.stream()
+        this.onlinePlayers = client.getConnection().getOnlinePlayers().stream()
+                .map(info -> info.getProfile().name())
                 .sorted(Comparator.comparing(String::toLowerCase))
                 .collect(Collectors.toList());
-    }
-
-    private void startVerification(String playerName, UUID uuidFromTab) {
-        if (forceTrustAll) return;
-        CompletableFuture.supplyAsync(() -> {
-            String response = fetch("https://api.mojang.com/users/profiles/minecraft/" + playerName);
-            if (response == null) return null;
-            try {
-                JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                if (json.has("id")) {
-                    String uuidStr = json.get("id").getAsString()
-                            .replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5");
-                    return UUID.fromString(uuidStr);
-                }
-            } catch (Exception ignored) {}
-            return null;
-        }).thenAccept(mojangUUID -> {
-            pendingVerifications.remove(playerName);
-            if (mojangUUID != null && mojangUUID.equals(uuidFromTab)) {
-                verifiedUUIDs.add(uuidFromTab);
-            }
-        }).exceptionally(ignored -> {
-            pendingVerifications.remove(playerName);
-            forceTrustAll = true;
-            forceTrustAllTime = System.currentTimeMillis();
-            return null;
-        });
     }
 
     private void updateCurrentPlayerIndex() {
@@ -273,7 +211,6 @@ public class SkinViewScreen extends Screen {
         onClose();
     }
 
-    // ---------- Official rendering hook ----------
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         renderTransparentBackground(graphics);
@@ -284,7 +221,6 @@ public class SkinViewScreen extends Screen {
         updateLabels();
         PlayerModelRenderer.renderPlayerModel(graphics, currentPlayerName,
                 modelX, modelY, MODEL_WIDTH, MODEL_HEIGHT, rotation, showSecondLayer);
-        // Let Screen draw all buttons and labels
         super.extractRenderState(graphics, mouseX, mouseY, delta);
     }
 
@@ -336,18 +272,5 @@ public class SkinViewScreen extends Screen {
     public void onClose() {
         PlayerModelRenderer.clearAllCache();
         super.onClose();
-    }
-
-    private static @Nullable String fetch(String url) {
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URI(url).toURL().openConnection();
-            conn.setRequestMethod("GET"); conn.setConnectTimeout(5000); conn.setReadTimeout(5000);
-            if (conn.getResponseCode() == 200) {
-                try (InputStream in = conn.getInputStream()) {
-                    return new String(in.readAllBytes());
-                }
-            }
-        } catch (Exception ignored) {}
-        return null;
     }
 }
