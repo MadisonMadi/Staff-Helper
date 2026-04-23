@@ -1,209 +1,187 @@
 package me.madisonn.staffhelpermod.commands;
 
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import me.madisonn.staffhelpermod.config.StaffHelperConfig;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
+import me.madisonn.staffhelpermod.commands.utils.SkinGrabberCommand;
+import me.madisonn.staffhelpermod.config.Configs;
+import net.fabricmc.fabric.api.client.command.v2.*;
+import net.minecraft.client.Minecraft;
 
 public class CommandRegistry {
-    public static void registerCommands(StaffHelperConfig config) {
+    public static void registerCommands() {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            dispatcher.register(commands("staffhelp", config));
-            dispatcher.register(commands("sh", config));
+            dispatcher.register(commands("staffhelp"));
+            dispatcher.register(commands("sh"));
         });
     }
 
-    private static LiteralArgumentBuilder<FabricClientCommandSource> commands(String commandName, StaffHelperConfig config) {
+    private static LiteralArgumentBuilder<FabricClientCommandSource> commands(String commandName) {
         return ClientCommandManager.literal(commandName)
                 .then(ClientCommandManager.literal("armorinfusions")
-                        .executes(context -> sendAsPlayer(config.messages.armorinfusionsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.armorinfusionsMessage)))
 
                 .then(ClientCommandManager.literal("artisan")
-                        .executes(context -> sendAsPlayer(config.messages.artisanMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.artisanMessage)))
 
                 .then(ClientCommandManager.literal("auction")
-                        .executes(context -> sendAsPlayer(config.messages.auctionMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.auctionMessage)))
 
                 .then(ClientCommandManager.literal("bait")
-                        .executes(context -> sendAsPlayer(config.messages.baitMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.baitMessage)))
 
                 .then(ClientCommandManager.literal("baitpack")
-                        .executes(context -> sendAsPlayer(config.messages.baitpackMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.baitpackMessage)))
 
                 .then(ClientCommandManager.literal("bloomingoasis")
-                        .executes(context -> sendAsPlayer(config.messages.bloomingoasisMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.bloomingoasisMessage)))
 
                 .then(ClientCommandManager.literal("calibrator")
-                        .executes(context -> sendAsPlayer(config.messages.calibratorMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.calibratorMessage)))
 
                 .then(ClientCommandManager.literal("calibratorloc")
-                        .executes(context -> sendAsPlayer(config.messages.calibratorlocMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.calibratorlocMessage)))
 
                 .then(ClientCommandManager.literal("chummer")
-                        .executes(context -> sendAsPlayer(config.messages.chummerMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.chummerMessage)))
 
                 .then(ClientCommandManager.literal("contest")
-                        .executes(context -> sendAsPlayer(config.messages.contestMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.contestMessage)))
 
                 .then(ClientCommandManager.literal("cosmetics")
-                        .executes(context -> sendAsPlayer(config.messages.cosmeticsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.cosmeticsMessage)))
 
                 .then(ClientCommandManager.literal("craft")
-                        .executes(context -> sendAsPlayer(config.messages.craftMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.craftMessage)))
 
                 .then(ClientCommandManager.literal("crew")
-                        .executes(context -> sendAsPlayer(config.messages.crewMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.crewMessage)))
 
                 .then(ClientCommandManager.literal("cryptidsighting")
-                        .executes(context -> sendAsPlayer(config.messages.cryptidsightingMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.cryptidsightingMessage)))
 
                 .then(ClientCommandManager.literal("dailymissions")
-                        .executes(context -> sendAsPlayer(config.messages.dailymissionsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.dailymissionsMessage)))
 
                 .then(ClientCommandManager.literal("earnmoney")
-                        .executes(context -> sendAsPlayer(config.messages.earnmoneyMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.earnmoneyMessage)))
 
                 .then(ClientCommandManager.literal("event")
-                        .executes(context -> sendAsPlayer(config.messages.eventMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.eventMessage)))
 
                 .then(ClientCommandManager.literal("fabled")
-                        .executes(context -> sendAsPlayer(config.messages.fabledMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.fabledMessage)))
 
                 .then(ClientCommandManager.literal("findnpc")
-                        .executes(context -> sendAsPlayer(config.messages.findnpcMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.findnpcMessage)))
 
                 .then(ClientCommandManager.literal("foe")
-                        .executes(context -> sendAsPlayer(config.messages.foeMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.foeMessage)))
 
                 .then(ClientCommandManager.literal("forge")
-                        .executes(context -> sendAsPlayer(config.messages.forgeMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.forgeMessage)))
 
                 .then(ClientCommandManager.literal("goldrush")
-                        .executes(context -> sendAsPlayer(config.messages.goldrushMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.goldrushMessage)))
 
                 .then(ClientCommandManager.literal("howfish")
-                        .executes(context -> sendAsPlayer(config.messages.howfishMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.howfishMessage)))
 
                 .then(ClientCommandManager.literal("identifier")
-                        .executes(context -> sendAsPlayer(config.messages.identifierMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.identifierMessage)))
 
                 .then(ClientCommandManager.literal("instances")
-                        .executes(context -> sendAsPlayer(config.messages.instancesMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.instancesMessage)))
 
                 .then(ClientCommandManager.literal("locationroll")
-                        .executes(context -> sendAsPlayer(config.messages.locationrollMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.locationrollMessage)))
 
                 .then(ClientCommandManager.literal("luckscaleprospect")
-                        .executes(context -> sendAsPlayer(config.messages.luckscaleprospectMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.luckscaleprospectMessage)))
 
                 .then(ClientCommandManager.literal("moonevents")
-                        .executes(context -> sendAsPlayer(config.messages.mooneventsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.mooneventsMessage)))
 
                 .then(ClientCommandManager.literal("overflow")
-                        .executes(context -> sendAsPlayer(config.messages.overflowMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.overflowMessage)))
 
                 .then(ClientCommandManager.literal("petdrop")
-                        .executes(context -> sendAsPlayer(config.messages.petdropMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.petdropMessage)))
 
                 .then(ClientCommandManager.literal("petmerge")
-                        .executes(context -> sendAsPlayer(config.messages.petmergeMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.petmergeMessage)))
 
                 .then(ClientCommandManager.literal("power")
-                        .executes(context -> sendAsPlayer(config.messages.powerMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.powerMessage)))
 
                 .then(ClientCommandManager.literal("presets")
-                        .executes(context -> sendAsPlayer(config.messages.presetsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.presetsMessage)))
 
                 .then(ClientCommandManager.literal("quests")
-                        .executes(context -> sendAsPlayer(config.messages.questsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.questsMessage)))
 
                 .then(ClientCommandManager.literal("rainbow")
-                        .executes(context -> sendAsPlayer(config.messages.rainbowMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.rainbowMessage)))
 
                 .then(ClientCommandManager.literal("rainshower")
-                        .executes(context -> sendAsPlayer(config.messages.rainshowerMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.rainshowerMessage)))
 
                 .then(ClientCommandManager.literal("recipes")
-                        .executes(context -> sendAsPlayer(config.messages.recipesMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.recipesMessage)))
 
                 .then(ClientCommandManager.literal("reelbiteline")
-                        .executes(context -> sendAsPlayer(config.messages.reelbitelineMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.reelbitelineMessage)))
 
                 .then(ClientCommandManager.literal("scrapper")
-                        .executes(context -> sendAsPlayer(config.messages.scrapperMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.scrapperMessage)))
 
                 .then(ClientCommandManager.literal("showitem")
-                        .executes(context -> sendAsPlayer(config.messages.showitemMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.showitemMessage)))
 
                 .then(ClientCommandManager.literal("sitting")
-                        .executes(context -> sendAsPlayer(config.messages.sittingMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.sittingMessage)))
 
                 .then(ClientCommandManager.literal("store")
-                        .executes(context -> sendAsPlayer(config.messages.storeMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.storeMessage)))
 
                 .then(ClientCommandManager.literal("supercellstorm")
-                        .executes(context -> sendAsPlayer(config.messages.supercellstormMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.supercellstormMessage)))
 
                 .then(ClientCommandManager.literal("supercharge")
-                        .executes(context -> sendAsPlayer(config.messages.superchargeMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.superchargeMessage)))
 
                 .then(ClientCommandManager.literal("tackleshop")
-                        .executes(context -> sendAsPlayer(config.messages.tackleshopMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.tackleshopMessage)))
 
                 .then(ClientCommandManager.literal("tackleshoploc")
-                        .executes(context -> sendAsPlayer(config.messages.tackleshoplocMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.tackleshoplocMessage)))
 
                 .then(ClientCommandManager.literal("thunderstorm")
-                        .executes(context -> sendAsPlayer(config.messages.thunderstormMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.thunderstormMessage)))
 
                 .then(ClientCommandManager.literal("tournaments")
-                        .executes(context -> sendAsPlayer(config.messages.tournamentsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.tournamentsMessage)))
 
                 .then(ClientCommandManager.literal("tutorial")
-                        .executes(context -> sendAsPlayer(config.messages.tutorialMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.tutorialMessage)))
 
                 .then(ClientCommandManager.literal("vehicles")
-                        .executes(context -> sendAsPlayer(config.messages.vehiclesMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.vehiclesMessage)))
 
                 .then(ClientCommandManager.literal("variants")
-                        .executes(context -> sendAsPlayer(config.messages.variantsMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.variantsMessage)))
 
                 .then(ClientCommandManager.literal("wiki")
-                        .executes(context -> sendAsPlayer(config.messages.wikiMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.wikiMessage)))
 
                 .then(ClientCommandManager.literal("xpmoney")
-                        .executes(context -> sendAsPlayer(config.messages.xpmoneyMessage)))
+                        .executes(context -> sendAsPlayer(Configs.messages.xpmoneyMessage)))
 
-                    // Error Message
-                .then(ClientCommandManager.argument("unknown", StringArgumentType.word())
-                        .executes(context -> {
-                            context.getSource().sendFeedback(Text.literal("Staff Helper » Error! Command doesn't exist, check spelling!").withColor(0xFF0000));
-                            return 1;
-                        }))
-
-                // Get Skin Command + Error
-                .then(ClientCommandManager.literal("getskin")
-                        .then(ClientCommandManager.argument("playername", StringArgumentType.word())
-                                .suggests(SkinGrabber::suggestPlayers)
-                                .executes(SkinGrabber::getSkin))
-                        .executes(context -> {
-                            String errorMessage = commandName.equals("sh") ?
-                                    "Staff Helper » Usage: /sh getskin <playername>" :
-                                    "Staff Helper » Usage: /staffhelp getskin <playername>";
-                            context.getSource().sendFeedback(Text.literal(errorMessage).withColor(0xFF0000));
-                            return 1;
-                        }));
+                .then(SkinGrabberCommand.register(commandName));
     }
 
-    // Sends message as player
     private static int sendAsPlayer(String message) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player != null && client.getNetworkHandler() != null) {
-            client.getNetworkHandler().sendChatMessage(message);
+        Minecraft client = Minecraft.getInstance();
+        if (client.player != null) {
+            client.player.connection.sendChat(message);
         }
         return 1;
     }

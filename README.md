@@ -1,6 +1,6 @@
 # Staff Helper
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.4-blue)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.11-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-orange)
 
@@ -17,7 +17,7 @@ Messages can be changed in the in-game config.
 | **`/staffhelp auction`**           | You can buy items on the action house by using '/ah', you can also put items up for sale by using '/ah sell price'. There is a 2% tax when listing items and expired items go to '/overflow'.                                              |
 | **`/staffhelp bait`**              | You can use bait by holding your rod and pressing 'Q' or right click it in your inventory. Now you can open the tacklebox and move your bait into it, the bait usage starts from the top left.                                             |
 | **`/staffhelp baitpack`**          | You can get bait packages from '/vote', '/ah', '/collections', '/compendium', '/contest', '/tournament', '/event' and power.                                                                                                               |
-| **`/staffhelp bloomingoasis`**     | The Blooming Oasis Gives +100% pet luck for 15-16 minutes.                                                                                                                                                                                 |
+| **`/staffhelp bloomingoasis`**     | The Blooming Oasis is an event that gives +100% pet luck for 15-16 minutes. '/events' to see what event is active at the time.                                                                                                             |
 | **`/staffhelp calibrator`**        | Calibrate reels and poles for better stats and bonuses. Higher rarity increases costs and bonus percentage. Upgrading in Artisan removes bonus. '/calibrator' (Mariner Rank).                                                              |
 | **`/staffhelp calibratorloc`**     | The Calibrator can be found by going to '/spawn' and turn around, go inside and follow the sign directions.                                                                                                                                |
 | **`/staffhelp chummer`**           | The Chummer boosts bite speed for all players within 10 blocks. It lasts 15 minutes after being placed. Common +75, Rare +130, Epic +180, Legendary +250 and Mythical +380.                                                                |
@@ -71,12 +71,12 @@ Messages can be changed in the in-game config.
 | **`/staffhelp getskin <playername>`** | Will show you a 3D Model of the player skin, and NameMC Profile button + Toggle for Skin Layer |
 
 ## Installation
-1. **Install Fabric Loader** for your Minecraft version (1.21.4)
+1. **Install Fabric Loader** for your Minecraft version (1.21.11)
 2. Download dependencies:
-   - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.4)
-   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.4)
-   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.4)
-3. Place `Staff-Helper-x.x.x+1.21.4.jar` in your `mods` folder
+   - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.11)
+   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.11)
+   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.11)
+3. Place `Staff-Helper-x.x.x+1.21.11.jar` in your `mods` folder
 
 ---
 

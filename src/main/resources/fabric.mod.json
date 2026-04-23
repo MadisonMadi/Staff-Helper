@@ -12,7 +12,6 @@
     "sandersalama"
   ],
   "contact": {
-    "discord": "madisonmadi",
     "issues": "https://github.com/MadisonMadi/Staff-Helper/issues",
     "sources": "https://github.com/MadisonMadi/Staff-Helper"
   },
@@ -22,16 +21,18 @@
   "entrypoints": {
     "client": [
       "me.madisonn.staffhelpermod.StaffHelperClient"
-    ],
-    "modmenu": [
-      "me.madisonn.staffhelpermod.config.ModMenuIntegration"
     ]
   },
   "depends": {
-    "minecraft": "1.21.4",
-    "fabricloader": ">=0.16.9",
+    "fabricloader": ">=0.19.2",
+    "minecraft": ">=1.21.11",
     "java": ">=21",
-    "cloth-config": ">=17.0.142",
-    "modmenu": ">=13.0.0"
+    "fabric-api": ">=0.141.3+1.21.11",
+    "fzzy_config": ">=0.7.3"
+  },
+  "custom": {
+    "fzzy_config": [
+      "staffhelpermod"
+    ]
   }
 }
