@@ -73,8 +73,8 @@ public class MessagesConfig extends Config {
     @Name("Find NPC Message")
     public String findnpcMessage = "Do '/spawn' walk forwards towards the 6 npc's and then walk to the left you'll find every npc with a huge sign stuck to their building!";
 
-    @Name("FishonExtra Message")
-    public String foeMessage = "You can install the FishonMC-Extras Mod here modrinth.com/mod/fishonmc-extras-r.";
+    @Name("FishOnMC Extras R Message")
+    public String foerMessage = "You can install the FishOnMC Extras R Mod here modrinth.com/mod/fishonmc-extras-r.";
 
     @Name("Forge Message")
     public String forgeMessage = "To tier up your armor you can go to the forge at spawn or use '/forge' (Sailor Rank), T2 16 Shards, T3 48 Shards, T4 96 Shards, T5 256 Shards, it's recommended to only forge pieces with 95%+.";

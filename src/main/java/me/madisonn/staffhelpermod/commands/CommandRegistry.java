@@ -73,8 +73,8 @@ public class CommandRegistry {
                 .then(ClientCommandManager.literal("findnpc")
                         .executes(context -> sendAsPlayer(Configs.messages.findnpcMessage)))
 
-                .then(ClientCommandManager.literal("foe")
-                        .executes(context -> sendAsPlayer(Configs.messages.foeMessage)))
+                .then(ClientCommandManager.literal("foer")
+                        .executes(context -> sendAsPlayer(Configs.messages.foerMessage)))
 
                 .then(ClientCommandManager.literal("forge")
                         .executes(context -> sendAsPlayer(Configs.messages.forgeMessage)))
