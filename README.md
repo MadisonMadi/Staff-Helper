@@ -74,8 +74,7 @@ Messages can be changed in the in-game config.
 1. **Install Fabric Loader** for your Minecraft version (1.21.11)
 2. Download dependencies:
    - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.11)
-   - [Cloth Config](https://modrinth.com/mod/cloth-config) (1.21.11)
-   - [ModMenu](https://modrinth.com/mod/modmenu) (1.21.11)
+   - [Fzzy Config](https://modrinth.com/mod/fzzy-config) (1.21.11)
 3. Place `Staff-Helper-x.x.x+1.21.11.jar` in your `mods` folder
 
 ---
