@@ -38,51 +38,54 @@ public class PlayerModelRenderer {
         Minecraft client = Minecraft.getInstance();
         if (client.level == null) return;
 
-        // Bake models once
-        if (wideModel == null) {
-            EntityModelSet entityModels = client.getEntityModels();
-            wideModel = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER), false);
-            slimModel = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER_SLIM), true);
-
-            wideModelNoOverlay = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER), false);
-            wideModelNoOverlay.jacket.visible = false;
-            wideModelNoOverlay.hat.visible = false;
-            wideModelNoOverlay.leftSleeve.visible = false;
-            wideModelNoOverlay.rightSleeve.visible = false;
-            wideModelNoOverlay.leftPants.visible = false;
-            wideModelNoOverlay.rightPants.visible = false;
-
-            slimModelNoOverlay = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER_SLIM), true);
-            slimModelNoOverlay.jacket.visible = false;
-            slimModelNoOverlay.hat.visible = false;
-            slimModelNoOverlay.leftSleeve.visible = false;
-            slimModelNoOverlay.rightSleeve.visible = false;
-            slimModelNoOverlay.leftPants.visible = false;
-            slimModelNoOverlay.rightPants.visible = false;
-        }
-
-        // Get skin info (texture + slim flag)
+        bakeModelsOnce(client);
         PlayerSkinInfo skinInfo = getSkinInfo(playerName, client);
-        PlayerModel model = (showOverlay)
-                ? (skinInfo.slim ? slimModel : wideModel)
-                : (skinInfo.slim ? slimModelNoOverlay : wideModelNoOverlay);
+        PlayerModel model = chooseModel(skinInfo.slim, showOverlay);
+        Identifier textureId = skinInfo.textureId;
 
         float modelHeight = 2.125F;
         float fitScale = 0.97F * (float)height / modelHeight;
         float pivotY = -1.0625F;
         float defaultRotX = -5.0F;
 
-        graphics.skin(
-                model, skinInfo.textureId, fitScale, defaultRotX, rotationY, pivotY,
-                x, y, x + width, y + height
-        );
+        graphics.skin(model, textureId, fitScale, defaultRotX, rotationY, pivotY,
+                x, y, x + width, y + height);
     }
 
-    // Simple record to hold texture and model type
+    private static void bakeModelsOnce(Minecraft client) {
+        if (wideModel != null) return;
+        EntityModelSet entityModels = client.getEntityModels();
+        wideModel = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER), false);
+        slimModel = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER_SLIM), true);
+
+        wideModelNoOverlay = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER), false);
+        wideModelNoOverlay.jacket.visible = false;
+        wideModelNoOverlay.hat.visible = false;
+        wideModelNoOverlay.leftSleeve.visible = false;
+        wideModelNoOverlay.rightSleeve.visible = false;
+        wideModelNoOverlay.leftPants.visible = false;
+        wideModelNoOverlay.rightPants.visible = false;
+
+        slimModelNoOverlay = new PlayerModel(entityModels.bakeLayer(ModelLayers.PLAYER_SLIM), true);
+        slimModelNoOverlay.jacket.visible = false;
+        slimModelNoOverlay.hat.visible = false;
+        slimModelNoOverlay.leftSleeve.visible = false;
+        slimModelNoOverlay.rightSleeve.visible = false;
+        slimModelNoOverlay.leftPants.visible = false;
+        slimModelNoOverlay.rightPants.visible = false;
+    }
+
+    private static PlayerModel chooseModel(boolean slim, boolean showOverlay) {
+        if (showOverlay) {
+            return slim ? slimModel : wideModel;
+        } else {
+            return slim ? slimModelNoOverlay : wideModelNoOverlay;
+        }
+    }
+
     private record PlayerSkinInfo(Identifier textureId, boolean slim) {}
 
     private static PlayerSkinInfo getSkinInfo(String playerName, Minecraft client) {
-        // Online – use real skin
         PlayerInfo playerInfo = client.getConnection() != null
                 ? client.getConnection().getPlayerInfo(playerName) : null;
         if (playerInfo != null) {
@@ -90,21 +93,18 @@ public class PlayerModelRenderer {
             return new PlayerSkinInfo(skin.body().texturePath(), skin.model() == PlayerModelType.SLIM);
         }
 
-        // Offline – use cached downloaded skin
         Identifier customId = skinCache.get(playerName.toLowerCase());
         if (customId != null) {
             boolean slim = skinSlimCache.getOrDefault(playerName.toLowerCase(), false);
             return new PlayerSkinInfo(customId, slim);
         }
 
-        // Start async download if not attempted
         if (!skinLoadingAttempts.contains(playerName.toLowerCase())) {
             skinLoadingAttempts.add(playerName.toLowerCase());
             UUID uuid = getUUID(playerName);
             loadSkin(playerName, uuid);
         }
 
-        // Fallback to default skin while downloading
         UUID uuid = getUUID(playerName);
         CompletableFuture<Optional<PlayerSkin>> future = skinFutures.get(playerName.toLowerCase());
         if (future == null) {
@@ -117,7 +117,6 @@ public class PlayerModelRenderer {
         return new PlayerSkinInfo(fallback.body().texturePath(), fallback.model() == PlayerModelType.SLIM);
     }
 
-    // ---------- Skin Downloader (unchanged) ----------
     private static UUID getUUID(String playerName) {
         PlayerInfo entry = getPlayerEntry(playerName);
         if (entry != null) return entry.getProfile().id();
