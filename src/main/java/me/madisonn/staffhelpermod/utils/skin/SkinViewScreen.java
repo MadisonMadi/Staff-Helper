@@ -159,6 +159,24 @@ public class SkinViewScreen extends Screen {
         }
     }
 
+    private void navigateToPreviousPlayer() {
+        if (onlinePlayers.isEmpty()) return;
+        currentPlayerIndex = (currentPlayerIndex - 1 + onlinePlayers.size()) % onlinePlayers.size();
+        switchToPlayer(onlinePlayers.get(currentPlayerIndex));
+    }
+
+    private void navigateToNextPlayer() {
+        if (onlinePlayers.isEmpty()) return;
+        currentPlayerIndex = (currentPlayerIndex + 1) % onlinePlayers.size();
+        switchToPlayer(onlinePlayers.get(currentPlayerIndex));
+    }
+
+    private void switchToPlayer(String playerName) {
+        PlayerModelRenderer.clearCache();
+        currentPlayerName = playerName;
+        clearAndReinitializeButtons();
+    }
+
     private void addControlButtons() {
         int centerX = this.width / 2;
         int buttonY = this.height - 60;
@@ -188,24 +206,6 @@ public class SkinViewScreen extends Screen {
         button.setMessage(Component.literal("Second Layer: " + (showSecondLayer ? "ON" : "OFF")));
     }
 
-    private void navigateToPreviousPlayer() {
-        if (onlinePlayers.isEmpty()) return;
-        currentPlayerIndex = (currentPlayerIndex - 1 + onlinePlayers.size()) % onlinePlayers.size();
-        switchToPlayer(onlinePlayers.get(currentPlayerIndex));
-    }
-
-    private void navigateToNextPlayer() {
-        if (onlinePlayers.isEmpty()) return;
-        currentPlayerIndex = (currentPlayerIndex + 1) % onlinePlayers.size();
-        switchToPlayer(onlinePlayers.get(currentPlayerIndex));
-    }
-
-    private void switchToPlayer(String playerName) {
-        PlayerModelRenderer.clearCache();
-        currentPlayerName = playerName;
-        clearAndReinitializeButtons();
-    }
-
     private void closeScreen() {
         PlayerModelRenderer.clearAllCache();
         onClose();
@@ -223,6 +223,13 @@ public class SkinViewScreen extends Screen {
                 modelX, modelY, MODEL_WIDTH, MODEL_HEIGHT, rotation, showSecondLayer);
         super.render(graphics, mouseX, mouseY, delta);
     }
+
+    public void renderTransparentBackground(GuiGraphics graphics) {
+        graphics.fill(0, 0, this.width, this.height, 0x80000000);
+    }
+
+    @Override
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float delta) {}
 
     @Override
     public boolean keyPressed(KeyEvent event) {
@@ -263,13 +270,6 @@ public class SkinViewScreen extends Screen {
         rotation = (rotation + (float)(delta * 0.5)) % 360f;
         lastMouseX = mouseX;
     }
-
-    public void renderTransparentBackground(GuiGraphics graphics) {
-        graphics.fill(0, 0, this.width, this.height, 0x80000000);
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float delta) {}
 
     @Override
     public void onClose() {
