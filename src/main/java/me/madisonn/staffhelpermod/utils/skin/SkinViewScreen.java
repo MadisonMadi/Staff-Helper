@@ -33,8 +33,8 @@ public class SkinViewScreen extends Screen {
     private @Nullable Button counterLabel;
     private @Nullable Button dragLabel;
     private @Nullable Button offlineLabel;
-
-    private int lastTabCount;
+    private @Nullable Button prevButton;
+    private @Nullable Button nextButton;
 
     public SkinViewScreen(String playerName) {
         super(Component.literal("Skin Viewer - " + playerName));
@@ -46,13 +46,8 @@ public class SkinViewScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        clearAndReinitializeButtons();
-    }
-
-    private void clearAndReinitializeButtons() {
-        clearWidgets();
         createLabels();
-        if (onlinePlayers.size() > 1) addNavigationButtons();
+        addNavigationButtons();
         addControlButtons();
     }
 
@@ -99,19 +94,43 @@ public class SkinViewScreen extends Screen {
             offlineLabel.visible = offline;
             if (offline) offlineLabel.setMessage(Component.literal("Offline Player"));
         }
+        updateNavigationButtonsState();
+    }
+
+    private void updateNavigationButtonsState() {
+        boolean visible = onlinePlayers.size() > 1;
+        if (prevButton != null) {
+            prevButton.visible = visible;
+            prevButton.active = visible;
+        }
+        if (nextButton != null) {
+            nextButton.visible = visible;
+            nextButton.active = visible;
+        }
     }
 
     @Override
     public void tick() {
         Minecraft client = Minecraft.getInstance();
         int currentCount = client.getConnection() != null ? client.getConnection().getOnlinePlayers().size() : 0;
-        if (currentCount != lastTabCount) {
+        if (currentCount != onlinePlayers.size()) {
             updateOnlinePlayersList();
-            lastTabCount = currentCount;
-            clearAndReinitializeButtons();
+            syncCurrentPlayerIndex();
+            updateLabels();
         }
-        updateCurrentPlayerIndex();
         super.tick();
+    }
+
+    private void syncCurrentPlayerIndex() {
+        int newIndex = findPlayerIndex(currentPlayerName);
+        if (newIndex >= 0) {
+            currentPlayerIndex = newIndex;
+        } else if (!onlinePlayers.isEmpty()) {
+            currentPlayerIndex = 0;
+            currentPlayerName = onlinePlayers.getFirst();
+        } else {
+            currentPlayerIndex = -1;
+        }
     }
 
     private void updateOnlinePlayersList() {
@@ -126,15 +145,6 @@ public class SkinViewScreen extends Screen {
                 .collect(Collectors.toList());
     }
 
-    private void updateCurrentPlayerIndex() {
-        int newIndex = findPlayerIndex(currentPlayerName);
-        if (newIndex >= 0 && newIndex < onlinePlayers.size()) {
-            currentPlayerIndex = newIndex;
-        } else if (!onlinePlayers.isEmpty()) {
-            currentPlayerIndex = Math.min(currentPlayerIndex, onlinePlayers.size() - 1);
-        }
-    }
-
     private int findPlayerIndex(String playerName) {
         for (int i = 0; i < onlinePlayers.size(); i++) {
             if (onlinePlayers.get(i).equalsIgnoreCase(playerName)) return i;
@@ -146,17 +156,18 @@ public class SkinViewScreen extends Screen {
         int centerX = this.width / 2;
         int navY = 35;
         int buttonWidth = 95;
-        int[] buttonX = {centerX - 100, centerX + 5};
-        String[] buttonTexts = {"← Previous", "Next →"};
-        Runnable[] buttonActions = { this::navigateToPreviousPlayer, this::navigateToNextPlayer };
-        for (int i = 0; i < 2; i++) {
-            int finalI = i;
-            addRenderableWidget(Button.builder(
-                            Component.literal(buttonTexts[i]),
-                            ignored -> buttonActions[finalI].run())
-                    .bounds(buttonX[i], navY, buttonWidth, 20)
-                    .build());
-        }
+        int leftX = centerX - 100;
+        int rightX = centerX + 5;
+
+        prevButton = Button.builder(Component.literal("← Previous"), ignored -> navigateToPreviousPlayer())
+                .bounds(leftX, navY, buttonWidth, 20)
+                .build();
+        nextButton = Button.builder(Component.literal("Next →"), ignored -> navigateToNextPlayer())
+                .bounds(rightX, navY, buttonWidth, 20)
+                .build();
+        addRenderableWidget(prevButton);
+        addRenderableWidget(nextButton);
+        updateNavigationButtonsState();
     }
 
     private void navigateToPreviousPlayer() {
@@ -172,9 +183,8 @@ public class SkinViewScreen extends Screen {
     }
 
     private void switchToPlayer(String playerName) {
-        PlayerModelRenderer.clearCache();
         currentPlayerName = playerName;
-        clearAndReinitializeButtons();
+        updateLabels();
     }
 
     private void addControlButtons() {
@@ -198,7 +208,7 @@ public class SkinViewScreen extends Screen {
     }
 
     private void openNameMC() {
-        Util.getPlatform().openUri("https://nl.namemc.com/profile/" + currentPlayerName);
+        Util.getPlatform().openUri("https://namemc.com/profile/" + currentPlayerName);
     }
 
     private void toggleSecondLayer(Button button) {
@@ -212,20 +222,20 @@ public class SkinViewScreen extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-        renderTransparentBackground(graphics);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphicsExtractor, int mouseX, int mouseY, float delta) {
+        renderTransparentBackground(guiGraphicsExtractor);
         int centerX = this.width / 2;
         int centerY = this.height / 2;
         int modelX = centerX - MODEL_WIDTH / 2;
         int modelY = centerY - MODEL_HEIGHT / 2;
         updateLabels();
-        PlayerModelRenderer.renderPlayerModel(graphics, currentPlayerName,
+        PlayerModelRenderer.renderPlayerModel(guiGraphicsExtractor, currentPlayerName,
                 modelX, modelY, MODEL_WIDTH, MODEL_HEIGHT, rotation, showSecondLayer);
-        super.extractRenderState(graphics, mouseX, mouseY, delta);
+        super.extractRenderState(guiGraphicsExtractor, mouseX, mouseY, delta);
     }
 
-    private void renderTransparentBackground(GuiGraphicsExtractor graphics) {
-        graphics.fill(0, 0, this.width, this.height, 0x80000000);
+    private void renderTransparentBackground(GuiGraphicsExtractor guiGraphicsExtractor) {
+        guiGraphicsExtractor.fill(0, 0, this.width, this.height, 0x80000000);
     }
 
     @Override

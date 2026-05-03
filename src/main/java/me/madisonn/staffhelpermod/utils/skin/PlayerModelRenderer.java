@@ -3,6 +3,7 @@ package me.madisonn.staffhelpermod.utils.skin;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
+import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.model.player.PlayerModel;
@@ -15,6 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.entity.player.PlayerSkin;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -196,9 +198,9 @@ public class PlayerModelRenderer {
 
     private static void registerSkin(String playerName, byte[] imageData) {
         Minecraft.getInstance().execute(() -> {
-            try (InputStream stream = new java.io.ByteArrayInputStream(imageData)) {
+            try (InputStream stream = new ByteArrayInputStream(imageData)) {
                 Identifier skinId = Identifier.fromNamespaceAndPath("staffhelper", "skin_" + playerName.toLowerCase());
-                var nativeImage = com.mojang.blaze3d.platform.NativeImage.read(stream);
+                var nativeImage = NativeImage.read(stream);
                 int pixel = nativeImage.getPixel(47, 20);
                 boolean slim = ((pixel >> 24) & 0xFF) == 0;
                 skinSlimCache.put(playerName.toLowerCase(), slim);
@@ -214,7 +216,6 @@ public class PlayerModelRenderer {
         return connection != null ? connection.getPlayerInfo(playerName) : null;
     }
 
-    public static void clearCache() {}
     public static void clearAllCache() {
         skinFutures.clear();
         skinCache.clear();
