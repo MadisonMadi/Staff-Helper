@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "staffhelpermod",
   "version": "${version}",
-  "name": "Staff-Helper",
+  "name": "Staff Helper",
   "description": "A custom built staff tool for helping players",
   "authors": [
     "Madisonn"
