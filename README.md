@@ -75,7 +75,7 @@ Messages can be changed in the in-game config.
 2. Download dependencies:
    - [Fabric API](https://modrinth.com/mod/fabric-api) (1.21.11)
    - [Fzzy Config](https://modrinth.com/mod/fzzy-config) (1.21.11)
-3. Place `Staff-Helper-x.x.x+1.21.11.jar` in your `mods` folder
+3. Place `Staff Helper-x.x.x+1.21.11.jar` in your `mods` folder
 
 ---
 
