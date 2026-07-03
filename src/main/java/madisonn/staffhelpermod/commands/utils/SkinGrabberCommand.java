@@ -1,11 +1,11 @@
-package me.madisonn.staffhelpermod.commands.utils;
+package madisonn.staffhelpermod.commands.utils;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import me.madisonn.staffhelpermod.utils.skin.SkinViewScreen;
+import madisonn.staffhelpermod.utils.skin.SkinViewScreen;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;

@@ -1,4 +1,4 @@
-package me.madisonn.staffhelpermod.config;
+package madisonn.staffhelpermod.config;
 
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;

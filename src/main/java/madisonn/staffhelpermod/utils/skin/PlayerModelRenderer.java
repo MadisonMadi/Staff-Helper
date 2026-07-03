@@ -1,4 +1,4 @@
-package me.madisonn.staffhelpermod.utils.skin;
+package madisonn.staffhelpermod.utils.skin;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

@@ -1,7 +1,7 @@
-package me.madisonn.staffhelpermod;
+package madisonn.staffhelpermod;
 
-import me.madisonn.staffhelpermod.commands.CommandRegistry;
-import me.madisonn.staffhelpermod.config.Configs;
+import madisonn.staffhelpermod.commands.CommandRegistry;
+import madisonn.staffhelpermod.config.Configs;
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

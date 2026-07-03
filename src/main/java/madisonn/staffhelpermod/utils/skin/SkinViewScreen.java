@@ -1,4 +1,4 @@
-package me.madisonn.staffhelpermod.utils.skin;
+package madisonn.staffhelpermod.utils.skin;
 
 import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
