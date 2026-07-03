@@ -1,8 +1,8 @@
-package me.madisonn.staffhelpermod.commands;
+package madisonn.staffhelpermod.commands;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import me.madisonn.staffhelpermod.commands.utils.SkinGrabberCommand;
-import me.madisonn.staffhelpermod.config.Configs;
+import madisonn.staffhelpermod.commands.utils.SkinGrabberCommand;
+import madisonn.staffhelpermod.config.Configs;
 import net.fabricmc.fabric.api.client.command.v2.*;
 import net.minecraft.client.Minecraft;
 

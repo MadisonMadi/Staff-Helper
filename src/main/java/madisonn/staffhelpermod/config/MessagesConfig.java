@@ -1,10 +1,10 @@
-package me.madisonn.staffhelpermod.config;
+package madisonn.staffhelpermod.config;
 
 import me.fzzyhmstrs.fzzy_config.annotations.Version;
 import me.fzzyhmstrs.fzzy_config.api.FileType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.util.Translatable;
-import me.madisonn.staffhelpermod.StaffHelperClient;
+import madisonn.staffhelpermod.StaffHelperClient;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
