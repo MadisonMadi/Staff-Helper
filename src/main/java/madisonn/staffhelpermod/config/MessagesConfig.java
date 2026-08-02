@@ -20,16 +20,16 @@ public class MessagesConfig extends Config {
     public String armorinfusionsMessage = "You can craft infusion capsules with the recipe in the recipes book. There are three types of infusions Albino, Melanistic and Trophy. The bonus improves by +5% on every tier up to +25% on a single piece.";
 
     @Name("Artisan Message")
-    public String artisanMessage = "To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank).";
+    public String artisanMessage = "To craft or upgrade rod pieces you can go to the artisan at spawn or use '/artisan' (Angler Rank). You can also turn in Old Parts here.";
 
     @Name("Auction Message")
     public String auctionMessage = "You can buy items on the action house by using '/ah', you can also put items up for sale by using '/ah sell price'. There is a 2% tax when listing items and expired items go to '/overflow'.";
 
     @Name("Bait Message")
-    public String baitMessage = "You can use bait by holding your rod and pressing 'Q' or right click it in your inventory. Now you can open the tacklebox and move your bait into it, the bait usage starts from the top left.";
+    public String baitMessage = "Use bait by holding your rod and pressing 'Q' or right click it in your inventory. now click the bait you want to equip, for more bait open the tackle box, the bait usage starts from the top left.";
 
     @Name("Bait Package Message")
-    public String baitpackMessage = "You can get bait packages from '/vote', '/ah', '/collections', '/compendium', '/contest', '/tournament', '/event' and power.";
+    public String baitpackMessage = "You can get bait packages from '/vote', '/ah', '/collections', '/compendium', '/contest', '/tournament', '/event' and from power.";
 
     @Name("Blooming Oasis Message")
     public String bloomingoasisMessage = "The Blooming Oasis is an event that gives +100% pet luck for 15-16 minutes. '/events' to see what event is active at the time.";
@@ -62,7 +62,7 @@ public class MessagesConfig extends Config {
     public String dailymissionsMessage = "Open the green book and check the bottom-right corner for Daily Missions. Each mission rewards 2-4 shards based on your location. Completing all grants XP, Money, a pet, and Location XP.";
 
     @Name("Earn Money Message")
-    public String earnmoneyMessage = "You can earn money from '/collections', '/ah', '/event', '/vote' and '/quests'.";
+    public String earnmoneyMessage = "You can earn money from '/collections', '/ah', '/event', '/vote', '/quests' and '/tournament'.";
 
     @Name("Event Message")
     public String eventMessage = "Make sure you check '/event' and hover over the book to see how to obtain event points.";
@@ -97,8 +97,11 @@ public class MessagesConfig extends Config {
     @Name("Luck, Scale and Prospect Message")
     public String luckscaleprospectMessage = "Luck boosts fish rarity chance, Scale boosts bigger fish chance, Prospect boosts shard chance: base chance is 1/50.";
 
+    @Name("Manufacturer Message")
+    public String manufacturerMessage = "The Manufacturer is used to increase the stats given by Poles and Reels by a percentage based on the rarity. '/manufacturer' (Mariner Rank)";
+
     @Name("Moon Events Message")
-    public String mooneventsMessage = "Moon Events occur every full moon and last 7 minutes, Full Moon +120 Bite Speed, Blue Moon +120 Bite Speed and 5x XP, Super Moon +120 Bite Speed and +150 Reel Speed, Blood Moon +120 Bite Speed and 1/300 chance for an infusion capsule.";
+    public String mooneventsMessage = "Moon Events occur every full moon and last 10 minutes, Full Moon +120 Bite Speed, Blue Moon +120 Bite Speed and 5x XP, Super Moon +120 Bite Speed and +150 Reel Speed, Blood Moon +120 Bite Speed and 1/300 chance for an infusion capsule.";
 
     @Name("Overflow Message")
     public String overflowMessage = "Type '/overflow' to check if you have any lost loot from previous contests. Make sure you have some free slots in your inventory.";
@@ -127,6 +130,9 @@ public class MessagesConfig extends Config {
     @Name("Recipes Message")
     public String recipesMessage = "Make sure to check out recipes to see the crafting patterns, open your green book and click the Recipes book.";
 
+    @Name("Reconstructer Message")
+    public String reconstructerMessage = "The Reconstructor is used to apply new tech to previously constructed rod parts! '/reconstructer' (Mariner Rank)";
+
     @Name("Reel, Bite and Line Message")
     public String reelbitelineMessage = "Reel Speed increases progress per tick, Bite Speed reduces wait time for bites, Line Strength makes catching fish easier.";
 
@@ -149,7 +155,7 @@ public class MessagesConfig extends Config {
     public String superchargeMessage = "For a supercharge you need 1 lightning bottle and 8 shards of choice, increases base stats by each tier 1.1x, 1.25x and 1.5x and the effect lasts for x amount of catches.";
 
     @Name("Tackle Shop Message")
-    public String tackleshopMessage = "The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the wait to extremely rare Variant Bait.";
+    public String tackleshopMessage = "The Tackle Shop is for bait (unique per player), gives 7 different bait and will reroll every 4 hours, from Common Bait all the way to extremely rare Variant Bait.";
 
     @Name("Tackle Shop Location Message")
     public String tackleshoplocMessage = "The Tackle Shop can be found by going to '/spawn' and turn around, go inside and follow the sign directions.";
