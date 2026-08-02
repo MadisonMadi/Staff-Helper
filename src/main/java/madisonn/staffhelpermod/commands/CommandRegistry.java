@@ -97,6 +97,9 @@ public class CommandRegistry {
                 .then(ClientCommands.literal("luckscaleprospect")
                         .executes(ignored -> sendAsPlayer(Configs.messages.luckscaleprospectMessage)))
 
+                .then(ClientCommands.literal("manufacturer")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.manufacturerMessage)))
+
                 .then(ClientCommands.literal("moonevents")
                         .executes(ignored -> sendAsPlayer(Configs.messages.mooneventsMessage)))
 
@@ -126,6 +129,9 @@ public class CommandRegistry {
 
                 .then(ClientCommands.literal("recipes")
                         .executes(ignored -> sendAsPlayer(Configs.messages.recipesMessage)))
+
+                .then(ClientCommands.literal("reconstructer")
+                        .executes(ignored -> sendAsPlayer(Configs.messages.reconstructerMessage)))
 
                 .then(ClientCommands.literal("reelbiteline")
                         .executes(ignored -> sendAsPlayer(Configs.messages.reelbitelineMessage)))
